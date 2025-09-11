@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>The AQUACON Lab — Prototype (Scaled + Taller Slideshow)</title>
+<style>
+  :root{
+    --accent:#0077b6;
+    --muted:#6c757d;
+    --bg:#f6fbff;
+    --card:#ffffff;
+    --glass: rgba(255,255,255,0.85);
+    --maxw:1100px; /* nominal final max width */
+    --radius:10px;
+    --shadow: 0 6px 18px rgba(20,30,50,0.08);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color: #0b2336;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    background:linear-gradient(180deg,var(--bg),#eef7fb);
+    padding:24px;
+    overflow-x:hidden; /* prevents horizontal scroll from scale */
+  }
+
+  /* --- SCALE: make everything 30% bigger --- */
+  /* Set wrap max-width smaller so after scale(1.3) effective max width ~= var(--maxw) */
+  .wrap{
+    max-width: calc(var(--maxw) / 1.3);
+    margin:0 auto;
+    transform: scale(1.3);
+    transform-origin: top center;
+  }
+
+  header{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+  .brand{display:flex;gap:12px;align-items:center}
+  .logo{width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#00b4d8);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;box-shadow:var(--shadow)}
+  nav a{margin-left:14px;color:var(--muted);text-decoration:none;font-weight:600}
+  nav a.active{color:var(--accent)}
+
+  /* HERO / SLIDESHOW (top bubble) */
+  .hero{
+    display:block;
+    gap:18px;
+    background:linear-gradient(0deg,rgba(5,30,50,0.02),rgba(255,255,255,0.2));
+    padding:0;
+    border-radius:16px;
+    box-shadow:var(--shadow);
+    align-items:center;
+    overflow:hidden;
+  }
+  /* Taller slideshow - user requested taller */
+  .hero .slideshow-wrap{
+    position:relative;
+    height:520px;            /* taller base height */
+    min-height:320px;
+    border-radius:16px;
+    overflow:hidden;
+    border:4px solid rgba(255,255,255,0.6);
+    background:#e9f6ff;
+  }
+  .slideshow{position:relative;width:100%;height:100%}
+  .slideshow img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    opacity:0;transition:opacity 1s ease-in-out;will-change:opacity;
+    -webkit-backface-visibility:hidden;backface-visibility:hidden;
+  }
+  .slideshow img.active{opacity:1}
+
+  /* small caption (kept from earlier) */
+  .slideshow .caption{
+    position:absolute;left:16px;bottom:72px;background:rgba(0,0,0,0.28);color:white;padding:8px 12px;border-radius:8px;font-weight:600;font-size:0.95rem;
+    backdrop-filter: blur(3px);
+  }
+
+  /* Bold mission statement overlay at bottom edge of frame */
+  .slideshow .mission-overlay{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    display:flex;
+    justify-content:center;
+    padding:14px 18px;
+    background:linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.28)); /* subtle gradient so image visible */
+    color: #fff;
+    font-weight:800;   /* bold as requested */
+    font-size:1.05rem;
+    text-align:center;
+    z-index:30;
+    backdrop-filter: blur(4px); /* improves legibility while letting image show */
+    -webkit-backdrop-filter: blur(4px);
+  }
+  /* Ensure mission overlay text wraps nicely on small widths */
+  .slideshow .mission-overlay .inner{max-width:1200px;padding:0 6px}
+
+  .slideshow .controls{
+    position:absolute;right:12px;bottom:12px;display:flex;gap:8px;z-index:40;
+  }
+  .slideshow button{background:rgba(255,255,255,0.92);border:0;padding:8px;border-radius:8px;cursor:pointer;font-weight:700}
+
+  /* NEW INTRO SECTION (moved hero-copy content) */
+  #intro{margin-top:18px}
+  .intro-card{display:grid;grid-template-columns:1fr;gap:18px;padding:18px;border-radius:12px;background:var(--card);box-shadow:var(--shadow);border:1px solid rgba(10,20,30,0.03)}
+  .mission{font-size:1.25rem;font-weight:700;color:var(--accent);margin-bottom:8px}
+  .mission-sub{color:var(--muted);margin-bottom:16px}
+  .cta-grid{display:flex;gap:12px}
+  .cta{flex:1;background:var(--card);padding:14px;border-radius:10px;box-shadow:var(--shadow);cursor:pointer;border:1px solid rgba(10,20,30,0.03)}
+  .cta h4{margin:0 0 6px 0}
+  .cta p{margin:0;color:var(--muted);font-size:0.95rem}
+
+  /* News feed mini */
+  .news-mini{display:flex;gap:12px;margin-top:12px}
+  .news-item{flex:1;background:var(--card);padding:10px;border-radius:8px;border:1px solid rgba(10,20,30,0.03)}
+  .news-item img{width:100%;height:90px;object-fit:cover;border-radius:6px;margin-bottom:8px}
+
+  /* Sections */
+  section{margin-top:26px}
+  h2{margin:0 0 12px 0}
+  .card{background:var(--card);padding:16px;border-radius:12px;box-shadow:var(--shadow)}
+
+  /* Research grid */
+  .research-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+  .theme{padding:12px;border-radius:10px;border:1px solid rgba(10,20,30,0.03)}
+  .theme img{width:100%;height:120px;object-fit:cover;border-radius:8px;margin-bottom:8px}
+
+  /* Project modal / accordion */
+  .accordion{border-top:1px solid #eef3f6;margin-top:8px}
+  .acc-row{padding:10px 0;cursor:pointer;display:flex;justify-content:space-between}
+  .acc-body{padding:8px 0 16px 0;color:var(--muted);display:none}
+
+  /* Publications table */
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .pill{padding:8px 10px;background:#f8fbff;border-radius:999px;border:1px solid rgba(10,20,30,0.04);cursor:pointer}
+  .pub-list{display:grid;gap:10px}
+  .pub{padding:10px;border-radius:8px;border:1px solid rgba(10,20,30,0.03);background:linear-gradient(180deg,#fff,#fbfeff)}
+  .pub .meta{color:var(--muted);font-size:0.9rem}
+
+  /* People */
+  .people-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+  .person{padding:12px;border-radius:10px;text-align:center;background:var(--card);cursor:pointer}
+  .person img{width:100%;height:120px;object-fit:cover;border-radius:8px;margin-bottom:8px}
+  .alumni{list-style:none;padding:0;margin:0}
+  .alumni li{padding:8px 0;border-bottom:1px dashed #eef7fb;color:var(--muted)}
+
+  /* News list */
+  .news-list{display:grid;gap:12px}
+  .news-article{display:flex;gap:12px;align-items:flex-start}
+  .news-article img{width:160px;height:100px;object-fit:cover;border-radius:8px}
+
+  /* Join us */
+  .apply-area{display:grid;grid-template-columns:1fr 320px;gap:18px}
+  .faq{background:#fbfeff;padding:12px;border-radius:8px;border:1px solid rgba(10,20,30,0.03)}
+
+  /* Contact */
+  .contact-grid{display:grid;grid-template-columns:1fr 320px;gap:16px}
+  iframe.map{width:100%;height:260px;border:0;border-radius:8px}
+
+  footer{margin-top:28px;text-align:center;color:var(--muted);font-size:0.95rem}
+
+  /* Responsive tweaks */
+  @media (max-width:820px){
+    .apply-area,.contact-grid{grid-template-columns:1fr}
+    .cta-grid{flex-direction:column}
+    .hero .slideshow-wrap{height:360px} /* smaller on narrow screens */
+    .wrap{transform-origin:top left;} /* keep scale anchored on small screens */
+  }
+
+  /* small utilities */
+  .btn{display:inline-block;padding:8px 12px;background:var(--accent);color:white;border-radius:8px;text-decoration:none}
+  .muted{color:var(--muted)}
+  .small{font-size:0.9rem}
+  .modal {position:fixed;inset:0;background:rgba(5,10,15,0.35);display:flex;align-items:center;justify-content:center;z-index:60;display:none}
+  .modal .box{width:min(880px,94%);background:var(--glass);backdrop-filter: blur(6px);padding:18px;border-radius:12px;box-shadow:var(--shadow)}
+  .close {float:right;cursor:pointer;color:var(--muted)}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">AQ</div>
+        <div>
+          <div style="font-weight:700">The AQUACON Lab</div>
+          <div class="muted small">Genomics • Conservation • eDNA</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#home" class="navlink active">Home</a>
+        <a href="#intro" class="navlink">Intro</a>
+        <a href="#research" class="navlink">Research</a>
+        <a href="#publications" class="navlink">Publications</a>
+        <a href="#people" class="navlink">People</a>
+        <a href="#news" class="navlink">News</a>
+        <a href="#join" class="navlink">Join Us</a>
+        <a href="#contact" class="navlink">Contact</a>
+      </nav>
+    </header>
+
+    <!-- HOME (now only slideshow / top bubble) -->
+    <main id="home" class="hero card" aria-label="AQUACON Lab header slideshow">
+      <div class="slideshow-wrap" aria-hidden="false">
+        <div class="slideshow" id="slideshow" aria-live="polite">
+          <!-- images injected by JS -->
+        </div>
+
+        <!-- Mission overlay (bottom-edge of frame; bold) -->
+        <div class="mission-overlay" aria-hidden="false">
+          <div class="inner">Using cutting-edge genomics to understand and protect aquatic ecosystems.</div>
+        </div>
+      </div>
+    </main>
+
+    <!-- NEW SECTION: Intro (moved hero-copy content) -->
+    <section id="intro">
+      <div class="intro-card">
+        <div>
+          <div class="mission">Using cutting-edge genomics to understand and protect aquatic ecosystems.</div>
+          <div class="mission-sub">Fieldwork, data, and mentorship—bridging research and training for undergraduates.</div>
+        </div>
+
+        <div class="cta-grid" aria-label="Primary call to actions">
+          <div class="cta" data-target="#research">
+            <h4>For the Public</h4>
+            <p>Explore our impact — accessible project stories and fieldwork highlights.</p>
+          </div>
+          <div class="cta" data-target="#publications">
+            <h4>For Collaborators</h4>
+            <p>See our latest research and publications, datasets, and code links.</p>
+          </div>
+          <div class="cta" data-target="#join">
+            <h4>For Recruits</h4>
+            <p>Join our team — info on the Mini-Masters experience and how to apply.</p>
+          </div>
+        </div>
+
+        <div class="news-mini" style="margin-top:12px;">
+          <div class="news-item">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=800&auto=format&fit=crop" alt="">
+            <strong class="small">New eDNA methods tested on coastal transects</strong>
+            <div class="muted small">Sept 2025</div>
+          </div>
+          <div class="news-item">
+            <img src="https://images.unsplash.com/photo-1503220317375-aaad61436b1b?q=80&w=800&auto=format&fit=crop" alt="">
+            <strong class="small">Undergraduates present at regional conference</strong>
+            <div class="muted small">Aug 2025</div>
+          </div>
+          <div class="news-item">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop" alt="">
+            <strong class="small">Grant awarded for long-term population genomics</strong>
+            <div class="muted small">Jul 2025</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESEARCH -->
+    <section id="research">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h2>Research</h2>
+        <div class="muted small">Structured layers for public & expert readers</div>
+      </div>
+      <div class="card" style="margin-top:12px;">
+        <p class="small muted">Overview of major themes with short accessible descriptions and representative imagery (e.g., eDNA, Population Genomics, Conservation Policy).</p>
+        <div class="research-grid" id="themes"></div>
+      </div>
+
+      <!-- Project modal (unchanged) -->
+      <div id="projectModal" class="modal" role="dialog" aria-hidden="true">
+        <div class="box">
+          <span class="close" id="closeProject">&times;</span>
+          <div id="projectContent"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section id="publications">
+      <h2>Publications</h2>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <input id="pubSearch" placeholder="Search publications..." style="padding:8px;border-radius:8px;border:1px solid #e7f0f6;width:360px" />
+          </div>
+          <div class="muted small">Filter by year / theme / author</div>
+        </div>
+
+        <div class="filters" style="margin-top:12px;">
+          <div class="pill" data-filter="year" data-val="2025">2025</div>
+          <div class="pill" data-filter="year" data-val="2024">2024</div>
+          <div class="pill" data-filter="theme" data-val="eDNA">eDNA</div>
+          <div class="pill" data-filter="theme" data-val="Genomics">Genomics</div>
+          <div class="pill" data-filter="author" data-val="Sard">Sard</div>
+          <div class="pill" id="clearFilters">Clear</div>
+        </div>
+
+        <div class="pub-list" id="pubList" style="margin-top:10px"></div>
+      </div>
+    </section>
+
+    <!-- PEOPLE -->
+    <section id="people">
+      <h2>People</h2>
+      <div class="card">
+        <h3>Principal Investigator</h3>
+        <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop" alt="PI" style="width:120px;height:120px;object-fit:cover;border-radius:8px">
+          <div>
+            <div style="font-weight:700">Dr. Alex Sard</div>
+            <div class="muted small">Research interests: eDNA, population genomics, conservation policy. Mentorship: collaborative, supportive, research-first.</div>
+          </div>
+        </div>
+
+        <h3>Current Members</h3>
+        <div class="people-grid" id="peopleGrid"></div>
+
+        <h3 style="margin-top:14px">Alumni</h3>
+        <ul class="alumni" id="alumniList"></ul>
+      </div>
+    </section>
+
+    <!-- NEWS / BLOG -->
+    <section id="news">
+      <h2>News / Blog</h2>
+      <div class="card">
+        <div class="news-list" id="newsList"></div>
+      </div>
+    </section>
+
+    <!-- JOIN US -->
+    <section id="join">
+      <h2>Join Us</h2>
+      <div class="card">
+        <div class="apply-area">
+          <div>
+            <h3>Mentorship & Lab Culture</h3>
+            <p class="muted small">We emphasize long-term mentorship, collaborative projects, and skill-building for undergraduates. The "Mini-Masters" experience lets motivated sophomores develop a multi-year project culminating in a thesis or co-authored paper.</p>
+
+            <h4 style="margin-top:12px">What We Look For</h4>
+            <ul class="muted small">
+              <li>Curiosity, reliability, and a desire to learn</li>
+              <li>Ability to commit 2–3 years (preferred)</li>
+              <li>Relevant coursework helpful but not required</li>
+            </ul>
+
+            <h4 style="margin-top:12px">How to Apply</h4>
+            <p class="small muted">We typically recruit each fall. Interested sophomores should email <strong>dr.sard@aquaconlab.edu</strong> with subject line <em>"Undergraduate Research Inquiry: [Your Name]"</em> and include CV, major, and a brief paragraph describing your interest.</p>
+          </div>
+
+          <aside class="faq">
+            <strong>Opportunities</strong>
+            <ul class="muted small" style="padding-left:14px;margin-top:8px">
+              <li>Undergraduate "Mini-Masters"</li>
+              <li>Grant-funded full-time technical positions (when available)</li>
+            </ul>
+            <div style="margin-top:12px">
+              <a class="btn" href="#contact">Contact</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="card contact-grid">
+        <div>
+          <h4>Email</h4>
+          <p class="muted small">dr.sard@aquaconlab.edu</p>
+          <h4 style="margin-top:8px">Address</h4>
+          <p class="muted small">Department of Marine Science — University Campus<br/>123 Ocean Ave, Ocean City, ST 01234</p>
+
+          <h4 style="margin-top:8px">Inquiries</h4>
+          <p class="muted small">For prospective students: read "Join Us" first. For media inquiries: email media@aquaconlab.edu</p>
+        </div>
+
+        <div>
+          <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086752495089!2d-122.08424968468186!3d37.422065779825714!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb7302ea1f9bf%3A0x7d6c8b0b9e9aa1c3!2sGoogleplex!5e0!3m2!1sen!2sus!4v1688052345678" loading="lazy" referrerpolicy="no-referrer-when-downgrade" aria-hidden="true"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Prototype site — content derived from the AQUACON Lab website blueprint. (This is a demo skeleton intended for content population.)
+    </footer>
+  </div>
+
+  <!-- person/project modal -->
+  <div id="personModal" class="modal" role="dialog" aria-hidden="true">
+    <div class="box">
+      <span class="close" id="closePerson">&times;</span>
+      <div id="personContent"></div>
+    </div>
+  </div>
+
+<script>
+  /***************
+   * Sample data *
+   ***************/
+  const themes = [
+    { id:'edna', title:'Environmental DNA (eDNA)', img:'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?q=80&w=800&auto=format&fit=crop', summary:'Using eDNA to detect species and monitor biodiversity across aquatic systems.' },
+    { id:'popgen', title:'Population Genomics', img:'https://images.unsplash.com/photo-1518544882450-8b0b10f130ce?q=80&w=800&auto=format&fit=crop', summary:'Genomic approaches to study population structure, connectivity, and conservation units.' },
+    { id:'policy', title:'Conservation Policy', img:'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=800&auto=format&fit=crop', summary:'Translating data into policy recommendations for aquatic conservation.' }
+  ];
+
+  const projects = [
+    { id:'coastal-edna', title:'Coastal eDNA Survey', hero:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop',
+      summary:'Public-facing summary: we sampled 40 coastal sites to map species presence using eDNA.',
+      methods:'Detailed methods: filtration, extraction, metabarcoding using MiSeq, negative controls, bioinformatics pipeline using QIIME2.',
+      publications:['Sard et al., 2025 (DOI:10.1000/abcd)'],
+      data:'https://github.com/aquacon/coastal-edna',
+      personnel:['Alex Sard','Jane Student']
+    },
+    { id:'fish-popgen', title:'Fish Population Genomics', hero:'https://images.unsplash.com/photo-1517638851339-4aa48b9d7d6d?q=80&w=1200&auto=format&fit=crop',
+      summary:'Public summary: investigating genetic structure of commercially important fish species.',
+      methods:'RAD-seq, SNP calling, population structure analysis with STRUCTURE/ADMIXTURE.',
+      publications:['Sard et al., 2024 (DOI:10.1000/wxyz)'],
+      data:'Dryad accession: XYZ',
+      personnel:['Alex Sard','Sam Technician']
+    }
+  ];
+
+  const publications = [
+    { id:1, title:'eDNA coastal patterns reveal cryptic diversity', authors:'Sard A., Student J.', year:2025, theme:'eDNA', doi:'#', summary:'Plain-language summary for news post.' },
+    { id:2, title:'Population genomics of coastal fish', authors:'Sard A., Tech S.', year:2024, theme:'Genomics', doi:'#', summary:'Plain-language summary for news post.' },
+    { id:3, title:'Policy implications for protected areas', authors:'Sard A., Policy P.', year:2023, theme:'Policy', doi:'#', summary:'' }
+  ];
+
+  const people = [
+    { id:'alex', name:'Dr. Alex Sard', role:'PI', bio:'PI and lab lead. Focus on mentoring undergrads and collaborative science.', img:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop'},
+    { id:'jane', name:'Jane Student', role:'Undergraduate Researcher', bio:'Sophomore majoring in Marine Biology. Works on eDNA field collections.', img:'https://images.unsplash.com/photo-1545996124-54038bcb0af2?q=80&w=400&auto=format&fit=crop'},
+    { id:'sam', name:'Sam Technician', role:'Lab Technician', bio:'Handles sequencing prep and lab management.', img:'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=400&auto=format&fit=crop'}
+  ];
+
+  const alumni = [
+    { name:'Anna Alum', year:2022, current:'MSc Marine Sci, University X' }, { name:'Ben Grad', year:2021, current:'PhD Candidate, University Y' }
+  ];
+
+  const news = [
+    { title:'New eDNA method validated on transect', date:'2025-09-01', excerpt:'We validated a new primer set for coastal metabarcoding with higher sensitivity.' , img:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=800&auto=format&fit=crop' },
+    { title:'Undergraduates present at regional meeting', date:'2025-08-18', excerpt:'Three undergrads presented posters and got travel awards.', img:'https://images.unsplash.com/photo-1503220317375-aaad61436b1b?q=80&w=800&auto=format&fit=crop' },
+    { title:'Grant awarded to study population connectivity', date:'2025-07-12', excerpt:'Funded for five years to monitor fish genomics across coastlines.', img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop' }
+  ];
+
+  /***********************
+   * Slideshow setup *
+   ***********************/
+  const slideshowImages = [
+    { src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1600&auto=format&fit=crop', caption: 'Coastal survey — eDNA sampling' },
+    { src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop', caption: 'Field transect at sunrise' },
+    { src: 'https://images.unsplash.com/photo-1503220317375-aaad61436b1b?q=80&w=1600&auto=format&fit=crop', caption: 'Sampling boats and nets' },
+    { src: 'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?q=80&w=1600&auto=format&fit=crop', caption: 'Tidepool biodiversity' }
+  ];
+
+  const SLIDE_INTERVAL_MS = 10000; // 10 seconds
+  let slideIndex = 0;
+  let slideTimer = null;
+
+  function buildSlideshow(){
+    const container = document.getElementById('slideshow');
+    container.innerHTML = '';
+    slideshowImages.forEach((imgObj, i) => {
+      const img = document.createElement('img');
+      img.src = imgObj.src;
+      img.alt = imgObj.caption || `Slide ${i+1}`;
+      if(i === 0) img.classList.add('active');
+      container.appendChild(img);
+    });
+
+    // caption
+    const caption = document.createElement('div');
+    caption.className = 'caption';
+    caption.id = 'slideCaption';
+    caption.textContent = slideshowImages[0].caption || '';
+    container.appendChild(caption);
+
+    // controls (prev / next)
+    const controls = document.createElement('div');
+    controls.className = 'controls';
+    controls.innerHTML = `
+      <button id="prevSlide" aria-label="Previous slide">&#9664;</button>
+      <button id="nextSlide" aria-label="Next slide">&#9654;</button>
+    `;
+    container.appendChild(controls);
+
+    // button events
+    document.getElementById('prevSlide').addEventListener('click', ()=> {
+      gotoSlide((slideIndex - 1 + slideshowImages.length) % slideshowImages.length);
+      restartTimer();
+    });
+    document.getElementById('nextSlide').addEventListener('click', ()=> {
+      gotoSlide((slideIndex + 1) % slideshowImages.length);
+      restartTimer();
+    });
+
+    // preload
+    preloadSlides();
+  }
+
+  function preloadSlides(){
+    slideshowImages.forEach(s => {
+      const i = new Image();
+      i.src = s.src;
+    });
+  }
+
+  function gotoSlide(n){
+    const imgs = Array.from(document.querySelectorAll('#slideshow img'));
+    if(imgs.length === 0) return;
+    imgs.forEach((img, idx) => img.classList.toggle('active', idx === n));
+    slideIndex = n;
+    const caption = document.getElementById('slideCaption');
+    if(caption) caption.textContent = slideshowImages[slideIndex].caption || '';
+  }
+
+  function nextSlide(){
+    gotoSlide((slideIndex + 1) % slideshowImages.length);
+  }
+
+  function startTimer(){
+    if(slideTimer) clearInterval(slideTimer);
+    slideTimer = setInterval(nextSlide, SLIDE_INTERVAL_MS);
+  }
+  function restartTimer(){ startTimer(); }
+
+  /***********************
+   * Rendering functions *
+   ***********************/
+  function renderThemes(){
+    const container = document.getElementById('themes');
+    container.innerHTML = '';
+    themes.forEach(t=>{
+      const el = document.createElement('div');
+      el.className = 'theme';
+      el.innerHTML = `
+        <img src="${t.img}" alt="${t.title}">
+        <h4>${t.title}</h4>
+        <p class="muted small">${t.summary}</p>
+        <div style="margin-top:8px"><a class="btn" href="#" data-project="${t.id}">Explore projects</a></div>
+      `;
+      container.appendChild(el);
+    });
+  }
+
+  function renderPublications(list=publications){
+    const out = document.getElementById('pubList');
+    out.innerHTML = '';
+    list.forEach(p=>{
+      const el = document.createElement('div');
+      el.className = 'pub';
+      el.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:start">
+          <div>
+            <div style="font-weight:700">${p.title}</div>
+            <div class="meta">${p.authors} • ${p.year} • ${p.theme}</div>
+            <div style="margin-top:6px" class="muted small">${p.summary}</div>
+          </div>
+          <div style="text-align:right">
+            <a class="pill" href="${p.doi}" target="_blank">DOI</a><br/>
+            <button class="btn" style="margin-top:8px" data-pub="${p.id}">View summary</button>
+          </div>
+        </div>
+      `;
+      out.appendChild(el);
+    });
+  }
+
+  function renderPeople(){
+    const container = document.getElementById('peopleGrid');
+    container.innerHTML = '';
+    people.forEach(p=>{
+      const el = document.createElement('div');
+      el.className = 'person';
+      el.innerHTML = `<img src="${p.img}" alt="${p.name}"><div style="font-weight:700">${p.name}</div><div class="muted small">${p.role}</div>`;
+      el.addEventListener('click',()=>openPerson(p));
+      container.appendChild(el);
+    });
+    // alumni
+    const al = document.getElementById('alumniList');
+    al.innerHTML = '';
+    alumni.forEach(a=>{
+      const li = document.createElement('li');
+      li.innerHTML = `<strong>${a.name}</strong> — ${a.year} • <span class="muted small">${a.current}</span>`;
+      al.appendChild(li);
+    });
+  }
+
+  function renderNews(){
+    const nlist = document.getElementById('newsList');
+    nlist.innerHTML = '';
+    news.forEach(n=>{
+      const el = document.createElement('div');
+      el.className = 'news-article card';
+      el.innerHTML = `
+        <img src="${n.img}" alt="">
+        <div>
+          <div style="font-weight:700">${n.title}</div>
+          <div class="muted small">${n.date}</div>
+          <div class="muted small" style="margin-top:6px">${n.excerpt}</div>
+        </div>
+      `;
+      nlist.appendChild(el);
+    });
+  }
+
+  /*********************
+   * Interactions / UI *
+   *********************/
+  // navigation smooth scroll + active state
+  document.querySelectorAll('nav a').forEach(a=>{
+    a.addEventListener('click', (e)=>{
+      e.preventDefault();
+      document.querySelectorAll('nav a').forEach(x=>x.classList.remove('active'));
+      a.classList.add('active');
+      const target = document.querySelector(a.getAttribute('href'));
+      if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
+
+  // CTA quick jumps
+  document.querySelectorAll('.cta').forEach(c=>{
+    c.addEventListener('click',()=> {
+      const t = c.dataset.target;
+      if(t) document.querySelector(t).scrollIntoView({behavior:'smooth'});
+    });
+  });
+
+  // publications: simple search and filter
+  document.getElementById('pubSearch').addEventListener('input',(e)=>{
+    const q = e.target.value.toLowerCase().trim();
+    const filtered = publications.filter(p => (p.title+p.authors+p.theme).toLowerCase().includes(q));
+    renderPublications(filtered);
+  });
+
+  document.querySelectorAll('.pill[data-filter]').forEach(p=>{
+    p.addEventListener('click',()=>{
+      const filter = p.dataset.filter;
+      const val = p.dataset.val;
+      const filtered = publications.filter(pub => String(pub[filter]).includes(val) || (pub.theme && pub.theme===val));
+      renderPublications(filtered);
+    });
+  });
+  document.getElementById('clearFilters').addEventListener('click',()=>renderPublications());
+
+  // project modal opening (demo)
+  document.addEventListener('click',(e)=>{
+    const projectId = e.target.closest('[data-project]')?.dataset?.project;
+    if(projectId){
+      openProject(projectId);
+    }
+    const pubBtn = e.target.closest('[data-pub]');
+    if(pubBtn){
+      const pid = Number(pubBtn.dataset.pub);
+      const p = publications.find(x=>x.id===pid);
+      if(p) alert('Plain-language summary (demo): ' + (p.summary || 'No summary provided.'));
+    }
+  });
+
+  function openProject(themeId){
+    const modal = document.getElementById('projectModal');
+    const content = document.getElementById('projectContent');
+    content.innerHTML = '';
+    projects.forEach(pr=>{
+      const div = document.createElement('div');
+      div.innerHTML = `
+        <h3>${pr.title}</h3>
+        <img src="${pr.hero}" alt="" style="width:100%;height:160px;object-fit:cover;border-radius:8px;margin-bottom:8px">
+        <p style="font-weight:700">Public summary</p>
+        <p class="muted small">${pr.summary}</p>
+
+        <div class="accordion">
+          <div class="acc-row"><div>Detailed Methodology</div><div>+</div></div>
+          <div class="acc-body">${pr.methods}</div>
+
+          <div class="acc-row"><div>Associated Publications</div><div>+</div></div>
+          <div class="acc-body">${pr.publications.join('<br>')}</div>
+
+          <div class="acc-row"><div>Data & Code</div><div>+</div></div>
+          <div class="acc-body"><a href="${pr.data}" target="_blank">${pr.data}</a></div>
+
+          <div class="acc-row"><div>Key Personnel</div><div>+</div></div>
+          <div class="acc-body">${pr.personnel.join('<br>')}</div>
+        </div>
+        <hr/>
+      `;
+      content.appendChild(div);
+    });
+    modal.style.display = 'flex';
+    modal.setAttribute('aria-hidden','false');
+
+    document.querySelectorAll('.acc-row').forEach((r)=>{
+      r.addEventListener('click',()=>{
+        const body = r.nextElementSibling;
+        if(!body) return;
+        body.style.display = body.style.display === 'block' ? 'none' : 'block';
+      });
+    });
+  }
+  document.getElementById('closeProject').addEventListener('click',()=>{
+    document.getElementById('projectModal').style.display = 'none';
+    document.getElementById('projectModal').setAttribute('aria-hidden','true');
+  });
+
+  // person modal
+  function openPerson(p){
+    const modal = document.getElementById('personModal');
+    const content = document.getElementById('personContent');
+    content.innerHTML = `<h3>${p.name}</h3><div class="muted small">${p.role}</div><p style="margin-top:8px">${p.bio}</p>`;
+    modal.style.display='flex';
+    modal.setAttribute('aria-hidden','false');
+  }
+  document.getElementById('closePerson').addEventListener('click',()=>{
+    document.getElementById('personModal').style.display='none';
+    document.getElementById('personModal').setAttribute('aria-hidden','true');
+  });
+
+  /*********************
+   * Init everything *
+   *********************/
+  renderThemes();
+  renderPublications();
+  renderPeople();
+  renderNews();
+
+  // Build and start slideshow
+  buildSlideshow();
+  startTimer();
+
+  // Pause slideshow on hover / focus
+  const slideshowWrap = document.getElementById('slideshow');
+  slideshowWrap.addEventListener('mouseenter', ()=> { if(slideTimer) clearInterval(slideTimer); });
+  slideshowWrap.addEventListener('mouseleave', ()=> { startTimer(); });
+
+  // accessible keyboard shortcut: "j" jumps to Join Us
+  document.addEventListener('keydown',(e)=>{
+    if(e.key && e.key.toLowerCase()==='j'){ document.querySelector('#join').scrollIntoView({behavior:'smooth'}); }
+  });
+</script>
+</body>
+</html>
+
