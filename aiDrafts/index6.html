@@ -3,118 +3,122 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>The AQUACON Lab — Aquatic Themed Prototype</title>
+<title>The AQUACON Lab — Logo-themed Colors</title>
 <style>
   :root{
-    --accent:#00a6d6;
-    --muted:#cfe7ef;
-    --card:#ffffff;
+    /* Logo-derived palette */
+    --brand-green: #254838;   /* deep forest green from logo */
+    --brand-gold:  #c89b23;  /* warm gold/yellow from logo text */
+    --brand-white: #ffffff;
+
+    /* aquatic accent (kept for ocean feeling) */
+    --accent-blue: #008fbf;
+
+    /* neutrals */
+    --muted: rgba(255,255,255,0.80);
+    --card-bg: rgba(255,255,255,0.03);
     --glass: rgba(255,255,255,0.85);
     --maxw:1100px;
     --radius:10px;
-    --shadow: 0 6px 18px rgba(6,20,34,0.14);
+    --shadow: 0 6px 18px rgba(6,20,34,0.18);
+
     font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    color: #032233;
+    color: var(--brand-white);
   }
+
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
     margin:0;
     padding:28px 24px;
     overflow-x:hidden;
-    /* AQUATIC BACKGROUND: deep ocean gradient */
-    background:
-      linear-gradient(180deg, #001c32 0%, #003a57 35%, #04668f 70%, #8fd7ff 100%);
-    color:var(--card);
-    /* place for animated overlays implemented via pseudo elements */
     position:relative;
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
+
+    /* base ocean gradient (still present) but slightly tinted toward the brand green */
+    background:
+      linear-gradient(180deg, #01262b 0%, #003a57 35%, #04668f 70%, #8fd7ff 100%);
+    color:var(--brand-white);
   }
 
-  /* Animated wave overlay using pseudo-element */
+  /* Smooth wave artwork (non-repeating) and blended edges */
   body::before{
     content:'';
     position:fixed;
     inset:0;
     z-index:0;
     pointer-events:none;
-    /* two layered SVG waves (one near horizon, one faint at top) encoded as data URI */
     background-image:
-      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='400' viewBox='0 0 1600 400'><defs><linearGradient id='g' x1='0' x2='0' y1='0' y2='1'><stop offset='0' stop-color='%23004b6a' stop-opacity='0.32'/><stop offset='1' stop-color='%23005f88' stop-opacity='0.12'/></linearGradient></defs><path fill='url(%23g)' d='M0 200 C200 140 400 260 800 200 C1200 140 1400 260 1600 200 L1600 400 L0 400 Z'/></svg>"),
-      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='200' viewBox='0 0 1600 200'><path fill='%23006b97' fill-opacity='0.12' d='M0 80 C150 120 300 40 600 80 C900 120 1050 40 1600 80 L1600 200 L0 200 Z'/></svg>");
-    background-repeat:no-repeat;
-    background-position:0% 35%, 0% 6%;
-    background-size:cover;
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 400' preserveAspectRatio='xMidYMid slice'><defs><linearGradient id='g' x1='0' x2='0' y1='0' y2='1'><stop offset='0' stop-color='%23004663' stop-opacity='0.40'/><stop offset='1' stop-color='%23005f88' stop-opacity='0.08'/></linearGradient></defs><path fill='url(%23g)' d='M0 220 C200 160 400 280 800 220 C1200 160 1400 280 1600 220 L1600 400 L0 400 Z'/></svg>"),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 200' preserveAspectRatio='xMidYMid slice'><path fill='%23006b97' fill-opacity='0.10' d='M0 80 C150 120 300 40 600 80 C900 120 1050 40 1600 80 L1600 200 L0 200 Z'/></svg>");
+    background-repeat:no-repeat,no-repeat;
+    background-size: 180% 60%, 180% 30%;
+    background-position: 10% 34%, 10% 6%;
     animation: waveShift 28s linear infinite;
     mix-blend-mode:overlay;
     opacity:0.95;
     transform: translateZ(0);
   }
 
-  @keyframes waveShift{
-    from { background-position: 0% 35%, 0% 6%; }
-    to   { background-position: -50% 35%, -40% 6%; }
-  }
-
-  /* Gentle rising bubbles using another pseudo-element */
   body::after{
     content:'';
     position:fixed;
-    inset:0;
+    inset:-20vh -10vw -20vh -10vw;
     z-index:0;
     pointer-events:none;
-    background-image:
-      radial-gradient(circle at 10% 80%, rgba(255,255,255,0.02) 0 1px, transparent 2px),
-      radial-gradient(circle at 30% 90%, rgba(255,255,255,0.03) 0 2px, transparent 4px),
-      radial-gradient(circle at 85% 78%, rgba(255,255,255,0.02) 0 1px, transparent 3px),
-      radial-gradient(circle at 75% 92%, rgba(255,255,255,0.015) 0 3px, transparent 6px);
-    background-size: 100% 100%;
-    animation: bubbles 14s linear infinite;
-    opacity:0.8;
-  }
-  @keyframes bubbles{
-    0% { transform: translateY(0) scale(1); opacity:0.9 }
-    50% { transform: translateY(-18px) scale(1.01); opacity:0.7 }
-    100% { transform: translateY(0) scale(1); opacity:0.9 }
+    background:
+      linear-gradient(180deg,
+        rgba(5,18,24,0.00) 0%,
+        rgba(5,18,24,0.02) 8%,
+        rgba(5,18,24,0.06) 18%,
+        rgba(5,18,24,0.10) 30%,
+        rgba(5,18,24,0.10) 70%,
+        rgba(5,18,24,0.02) 88%,
+        rgba(5,18,24,0.00) 100%);
+    filter: blur(18px) saturate(1.02);
+    opacity:0.95;
   }
 
-  /* container: scaled 30% larger but keep layout width similar */
+  @keyframes waveShift{
+    from { background-position: 10% 34%, 10% 6%; }
+    to   { background-position: -40% 34%, -30% 6%; }
+  }
+
+  /* container: scaled 30% larger (as before) */
   .wrap{
     position:relative;
-    z-index:10; /* above background overlays */
+    z-index:10;
     max-width: calc(var(--maxw) / 1.3);
     margin:0 auto;
     transform: scale(1.3);
     transform-origin: top center;
   }
 
-  header{display:flex;align-items:center;justify-content:space-between;padding:12px 0;color:var(--card)}
+  header{display:flex;align-items:center;justify-content:space-between;padding:12px 0;color:var(--brand-white)}
   .brand{display:flex;gap:12px;align-items:center}
-  .logo{width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#00b4d8);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;box-shadow:var(--shadow)}
-  .brand div {color:var(--card)}
-  nav a{margin-left:14px;color:rgba(255,255,255,0.9);text-decoration:none;font-weight:600}
-  nav a.active{color: #e0f7ff}
+  .logo{
+    width:56px;height:56px;border-radius:10px;
+    background: linear-gradient(135deg, var(--brand-green), #2b5a45);
+    display:flex;align-items:center;justify-content:center;color:var(--brand-white);
+    font-weight:900; font-size:18px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    border: 4px solid rgba(255,255,255,0.06);
+  }
+  .brand div {color:var(--brand-white)}
+  nav a{margin-left:14px;color:rgba(255,255,255,0.9);text-decoration:none;font-weight:700}
+  nav a.active{color:var(--brand-gold); text-shadow: 0 1px 0 rgba(0,0,0,0.35)}
 
   /* HERO / SLIDESHOW */
   .hero{
-    display:block;
-    gap:18px;
-    padding:0;
-    border-radius:16px;
-    box-shadow:var(--shadow);
-    align-items:center;
-    overflow:hidden;
-    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    display:block;gap:18px;padding:0;border-radius:16px;box-shadow:var(--shadow);
+    align-items:center;overflow:hidden;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
     border: 1px solid rgba(255,255,255,0.04);
   }
 
   .hero .slideshow-wrap{
-    position:relative;
-    height:520px;
-    min-height:320px;
-    border-radius:16px;
-    overflow:hidden;
+    position:relative;height:520px;min-height:320px;border-radius:16px;overflow:hidden;
     border:4px solid rgba(255,255,255,0.06);
     background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
     box-shadow: inset 0 -30px 80px rgba(0,0,0,0.12);
@@ -129,27 +133,21 @@
   }
   .slideshow img.active{opacity:1}
 
-  /* caption */
+  /* small caption */
   .slideshow .caption{
-    position:absolute;left:18px;bottom:92px;background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.28));
-    color:white;padding:10px 14px;border-radius:10px;font-weight:700;font-size:1rem;
+    position:absolute;left:18px;bottom:92px;
+    background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.28));
+    color:var(--brand-white);padding:10px 14px;border-radius:10px;font-weight:700;font-size:1rem;
     backdrop-filter: blur(4px); z-index:35;
   }
 
-  /* Bold mission overlay at bottom edge of frame (image visible behind) */
+  /* Bold mission overlay at bottom; golden-ish text with white-outline feel */
   .slideshow .mission-overlay{
-    position:absolute;
-    left:0;right:0;bottom:0;
-    display:flex;justify-content:center;
-    padding:16px 18px;
-    background: linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.26));
-    color: #fff;
-    font-weight:800;
-    font-size:1.12rem;
-    text-align:center;
-    z-index:34;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:center;
+    padding:18px 20px;background: linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.26));
+    color:var(--brand-gold);font-weight:900;font-size:1.18rem;text-align:center;z-index:34;
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    text-shadow: 0 1px 0 rgba(0,0,0,0.45);
   }
   .slideshow .mission-overlay .inner{max-width:1200px;padding:0 6px}
 
@@ -157,29 +155,29 @@
     position:absolute;right:12px;bottom:12px;display:flex;gap:8px;z-index:40;
   }
   .slideshow button{
-    background:rgba(255,255,255,0.95);border:0;padding:8px;border-radius:8px;cursor:pointer;font-weight:700;
-    box-shadow: 0 4px 12px rgba(2,10,20,0.2);
+    background:var(--brand-gold);border:0;padding:8px;border-radius:8px;cursor:pointer;font-weight:700;
+    color:var(--brand-green); box-shadow: 0 6px 18px rgba(0,0,0,0.22);
   }
 
   /* NEW INTRO SECTION (moved hero-copy) */
-  #intro{margin-top:18px; color:var(--card)}
-  .intro-card{display:grid;grid-template-columns:1fr;gap:18px;padding:18px;border-radius:12px;background:rgba(255,255,255,0.04);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.04)}
-  .mission{font-size:1.25rem;font-weight:700;color:#c8f2ff;margin-bottom:8px}
-  .mission-sub{color:rgba(255,255,255,0.85);margin-bottom:16px}
+  #intro{margin-top:18px; color:var(--brand-white)}
+  .intro-card{display:grid;grid-template-columns:1fr;gap:18px;padding:18px;border-radius:12px;background:rgba(255,255,255,0.02);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.03)}
+  .mission{font-size:1.25rem;font-weight:700;color:var(--brand-gold);margin-bottom:8px}
+  .mission-sub{color:var(--muted);margin-bottom:16px}
   .cta-grid{display:flex;gap:12px}
-  .cta{flex:1;background:rgba(255,255,255,0.04);padding:14px;border-radius:10px;box-shadow:var(--shadow);cursor:pointer;border:1px solid rgba(255,255,255,0.03);color:var(--card)}
-  .cta h4{margin:0 0 6px 0}
-  .cta p{margin:0;color:rgba(255,255,255,0.75);font-size:0.95rem}
+  .cta{flex:1;background:rgba(255,255,255,0.02);padding:14px;border-radius:10px;box-shadow:var(--shadow);cursor:pointer;border:1px solid rgba(255,255,255,0.03);color:var(--brand-white)}
+  .cta h4{margin:0 0 6px 0;color:var(--brand-gold)}
+  .cta p{margin:0;color:rgba(255,255,255,0.78);font-size:0.95rem}
 
   /* News feed mini */
   .news-mini{display:flex;gap:12px;margin-top:12px}
-  .news-item{flex:1;background:rgba(255,255,255,0.02);padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);color:var(--card)}
+  .news-item{flex:1;background:rgba(255,255,255,0.02);padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);color:var(--brand-white)}
   .news-item img{width:100%;height:90px;object-fit:cover;border-radius:6px;margin-bottom:8px}
-  .news-item strong{color:#e6fbff}
+  .news-item strong{color:var(--brand-gold)}
 
   /* Sections */
-  section{margin-top:26px;color:var(--card)}
-  h2{margin:0 0 12px 0;color:#eaffff}
+  section{margin-top:26px;color:var(--brand-white)}
+  h2{margin:0 0 12px 0;color:var(--brand-gold)}
   .card{background: rgba(255,255,255,0.03);padding:16px;border-radius:12px;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.04)}
 
   /* Research grid */
@@ -187,33 +185,33 @@
   .theme{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.03))}
   .theme img{width:100%;height:120px;object-fit:cover;border-radius:8px;margin-bottom:8px}
 
-  /* Project modal / accordion */
+  /* Accordion / modal styles */
   .accordion{border-top:1px solid rgba(255,255,255,0.03);margin-top:8px}
-  .acc-row{padding:10px 0;cursor:pointer;display:flex;justify-content:space-between;color:var(--card)}
-  .acc-body{padding:8px 0 16px 0;color:rgba(255,255,255,0.85);display:none}
+  .acc-row{padding:10px 0;cursor:pointer;display:flex;justify-content:space-between;color:var(--brand-white)}
+  .acc-body{padding:8px 0 16px 0;color:rgba(255,255,255,0.88);display:none}
 
-  /* Publications table */
+  /* Publications */
   .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-  .pill{padding:8px 10px;background:rgba(255,255,255,0.02);border-radius:999px;border:1px solid rgba(255,255,255,0.03);cursor:pointer;color:var(--card)}
+  .pill{padding:8px 10px;background:rgba(255,255,255,0.02);border-radius:999px;border:1px solid rgba(255,255,255,0.03);cursor:pointer;color:var(--brand-white)}
   .pub-list{display:grid;gap:10px}
-  .pub{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));color:var(--card)}
-  .pub .meta{color:rgba(255,255,255,0.75);font-size:0.9rem}
+  .pub{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));color:var(--brand-white)}
+  .pub .meta{color:rgba(255,255,255,0.78);font-size:0.9rem}
 
   /* People */
   .people-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
-  .person{padding:12px;border-radius:10px;text-align:center;background:rgba(255,255,255,0.03);cursor:pointer;color:var(--card)}
+  .person{padding:12px;border-radius:10px;text-align:center;background:rgba(255,255,255,0.03);cursor:pointer;color:var(--brand-white)}
   .person img{width:100%;height:120px;object-fit:cover;border-radius:8px;margin-bottom:8px}
   .alumni{list-style:none;padding:0;margin:0;color:rgba(255,255,255,0.78)}
   .alumni li{padding:8px 0;border-bottom:1px dashed rgba(255,255,255,0.02);}
 
   /* News list */
   .news-list{display:grid;gap:12px}
-  .news-article{display:flex;gap:12px;align-items:flex-start;color:var(--card)}
+  .news-article{display:flex;gap:12px;align-items:flex-start;color:var(--brand-white)}
   .news-article img{width:160px;height:100px;object-fit:cover;border-radius:8px}
 
   /* Join us */
   .apply-area{display:grid;grid-template-columns:1fr 320px;gap:18px}
-  .faq{background:rgba(255,255,255,0.02);padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);color:var(--card)}
+  .faq{background:rgba(255,255,255,0.02);padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);color:var(--brand-white)}
 
   /* Contact */
   .contact-grid{display:grid;grid-template-columns:1fr 320px;gap:16px}
@@ -221,7 +219,7 @@
 
   footer{margin-top:28px;text-align:center;color:rgba(255,255,255,0.7);font-size:0.95rem}
 
-  /* Responsive tweaks */
+  /* Responsive */
   @media (max-width:820px){
     .apply-area,.contact-grid{grid-template-columns:1fr}
     .cta-grid{flex-direction:column}
@@ -229,9 +227,17 @@
     .wrap{transform-origin:top left;}
   }
 
-  /* small utilities */
-  .btn{display:inline-block;padding:8px 12px;background:var(--accent);color:white;border-radius:8px;text-decoration:none;box-shadow:0 6px 18px rgba(0,106,160,0.18)}
-  .muted{color:rgba(255,255,255,0.8)}
+  /* utilities */
+  .btn{
+    display:inline-block;padding:8px 12px;background:var(--accent-blue);color:white;border-radius:8px;text-decoration:none;
+    box-shadow:0 6px 18px rgba(0,143,191,0.18);font-weight:700;
+    border: 2px solid rgba(255,255,255,0.04);
+  }
+  .btn.inverse{
+    background:var(--brand-gold); color:var(--brand-green);
+  }
+
+  .muted{color:var(--muted)}
   .small{font-size:0.9rem}
   .modal {position:fixed;inset:0;background:rgba(2,8,12,0.6);display:flex;align-items:center;justify-content:center;z-index:80;display:none}
   .modal .box{width:min(880px,94%);background:var(--glass);backdrop-filter: blur(6px);padding:18px;border-radius:12px;box-shadow:0 20px 40px rgba(1,15,30,0.5)}
@@ -244,7 +250,7 @@
       <div class="brand">
         <div class="logo">AQ</div>
         <div>
-          <div style="font-weight:700">The AQUACON Lab</div>
+          <div style="font-weight:900">The AQUACON Lab</div>
           <div class="muted small">Genomics • Conservation • eDNA</div>
         </div>
       </div>
@@ -326,7 +332,7 @@
         <div class="research-grid" id="themes"></div>
       </div>
 
-      <!-- Project modal -->
+      <!-- Project modal (unchanged) -->
       <div id="projectModal" class="modal" role="dialog" aria-hidden="true">
         <div class="box">
           <span class="close" id="closeProject">&times;</span>
@@ -341,7 +347,7 @@
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;">
           <div>
-            <input id="pubSearch" placeholder="Search publications..." style="padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);width:360px;background:transparent;color:var(--card)" />
+            <input id="pubSearch" placeholder="Search publications..." style="padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);width:360px;background:transparent;color:var(--brand-white)" />
           </div>
           <div class="muted small">Filter by year / theme / author</div>
         </div>
@@ -367,7 +373,7 @@
         <div style="display:flex;gap:12px;align-items:center;margin-bottom:12px">
           <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop" alt="PI" style="width:120px;height:120px;object-fit:cover;border-radius:8px">
           <div>
-            <div style="font-weight:700;color:var(--card)">Dr. Alex Sard</div>
+            <div style="font-weight:700;color:var(--brand-white)">Dr. Alex Sard</div>
             <div class="muted small">Research interests: eDNA, population genomics, conservation policy. Mentorship: collaborative, supportive, research-first.</div>
           </div>
         </div>
@@ -415,7 +421,7 @@
               <li>Grant-funded full-time technical positions (when available)</li>
             </ul>
             <div style="margin-top:12px">
-              <a class="btn" href="#contact">Contact</a>
+              <a class="btn inverse" href="#contact">Contact</a>
             </div>
           </aside>
         </div>
@@ -443,7 +449,7 @@
     </section>
 
     <footer>
-      Prototype site — content derived from the AQUACON Lab website blueprint. (This is a demo skeleton intended for content population.)
+      Prototype site — colors tuned to your logo. Want the logo placed in the header instead of the badge? I can swap it in and add hover states. 🌊🟡
     </footer>
   </div>
 
@@ -529,14 +535,12 @@
       container.appendChild(img);
     });
 
-    // caption
     const caption = document.createElement('div');
     caption.className = 'caption';
     caption.id = 'slideCaption';
     caption.textContent = slideshowImages[0].caption || '';
     container.appendChild(caption);
 
-    // controls (prev / next)
     const controls = document.createElement('div');
     controls.className = 'controls';
     controls.innerHTML = `
@@ -545,7 +549,6 @@
     `;
     container.appendChild(controls);
 
-    // events
     document.getElementById('prevSlide').addEventListener('click', ()=> {
       gotoSlide((slideIndex - 1 + slideshowImages.length) % slideshowImages.length);
       restartTimer();
@@ -558,9 +561,7 @@
     preloadSlides();
   }
 
-  function preloadSlides(){
-    slideshowImages.forEach(s => { const i = new Image(); i.src = s.src; });
-  }
+  function preloadSlides(){ slideshowImages.forEach(s => { const i = new Image(); i.src = s.src; }); }
 
   function gotoSlide(n){
     const imgs = Array.from(document.querySelectorAll('#slideshow img'));
@@ -572,7 +573,6 @@
   }
 
   function nextSlide(){ gotoSlide((slideIndex + 1) % slideshowImages.length); }
-
   function startTimer(){ if(slideTimer) clearInterval(slideTimer); slideTimer = setInterval(nextSlide, SLIDE_INTERVAL_MS); }
   function restartTimer(){ startTimer(); }
 
@@ -587,7 +587,7 @@
       el.className = 'theme';
       el.innerHTML = `
         <img src="${t.img}" alt="${t.title}">
-        <h4 style="color:#e6fbff">${t.title}</h4>
+        <h4 style="color:var(--brand-gold)">${t.title}</h4>
         <p class="muted small">${t.summary}</p>
         <div style="margin-top:8px"><a class="btn" href="#" data-project="${t.id}">Explore projects</a></div>
       `;
@@ -604,7 +604,7 @@
       el.innerHTML = `
         <div style="display:flex;justify-content:space-between;align-items:start">
           <div>
-            <div style="font-weight:700;color:#eaffff">${p.title}</div>
+            <div style="font-weight:700;color:var(--brand-gold)">${p.title}</div>
             <div class="meta">${p.authors} • ${p.year} • ${p.theme}</div>
             <div style="margin-top:6px" class="muted small">${p.summary}</div>
           </div>
@@ -624,13 +624,11 @@
     people.forEach(p=>{
       const el = document.createElement('div');
       el.className = 'person';
-      el.innerHTML = `<img src="${p.img}" alt="${p.name}"><div style="font-weight:700;color:var(--card)">${p.name}</div><div class="muted small">${p.role}</div>`;
+      el.innerHTML = `<img src="${p.img}" alt="${p.name}"><div style="font-weight:700;color:var(--brand-white)">${p.name}</div><div class="muted small">${p.role}</div>`;
       el.addEventListener('click',()=>openPerson(p));
       container.appendChild(el);
     });
-    // alumni
-    const al = document.getElementById('alumniList');
-    al.innerHTML = '';
+    const al = document.getElementById('alumniList'); al.innerHTML = '';
     alumni.forEach(a=>{
       const li = document.createElement('li');
       li.innerHTML = `<strong>${a.name}</strong> — ${a.year} • <span class="muted small">${a.current}</span>`;
@@ -647,7 +645,7 @@
       el.innerHTML = `
         <img src="${n.img}" alt="">
         <div>
-          <div style="font-weight:700;color:#eaffff">${n.title}</div>
+          <div style="font-weight:700;color:var(--brand-gold)">${n.title}</div>
           <div class="muted small">${n.date}</div>
           <div class="muted small" style="margin-top:6px">${n.excerpt}</div>
         </div>
@@ -659,7 +657,6 @@
   /*********************
    * Interactions / UI *
    *********************/
-  // navigation smooth scroll + active state
   document.querySelectorAll('nav a').forEach(a=>{
     a.addEventListener('click', (e)=>{
       e.preventDefault();
@@ -670,7 +667,6 @@
     });
   });
 
-  // CTA quick jumps
   document.querySelectorAll('.cta').forEach(c=>{
     c.addEventListener('click',()=> {
       const t = c.dataset.target;
@@ -678,7 +674,6 @@
     });
   });
 
-  // publications: search and filter
   document.getElementById('pubSearch').addEventListener('input',(e)=>{
     const q = e.target.value.toLowerCase().trim();
     const filtered = publications.filter(p => (p.title+p.authors+p.theme).toLowerCase().includes(q));
@@ -695,7 +690,6 @@
   });
   document.getElementById('clearFilters').addEventListener('click',()=>renderPublications());
 
-  // project modal opening
   document.addEventListener('click',(e)=>{
     const projectId = e.target.closest('[data-project]')?.dataset?.project;
     if(projectId) openProject(projectId);
@@ -714,7 +708,7 @@
     projects.forEach(pr=>{
       const div = document.createElement('div');
       div.innerHTML = `
-        <h3 style="color:#012b3a">${pr.title}</h3>
+        <h3 style="color:var(--brand-green)">${pr.title}</h3>
         <img src="${pr.hero}" alt="" style="width:100%;height:160px;object-fit:cover;border-radius:8px;margin-bottom:8px">
         <p style="font-weight:700">Public summary</p>
         <p class="muted small">${pr.summary}</p>
@@ -752,11 +746,10 @@
     document.getElementById('projectModal').setAttribute('aria-hidden','true');
   });
 
-  // person modal
   function openPerson(p){
     const modal = document.getElementById('personModal');
     const content = document.getElementById('personContent');
-    content.innerHTML = `<h3 style="color:#012b3a">${p.name}</h3><div class="muted small">${p.role}</div><p style="margin-top:8px">${p.bio}</p>`;
+    content.innerHTML = `<h3 style="color:var(--brand-green)">${p.name}</h3><div class="muted small">${p.role}</div><p style="margin-top:8px">${p.bio}</p>`;
     modal.style.display='flex';
     modal.setAttribute('aria-hidden','false');
   }
@@ -765,24 +758,19 @@
     document.getElementById('personModal').setAttribute('aria-hidden','true');
   });
 
-  /*********************
-   * Init everything *
-   *********************/
+  /* Init */
   renderThemes();
   renderPublications();
   renderPeople();
   renderNews();
 
-  // Build and start slideshow
   buildSlideshow();
   startTimer();
 
-  // Pause slideshow on hover / focus
   const slideshowWrap = document.getElementById('slideshow');
-  slideshowWrap.addEventListener('mouseenter', ()=> { if(slideTimer) clearInterval(slideTimer); });
+  slideshowWrap.addEventListener('mouseenter', ()=> { if(window.slideTimer) clearInterval(window.slideTimer); });
   slideshowWrap.addEventListener('mouseleave', ()=> { startTimer(); });
 
-  // accessible keyboard shortcut: "j" jumps to Join Us
   document.addEventListener('keydown',(e)=>{
     if(e.key && e.key.toLowerCase()==='j'){ document.querySelector('#join').scrollIntoView({behavior:'smooth'}); }
   });
