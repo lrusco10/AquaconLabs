@@ -19,14 +19,17 @@ function prevSlide() {
     showSlide(slideIndex);
 }
 
-nextBtn.addEventListener('click', nextSlide);
-prevBtn.addEventListener('click', prevSlide);
+if (nextBtn && prevBtn && slides.length > 0) {
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
 
-// Auto-advance slides every 5 seconds
-setInterval(nextSlide, 5000);
+    // Auto-advance slides every 5 seconds
+    setInterval(nextSlide, 5000);
 
-// Initialize
-showSlide(slideIndex);
+    // Initialize
+    showSlide(slideIndex);
+}
+
 
 // Accordion logic for Public
 document.querySelectorAll('.accordion-toggle').forEach(toggle => {
