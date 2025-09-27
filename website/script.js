@@ -25,8 +25,6 @@ if (nextBtn && prevBtn && slides.length > 0) {
 
     // Auto-advance slides every 5 seconds
     setInterval(nextSlide, 5000);
-
-    // Initialize
     showSlide(slideIndex);
 }
 
