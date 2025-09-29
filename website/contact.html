@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SOAC - Contact</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo-container">
+            <img src="assets/soacLogo.png" alt="SOAC Logo" class="logo">
+            <span class="site-title">SUNY Oswego Aquatic Conservation</span>
+        </a>
+        <nav class="navbar">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="research.html" class="nav-link">Research</a>
+            <a href="joinus.html" class="nav-link">Join Us</a>
+            <a href="contact.html" class="nav-link">Contact/About</a>
+        </nav>
+    </header>
+    <main>
+        <section class="contact-section">
+            <h1>Contact Us</h1>
+            <p>Reach out to our team for questions, collaborations, or more information about our research and programs.</p>
+            <div class="contact-flex">
+                <div class="social-buttons">
+                    <a href="https://facebook.com/" class="social-btn facebook" target="_blank" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                        <span>Facebook</span>
+                    </a>
+                    <a href="https://instagram.com/" class="social-btn instagram" target="_blank" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="https://linkedin.com/" class="social-btn linkedin" target="_blank" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                </div>
+                <form class="contact-form" action="mailto:your@email.com" method="POST" enctype="text/plain">
+                    <label for="contact-email">Your Email</label>
+                    <input type="email" id="contact-email" name="email" placeholder="you@example.com" required>
+                    <label for="contact-message">Message</label>
+                    <textarea id="contact-message" name="message" placeholder="Type your message here..." required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="team-section">
+            <h2>Meet the Team</h2>
+            <div class="team-grid">
+                <!-- Example Team Member -->
+                <div class="team-profile">
+                    <img src="assets/team1.jpg" alt="Dr. Alex Waters">
+                    <div class="team-info">
+                        <span class="team-name">Dr. Alex Waters</span>
+                        <span class="team-role">Principal Investigator</span>
+                        <a href="bios/alex-waters.html" target="_blank" class="bio-link">View Bio</a>
+                    </div>
+                </div>
+                <div class="team-profile">
+                    <img src="assets/team2.jpg" alt="Jamie Lake">
+                    <div class="team-info">
+                        <span class="team-name">Jamie Lake</span>
+                        <span class="team-role">Lab Manager</span>
+                        <a href="bios/jamie-lake.html" target="_blank" class="bio-link">View Bio</a>
+                    </div>
+                </div>
+                <div class="team-profile">
+                    <img src="assets/team3.jpg" alt="Chris Brook">
+                    <div class="team-info">
+                        <span class="team-name">Chris Brook</span>
+                        <span class="team-role">Field Biologist</span>
+                        <a href="bios/chris-brook.html" target="_blank" class="bio-link">View Bio</a>
+                    </div>
+                </div>
+                <div class="team-profile">
+                    <img src="assets/team4.jpg" alt="Sam Rivers">
+                    <div class="team-info">
+                        <span class="team-name">Sam Rivers</span>
+                        <span class="team-role">Graduate Researcher</span>
+                        <a href="bios/sam-rivers.html" target="_blank" class="bio-link">View Bio</a>
+                    </div>
+                </div>
+                <div class="team-profile">
+                    <img src="assets/team5.jpg" alt="Morgan Bay">
+                    <div class="team-info">
+                        <span class="team-name">Morgan Bay</span>
+                        <span class="team-role">Undergraduate Assistant</span>
+                        <a href="bios/morgan-bay.html" target="_blank" class="bio-link">View Bio</a>
+                    </div>
+                </div>
+                <div class="team-profile">
+                    <img src="assets/team6.jpg" alt="Taylor Creek">
+                    <div class="team-info">
+                        <span class="team-name">Taylor Creek</span>
+                        <span class="team-role">Outreach Coordinator</span>
+                        <a href="bios/taylor-creek.html" target="_blank" class="bio-link">View Bio</a>
+                    </div>
+                </div>
+                <!-- Add more team profiles here as needed -->
+            </div>
+        </section>
+    </main>
+</body>
+</html>
