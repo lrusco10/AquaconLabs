@@ -1,6 +1,6 @@
 :root {
     --primary-dark: #064675;
-    --primary-light: #f8c34b;
+    --primary-light: #e9c673;
     --text-on-dark: #fff;
     --text-on-light: #222;
 }
@@ -134,8 +134,10 @@ main {
 
 .mission-overlay p {
     font-size: 2.5rem;
+    font-family: 'Montserrat';
+    font-weight: 800;
     color: var(--text-on-dark);
-    background: var(--primary-dark);
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
 }
 
 .prev, .next {
