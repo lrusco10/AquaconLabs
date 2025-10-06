@@ -8,7 +8,11 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', Arial, sans-serif;
-    background: var(--primary-dark);
+    background-image: url('assets/WebsiteBG1.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
 }
 
 header {
@@ -166,14 +170,44 @@ main {
 
 /* Ditching accordion menus, let's see how Emma's idea works here... */
 
-.feature-section {
+.feature-section1 {
   display: flex;
   align-items: center;
   gap: 2rem;
   padding: 2rem;
-  max-width: 900px;
+  width: 100vw;
   margin: auto;
+  background: linear-gradient(
+    to right,
+    var(--primary-dark) 0%,
+    var(--primary-dark) 10%,
+    rgba(0,112,243,0.0) 100%
+  );
 }
+.feature-section2 {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  width: 100vw;
+  margin: auto;
+  background: linear-gradient(
+    to left,
+    var(--primary-dark) 0%,
+    var(--primary-dark) 10%,
+    rgba(0,112,243,0.0) 100%
+  );
+}
+
+.container {
+  max-width: 900px;  /* or whatever width you want */
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem 0;   /* vertical padding */
+}
+
 .feature-image img {
   max-width: 500px;
   width: 100%;
@@ -188,12 +222,16 @@ main {
 }
 .feature-content h2 {
   margin-top: 0;
-  font-size: 2rem;
+  font-family: 'Montserrat';
+  font-size: 3rem;
+  color: var(--text-on-dark);
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
 }
 .feature-content .subheading {
-  font-size: 1.2rem;
-  color: #666;
+  font-size: 1.5rem;
+  color: var(--text-on-dark);
   margin: 0.5rem 0 1.5rem 0;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
 }
 .cta-button {
   display: inline-block;
@@ -282,7 +320,12 @@ main {
 .news-feed-section {
     max-width: 80vw;
     margin: 2rem auto;
-    background: #fff;
+    background: linear-gradient(
+    to right,
+    #fff 0%,
+    #fff 20%,
+    rgba(0,112,243,0.0) 100%
+  );
     border-radius: 0;
     box-shadow: 0 2px 10px rgba(6,70,117,0.12);
     padding: 2rem;
