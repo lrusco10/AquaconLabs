@@ -1,11 +1,11 @@
 :root {
-    --primary-dark: #064675;
+    --primary-dark: #04263f;
     --primary-light: #e9c673;
     --text-on-dark: #fff;
     --text-on-light: #222;
 }
 
-body {
+body.home {
     margin: 0;
     font-family: 'Segoe UI', Arial, sans-serif;
     background-image: url('assets/WebsiteBG1.png');
@@ -15,10 +15,16 @@ body {
     background-attachment: fixed;
 }
 
+body.research{
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--primary-dark);
+}
+
 header {
     background: var(--primary-dark);
     color: var(--text-on-dark);
-    padding: 0.5rem 2rem;
+    padding: 1.0rem 3.0rem;
     display: flex;
     align-items: center;
     justify-content: space-between; /* Spread logo left, nav right */
@@ -26,16 +32,17 @@ header {
 
 .navbar {
     display: flex;
-    gap: 2rem; /* Space between nav links */
+    gap: 1rem; /* Space between nav links */
 }
 
 .nav-link {
-    color: var(--primary-light);
+    color: var(--text-on-light);
+    background: var(--text-on-dark);
     text-decoration: none;
     font-weight: 500;
     font-size: 1.1rem;
     letter-spacing: 1px;
-    padding: 0.5rem 1rem;
+    padding: 0.3rem 1rem;
     border-radius: 4px;
     transition: background 0.2s, color 0.2s;
 }
@@ -63,7 +70,8 @@ header {
 }
 
 .logo {
-    height: 48px;
+    width: 100px;
+    height: auto;
     margin-right: 1rem;
 }
 
@@ -71,7 +79,7 @@ header {
     font-size: 2rem;
     font-weight: bold;
     letter-spacing: 2px;
-    color: var(--primary-light);
+    color: var(#fff);
 }
 
 main {
@@ -177,12 +185,7 @@ main {
   padding: 2rem;
   width: 100vw;
   margin: auto;
-  background: linear-gradient(
-    to right,
-    var(--primary-dark) 0%,
-    var(--primary-dark) 10%,
-    rgba(0,112,243,0.0) 100%
-  );
+  background: var(--primary-dark);
 }
 .feature-section2 {
   display: flex;
@@ -193,13 +196,23 @@ main {
   margin: auto;
   background: linear-gradient(
     to left,
-    var(--primary-dark) 0%,
-    var(--primary-dark) 10%,
+    var(--primary-light) 0%,
+    var(--primary-light) 5%,
     rgba(0,112,243,0.0) 100%
   );
 }
 
-.container {
+.container1 {
+  max-width: 1100px;  /* or whatever width you want */
+  margin-left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+  padding: 2rem 0;   /* vertical padding */
+}
+
+.container2 {
   max-width: 900px;  /* or whatever width you want */
   margin: 0 auto;
   display: flex;
@@ -214,7 +227,7 @@ main {
   height: auto;
   display: block;
   border-radius: 0px;
-  border: var(--primary-light) 4px solid;
+  border: var(--text-on-dark) 4px solid;
   box-shadow: 10 20px 80px rgba(0,0,0,0.12);
 }
 .feature-content {
@@ -223,7 +236,7 @@ main {
 .feature-content h2 {
   margin-top: 0;
   font-family: 'Montserrat';
-  font-size: 3rem;
+  font-size: 3.5rem;
   color: var(--text-on-dark);
   text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
 }
@@ -401,6 +414,56 @@ main {
   margin: 0 auto;
   line-height: 1.7;
 }
+
+
+
+/* for the headline projects */
+.research-projects {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0;
+  background: #fff
+}
+
+.image-container img {
+  max-width: 500px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto 32px auto;
+}
+
+.project-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 30px;
+  width: 50%;
+}
+
+.project-title {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+}
+
+.project-description {
+  flex: 2;
+  display: flex;
+  align-items: flex-start;
+  background: var(--text-on-dark);
+}
+
+.project-description p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+
+
+/* Accordion Styles for Research Page */
 
 .research-accordion-list {
   margin-top: 2.5rem;
