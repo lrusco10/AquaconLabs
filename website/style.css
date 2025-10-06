@@ -164,6 +164,65 @@ main {
 .prev { left: 10px; }
 .next { right: 10px; }
 
+/* Ditching accordion menus, let's see how Emma's idea works here... */
+
+.feature-section {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 900px;
+  margin: auto;
+}
+.feature-image img {
+  max-width: 500px;
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0px;
+  border: var(--primary-light) 4px solid;
+  box-shadow: 10 20px 80px rgba(0,0,0,0.12);
+}
+.feature-content {
+  flex: 1;
+}
+.feature-content h2 {
+  margin-top: 0;
+  font-size: 2rem;
+}
+.feature-content .subheading {
+  font-size: 1.2rem;
+  color: #666;
+  margin: 0.5rem 0 1.5rem 0;
+}
+.cta-button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: var(--primary-light);
+  color: var(--text-on-light);
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+.cta-button:hover {
+  background: var(--text-on-dark);
+}
+
+@media (max-width: 700px) {
+  .feature-section {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  .feature-image img {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+}
+
+
+
 .accordion-section {
     width: 70vw;
     margin: 2rem auto;
