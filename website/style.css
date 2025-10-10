@@ -15,7 +15,7 @@ body.home {
     background-attachment: fixed;
 }
 
-body.research{
+body.standard{
     margin: 0;
     font-family: 'Segoe UI', Arial, sans-serif;
     background: var(--primary-dark);
@@ -239,22 +239,22 @@ main {
 }
 
 .container1 {
-  max-width: 1100px;  /* or whatever width you want */
+  max-width: 1100px;  
   margin-left: 0;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 2rem;
-  padding: 2rem 0;   /* vertical padding */
+  padding: 2rem 0;   
 }
 
 .container2 {
-  max-width: 900px;  /* or whatever width you want */
+  max-width: 900px;  
   margin: 0 auto;
   display: flex;
   align-items: center;
   gap: 2rem;
-  padding: 2rem 0;   /* vertical padding */
+  padding: 2rem 0;
 }
 
 .feature-image img {
@@ -361,6 +361,34 @@ main {
     color: #222;
     font-size: 1rem;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* end of home page and start of research page styles*/
 
@@ -471,6 +499,39 @@ main {
   padding: 0 1rem;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Join Us Page Styles */
 .joinus-section {
     max-width: 1100px;
@@ -532,6 +593,7 @@ main {
         min-width: 0;
     }
 }
+
 /* Opportunity Boxes on Join Us Page */
 .opportunity-boxes {
     display: flex;
@@ -606,6 +668,50 @@ main {
         min-width: 0;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Contact Page Styles */
 .contact-section {
