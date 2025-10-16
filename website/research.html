@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
 </head>
+<div id="ascii-bg"></div>
 <body class = "standard">
   <header>
         <a href="index.html" class="logo-container">
@@ -28,16 +29,16 @@
       </div>
       <div class="mission-overlay">
         <h1>Our Research</h1>
-        <p>
-        S.O.A.C is dedicated to offering students opportunities to engage in meaningful research projects that enhance their academic and professional growth. 
-        </p>
       </div>
     </section>
 
     
     <section class="research-projects">
+
       <div class="image-container">
-        <img src="assets/eDNAProj.jpg" alt="Research Project Main Image" />
+        <a href="articles/eDNAProject.pdf" target="_blank" data-name="Tony David">
+          <img src="assets/eDNAProj.jpg" alt="eDNA Project">
+        </a>
       </div>
       <div class="project-details">
         <div class="project-title">
@@ -59,7 +60,7 @@
         Our waters face growing threats from non-native species that spread quickly and disrupt balance. In partnership with SLELO PRISM, and using cutting-edge environmental DNA (eDNA), we can spot invaders early and give the Great Lakes a fighting chance.
         </p>
       </div>
-      </div>
+    </div>
     </section>
 
 
@@ -88,6 +89,48 @@
     </section>
 
   </main>
-  <script src="script.js"></script>
+  <script>
+    const fish = [
+      {text: '><(((°>  ', color: '#fff'},
+      {text: '><>      ', color: '#fff'},
+      {text: '><{{{°>  ', color: '#00ffff'},
+      {text: '>=====*> ', color: '#00ffff'},
+      {text: '><o>     ', color: '#00ffff'},
+      {text: '}<>{{0}}3', color: '#00ffff'}
+    ];
+    let pos = 0;
+
+    function getDimensions() {
+      // Estimate chars per line and lines per page based on window size and font size
+      const fontSize = 16; // px, must match CSS
+      const charsPerLine = Math.floor(window.innerWidth / (fontSize * 0.6)); // monospace approx
+      const linesPerPage = Math.floor(window.innerHeight / fontSize);
+      return { charsPerLine, linesPerPage };
+    }
+
+    function drawAquarium() {
+      const { charsPerLine, linesPerPage } = getDimensions();
+      let aquarium = '';
+      for (let i = 0; i < linesPerPage; i++) {
+        let offset = (pos + i * 30) % (charsPerLine - 10);
+
+        const fishObj = fish[i % fish.length];
+        let fishSpan = `<span style="color: ${fishObj.color}">${fishObj.text}</span>`;
+        // Pad remaining spaces with &nbsp; for HTML
+        let row = '&nbsp;'.repeat(offset) + fishSpan;
+        let neededSpaces = charsPerLine - offset - fishObj.text.length;
+        if (neededSpaces > 0) {
+          row += '&nbsp;'.repeat(neededSpaces);
+        }
+        aquarium += row + '<br>'; 
+      }
+  document.getElementById('ascii-bg').innerHTML = aquarium;
+  pos = (pos + 1) % charsPerLine;
+}
+
+    drawAquarium();
+    setInterval(drawAquarium, 200);
+    window.addEventListener('resize', drawAquarium); // Redraw on resize
+  </script>
 </body>
 </html>
