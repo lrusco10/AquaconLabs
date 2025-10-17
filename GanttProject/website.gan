@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="website" company="" webLink="cs.oswego.edu/~lrusco/AquaconLabs/website/index.html" view-date="2025-10-16" view-index="0" gantt-divider-location="351" resource-divider-location="300" version="3.3.3316" locale="en_US">
+    <description><![CDATA[website for SOAC]]></description>
+    <view zooming-state="default:2" id="gantt-chart">
+        <field id="tpd3" name="Name" width="200" order="0"/>
+        <field id="tpd4" name="Begin date" width="75" order="1"/>
+        <field id="tpd5" name="End date" width="75" order="2"/>
+        <field id="tpd15" name="Notes" width="20" order="3"/>
+        <option id="filter.completedTasks" value="false"/>
+        <option id="filter.dueTodayTasks" value="false"/>
+        <option id="filter.overdueTasks" value="false"/>
+        <option id="filter.inProgressTodayTasks" value="false"/>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Name" width="210" order="0"/>
+        <field id="1" name="Default role" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="true"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="5" uid="b883483876a742d293fb0c1baa0d5e31" name="term duration" meeting="false" start="2025-10-17" duration="49" complete="0" expand="true">
+            <notes><![CDATA[This is just a placeholder for the semester.
+
+Notes:
+
+I am keeping this chart vague for 2 reasons: 1, because it's easier to present, and 2, because gantt charts are annoying to edit.]]></notes>
+        </task>
+        <task id="0" uid="262fbb5b48704211adf224f7900f8e8b" name="Launch The Website Prototype" meeting="false" start="2025-10-17" duration="8" complete="0" expand="true">
+            <notes><![CDATA[TO DO:
+---------
+ABSOLUTE
+-Enable full mobile styling support
+-Create QR codes to be put on adverts
+---------
+SUGGESTIVE
+-add a footer with contact info, website credit, watermark, etc.
+-redesign the employer's page [sliders]
+-add CTA buttons and taglines to homepage
+]]></notes>
+            <depend id="2" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="2" uid="4eff56cfba8743d995736ec61db0634f" name="Make a database for messaging" meeting="false" start="2025-10-25" duration="7" complete="0" expand="true">
+            <notes><![CDATA[TO DO:
+---------
+ABSOLUTE
+-create a backend java app
+-create a JSON database
+-create a GUI for userbase
+-notify userbase of resource and provide instructions
+---------
+SUGGESTIVE
+-redesign the look of the contact section
+-add email support? [vulnerabilites]
+-create email push notifications
+]]></notes>
+            <depend id="3" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="3" uid="a29a31ed8b9c4b2fb77ff6cd19feb1ba" name="Make profile pages for all team members" meeting="false" start="2025-11-01" duration="10" complete="0" expand="true">
+            <notes><![CDATA[TO DO:
+---------
+ABSOLUTE
+-reach out to each team member, requesting bioinformatics
+-create interactive pages for each user, link to professional experience.
+---------
+SUGGESTIVE
+-in the team page, create a search bar to quickly find teammates
+-reduce the number of regularly displayed teammates
+]]></notes>
+            <depend id="1" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="1" uid="73b127610b024b348b53ec27b1bc954b" name="Automate the news system" meeting="false" start="2025-11-11" duration="10" complete="0" expand="true">
+            <notes><![CDATA[TO DO:
+---------
+ABSOLUTE
+-create a backend java scraping application
+-link news headlines to the post they're referencing
+-have the scraping app monitor the social media for new postings
+OR
+-have the app be run manually (minimal action) with regular intervals
+-create an administrative login for security
+---------
+SUGGESTIVE
+-incorporate google gemini to make headlines
+-users can use the editor to change the headlines gemini is wrong
+]]></notes>
+            <depend id="4" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="4" uid="e931e63b14f949b6a0071a3c760b6e02" name="Create applications for editing the website" meeting="false" start="2025-11-21" duration="14" complete="0" expand="true">
+            <notes><![CDATA[TO DO:
+---------
+ABSOLUTE
+-create GUI app for editing the website using the css styling as a guide.
+-notify userbase of it's existence
+-add logins and security protocols (so nobody can just "update" whatever they want)
+---------
+SUGGESTIVE
+-incorporate google gemini to improve this process.]]></notes>
+        </task>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+</project>
