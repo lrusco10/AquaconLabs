@@ -776,7 +776,7 @@ main {
 }
 
 .contact-section h1 {
-    color: var(--background-light);
+    color: var(--primary-light);
     font-size: 2.4rem;
     margin-bottom: 0.8rem;
     text-shadow: 2px 2px 8px rgba(0,0,0,0.5);

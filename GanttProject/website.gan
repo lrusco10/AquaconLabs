@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="website" company="" webLink="cs.oswego.edu/~lrusco/AquaconLabs/website/index.html" view-date="2025-10-16" view-index="0" gantt-divider-location="351" resource-divider-location="300" version="3.3.3316" locale="en_US">
+<?xml version="1.0" encoding="UTF-8"?><project name="website" company="" webLink="cs.oswego.edu/~lrusco/AquaconLabs/website/index.html" view-date="2025-10-12" view-index="0" gantt-divider-location="351" resource-divider-location="300" version="3.3.3316" locale="en_US">
     <description><![CDATA[website for SOAC]]></description>
-    <view zooming-state="default:2" id="gantt-chart">
+    <view zooming-state="default:6" id="gantt-chart">
         <field id="tpd3" name="Name" width="200" order="0"/>
         <field id="tpd4" name="Begin date" width="75" order="1"/>
         <field id="tpd5" name="End date" width="75" order="2"/>
@@ -43,9 +43,27 @@
 
 Notes:
 
-I am keeping this chart vague for 2 reasons: 1, because it's easier to present, and 2, because gantt charts are annoying to edit.]]></notes>
+I am keeping this chart vague for 2 reasons: 1, because it's easier to present, and 2, because gantt charts are annoying to edit.
+
+maggie suny esf working on muskie in the st lawrence
+chloe suny esf working on sturgeons at sturgeonfest
+
+will be a reel for 3d printing peeps
+
+there will be a post for the website launch
+
+"interested in aquatic conservation?"
+
+add profiles of:
+ellen.karboski@oswego.edu
+slf85@cornell.edu
+
+
+don't need the labelled columns. just display jobs.
+
+]]></notes>
         </task>
-        <task id="0" uid="262fbb5b48704211adf224f7900f8e8b" name="Launch The Website Prototype" meeting="false" start="2025-10-17" duration="8" complete="0" expand="true">
+        <task id="0" uid="262fbb5b48704211adf224f7900f8e8b" name="Launch The Website Prototype" meeting="false" start="2025-10-17" duration="12" complete="0" expand="true">
             <notes><![CDATA[TO DO:
 ---------
 ABSOLUTE
@@ -54,28 +72,32 @@ ABSOLUTE
 ---------
 SUGGESTIVE
 -add a footer with contact info, website credit, watermark, etc.
+-improve the redirects on the news
 -redesign the employer's page [sliders]
 -add CTA buttons and taglines to homepage
 ]]></notes>
             <depend id="2" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="2" uid="4eff56cfba8743d995736ec61db0634f" name="Make a database for messaging" meeting="false" start="2025-10-25" duration="7" complete="0" expand="true">
+        <task id="2" uid="4eff56cfba8743d995736ec61db0634f" name="Make a database for messaging" meeting="false" start="2025-10-29" duration="4" complete="0" expand="true">
             <notes><![CDATA[TO DO:
 ---------
 ABSOLUTE
--create a backend java app
--create a JSON database
--create a GUI for userbase
--notify userbase of resource and provide instructions
+-Use a google form.
+-Xcreate a backend java app
+-Xcreate a JSON database
+-Xcreate a GUI for userbase
+-Xnotify userbase of resource and provide instructions
 ---------
 SUGGESTIVE
+-maybe keep the message box-- use JS to pipe the inputs
+-make the google form invisible?
 -redesign the look of the contact section
 -add email support? [vulnerabilites]
 -create email push notifications
 ]]></notes>
             <depend id="3" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="3" uid="a29a31ed8b9c4b2fb77ff6cd19feb1ba" name="Make profile pages for all team members" meeting="false" start="2025-11-01" duration="10" complete="0" expand="true">
+        <task id="3" uid="a29a31ed8b9c4b2fb77ff6cd19feb1ba" name="Make profile pages for all team members" meeting="false" start="2025-11-02" duration="10" complete="0" expand="true">
             <notes><![CDATA[TO DO:
 ---------
 ABSOLUTE
@@ -88,7 +110,7 @@ SUGGESTIVE
 ]]></notes>
             <depend id="1" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="1" uid="73b127610b024b348b53ec27b1bc954b" name="Automate the news system" meeting="false" start="2025-11-11" duration="10" complete="0" expand="true">
+        <task id="1" uid="73b127610b024b348b53ec27b1bc954b" name="Automate the news system" meeting="false" start="2025-11-12" duration="10" complete="0" expand="true">
             <notes><![CDATA[TO DO:
 ---------
 ABSOLUTE
@@ -105,7 +127,7 @@ SUGGESTIVE
 ]]></notes>
             <depend id="4" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="4" uid="e931e63b14f949b6a0071a3c760b6e02" name="Create applications for editing the website" meeting="false" start="2025-11-21" duration="14" complete="0" expand="true">
+        <task id="4" uid="e931e63b14f949b6a0071a3c760b6e02" name="Create applications for editing the website" meeting="false" start="2025-11-22" duration="14" complete="0" expand="true">
             <notes><![CDATA[TO DO:
 ---------
 ABSOLUTE
