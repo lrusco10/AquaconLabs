@@ -10,6 +10,8 @@
     --background-light: #f5faff;       /* very light blue background */
     --border-light: #dbeafe;           /* pale blue border */
     --border-dark: #2e3c43;            /* muted dark border */
+    --nav-height: 5vh;
+    --accordion-transition: 240ms cubic-bezier(.4,0,.2,1);
 }
 
 body.home {
@@ -35,11 +37,34 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between; /* Spread logo left, nav right */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.navbar {
-    display: flex;
-    gap: 1rem; /* Space between nav links */
+
+
+
+
+/* new */
+
+.nav{
+  display:flex;
+  align-items:center;
+  gap:0.5rem;
+  flex: 1 1 auto;
+  min-width: 0; /* enables child truncation/overflow detection */
+}
+
+.nav-primary{
+  display:flex;
+  gap: 1rem;
+  align-items:center;
+  white-space:nowrap; /* keep each button as single unit for proper measurement */
+  overflow: visible;  /* measurement uses scrollWidth/clientWidth */
+  min-width: 0; /* important so clientWidth shrinks on small screens */
+  padding-left: 3rem;
+  flex: 1 1 auto;
 }
 
 .nav-link {
@@ -51,7 +76,7 @@ header {
   background: var(--text-on-dark);
   text-decoration: none;
   font-weight: 500;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   letter-spacing: 1px;
   padding: 0.3rem 1rem;
   border-radius: 4px;
@@ -64,6 +89,109 @@ header {
     color: var(--primary-dark);
     outline: none;
 }
+
+
+
+
+
+
+/* Nav toggle (hamburger) */
+.nav-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:0.5rem;
+  font-size:1.25rem;
+  height:40px;
+  width:40px;
+  border-radius:8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  flex: 0 0 auto;
+  color: var(--text-on-dark);
+}
+
+/* Dropdown / accordion panel — default collapsed and visually hidden.
+   It stays detached from the header (position:fixed) so it won't be clipped.
+   The panel will only expand when the .open class is added in JS. */
+.nav-overflow,
+.nav-accordion {
+  position: fixed;                 /* detach from header's containing block */
+  top: calc(var(--nav-height) + 8px);
+  right: 1rem;
+  left: 1rem;
+  z-index: 9999;
+  background: white;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  border-radius: 8px;
+  padding: 0.25rem;
+  overflow: hidden;                /* keep collapsed when closed */
+  max-height: 0;                   /* collapsed */
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    max-height var(--accordion-transition),
+    opacity 160ms linear;
+}
+
+/* Open state: expand (acts like an accordion). We use a large max-height so the
+   panel can grow to fit content. If content is extremely long, internal elements
+   can still scroll (see .nav-overflow-list). */
+.nav-overflow.open,
+.nav-accordion.open {
+  max-height: 1000px; /* large enough to fit typical nav lists */
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Storage list (used by balancing code). This is the VISIBLE menu:
+   it contains the overflowed/missing items and is scrollable if very tall. */
+.nav-overflow-list{
+  background: white;
+  border-radius: 8px;
+  padding: 0.5rem;
+  display:flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 160px;
+
+  max-height: calc(100vh - var(--nav-height) - 24px);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Display menu (unused duplicate) kept hidden to avoid double menus */
+.nav-overflow-menu{
+  display: none;
+}
+
+/* Overflowed items are presented like nav links */
+.nav-overflow-list .nav-link{
+  display:block;
+  padding:0.6rem 0.75rem;
+  border-radius:6px;
+}
+
+/* Small screen aesthetics: group overflow/menu */
+@media (max-width: 520px){
+  .nav-overflow{
+    right: 0.5rem;
+    left: 0.5rem;
+  }
+}
+
+/* Desktop: hide hamburger as an aesthetic fallback (JS controls real visibility) */
+@media (min-width: 900px){
+  .nav-toggle{ display:none; }
+}
+
+
+
+
+
+
+
 
 .logo-container {
     display: flex;
@@ -81,8 +209,8 @@ header {
 }
 
 .logo {
-    width: 10vw;
-    height: auto;
+    min-width: 3vw;
+    min-height: 3vh;
     margin-right: 1rem;
 }
 

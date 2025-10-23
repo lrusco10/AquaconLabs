@@ -10,17 +10,44 @@
 </head>
 <div id="ascii-bg"></div>
 <body class="standard">
-    <header>
-        <a href="index.html" class="logo-container">
+    <header class="site-header" id="site-header">
+        <a href="#home" class="logo-container">
             <img src="assets/logo.svg" alt="SOAC Logo" class="logo">
-            <span class="site-title">SUNY Oswego Aquatic Conservation</span>
         </a>
-        <nav class="navbar">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="research.html" class="nav-link">Research</a>
-            <a href="joinus.html" class="nav-link">Join Us</a>
-            <a href="contact.html" class="nav-link">Contact/About</a>
-        </nav>
+
+
+
+                                            <!-- new -->
+        <!-- Nav container -->
+    <nav id="main-nav" class="nav" role="navigation" aria-label="Primary">
+      <!-- visible inline items -->
+      <div class="nav-primary" id="nav-primary" aria-hidden="false">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="research.html" class="nav-link">Research</a>
+        <a href="joinus.html" class="nav-link">Join Us</a>
+        <a href="contact.html" class="nav-link">Contact/About</a>
+      </div>
+
+      <button
+        id="nav-toggle"
+        class="nav-toggle"
+        aria-controls="nav-overflow"
+        aria-expanded="false"
+        aria-label="Open menu"
+        hidden
+      >
+        ☰
+      </button>
+
+      <!-- Overflow menu container (items moved here) -->
+      <div id="nav-overflow" class="nav-overflow" aria-hidden="true">
+        <!-- Storage for moved items (used by balancing code) -->
+        <div class="nav-overflow-list" id="nav-overflow-list" role="menu" hidden></div>
+
+        <!-- Display menu shown when the hamburger opens; populated with ALL nav links -->
+        <div class="nav-overflow-menu" id="nav-overflow-menu" role="menu" hidden></div>
+      </div>
+    </nav>
     </header>
     <main>
 
@@ -210,48 +237,7 @@
         </section>
 
     </main>
-    <script>
-    const fish = [
-      {text: '><(((°>  ', color: '#fff'},
-      {text: '><>      ', color: '#fff'},
-      {text: '><{{{°>  ', color: '#00ffff'},
-      {text: '>=====*> ', color: '#00ffff'},
-      {text: '><o>     ', color: '#00ffff'},
-      {text: '}<>{{0}}3', color: '#00ffff'}
-    ];
-    let pos = 0;
-
-    function getDimensions() {
-      // Estimate chars per line and lines per page based on window size and font size
-      const fontSize = 16; // px, must match CSS
-      const charsPerLine = Math.floor(window.innerWidth / (fontSize * 0.6)); // monospace approx
-      const linesPerPage = Math.floor(window.innerHeight / fontSize);
-      return { charsPerLine, linesPerPage };
-    }
-
-    function drawAquarium() {
-      const { charsPerLine, linesPerPage } = getDimensions();
-      let aquarium = '';
-      for (let i = 0; i < linesPerPage; i++) {
-        let offset = (pos + i * 30) % (charsPerLine - 10);
-
-        const fishObj = fish[i % fish.length];
-        let fishSpan = `<span style="color: ${fishObj.color}">${fishObj.text}</span>`;
-        // Pad remaining spaces with &nbsp; for HTML
-        let row = '&nbsp;'.repeat(offset) + fishSpan;
-        let neededSpaces = charsPerLine - offset - fishObj.text.length;
-        if (neededSpaces > 0) {
-          row += '&nbsp;'.repeat(neededSpaces);
-        }
-        aquarium += row + '<br>'; 
-      }
-  document.getElementById('ascii-bg').innerHTML = aquarium;
-  pos = (pos + 1) % charsPerLine;
-}
-
-    drawAquarium();
-    setInterval(drawAquarium, 200);
-    window.addEventListener('resize', drawAquarium); // Redraw on resize
-  </script>
+    <script src="fishies.js"> </script>
+    <script src="script.js"></script>
 </body>
 </html>

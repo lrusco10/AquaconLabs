@@ -7,21 +7,54 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="standard">
-    <header>
-        <a href="index.html" class="logo-container">
+
+
+
+
+    
+    <header class="site-header" id="site-header">
+        <a href="#home" class="logo-container">
             <img src="assets/logo.svg" alt="SOAC Logo" class="logo">
-            <span class="site-title">SUNY Oswego Aquatic Conservation</span>
         </a>
-        <nav class="navbar">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="research.html" class="nav-link">Research</a>
-            <a href="joinus.html" class="nav-link">Join Us</a>
-            <a href="contact.html" class="nav-link">Contact/About</a>
-        </nav>
+
+
+
+                                            <!-- new -->
+        <!-- Nav container -->
+    <nav id="main-nav" class="nav" role="navigation" aria-label="Primary">
+      <!-- visible inline items -->
+      <div class="nav-primary" id="nav-primary" aria-hidden="false">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="research.html" class="nav-link">Research</a>
+        <a href="joinus.html" class="nav-link">Join Us</a>
+        <a href="contact.html" class="nav-link">Contact/About</a>
+      </div>
+
+      <button
+        id="nav-toggle"
+        class="nav-toggle"
+        aria-controls="nav-overflow"
+        aria-expanded="false"
+        aria-label="Open menu"
+        hidden
+      >
+        ☰
+      </button>
+
+      <!-- Overflow menu container (items moved here) -->
+      <div id="nav-overflow" class="nav-overflow" aria-hidden="true">
+        <!-- Storage for moved items (used by balancing code) -->
+        <div class="nav-overflow-list" id="nav-overflow-list" role="menu" hidden></div>
+
+        <!-- Display menu shown when the hamburger opens; populated with ALL nav links -->
+        <div class="nav-overflow-menu" id="nav-overflow-menu" role="menu" hidden></div>
+      </div>
+    </nav>
     </header>
+
     <main>
 
-        <section class="landing"">
+        <section class="landing">
             <img class="landing-img" src="assets/joinUs/joinUsLanding.jpg" alt="Research Landing Image">
             <div class="mission-overlay">
                 <h1>Join Us</h1>
