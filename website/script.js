@@ -28,11 +28,3 @@ if (nextBtn && prevBtn && slides.length > 0) {
     showSlide(slideIndex);
 }
 
-
-// Accordion logic for Public
-document.querySelectorAll('.accordion-toggle').forEach(toggle => {
-    toggle.addEventListener('click', function() {
-        const expanded = this.getAttribute('aria-expanded') === 'true';
-        this.setAttribute('aria-expanded', String(!expanded));
-    });
-});
