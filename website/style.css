@@ -102,8 +102,8 @@ header {
   justify-content:center;
   padding:0.5rem;
   font-size:1.25rem;
-  height:40px;
-  width:40px;
+  height:5vh;
+  width:5vw;
   border-radius:8px;
   border: none;
   background: transparent;
@@ -118,7 +118,7 @@ header {
 .nav-overflow,
 .nav-accordion {
   position: fixed;                 /* detach from header's containing block */
-  top: calc(var(--nav-height) + 8px);
+  top: calc(var(--nav-height) + 3rem); /* just below header */
   right: 1rem;
   left: 1rem;
   z-index: 9999;
@@ -359,18 +359,11 @@ main {
 .prev { left: 10px; }
 .next { right: 10px; }
 
-/* Ditching accordion menus, let's see how Emma's idea works here... */
+/* Ditching accordion menus, let's see how Emma's idea works here... 
+.. Long story short, it looks amazing! Thanks Emma! :) */
 
-.feature-section1 {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  padding: 2rem;
-  width: 100%;
-  box-sizing: border-box;
-  margin: auto;
-  background: var(--primary-dark);
-}
+
+.feature-section1,
 .feature-section2 {
   display: flex;
   align-items: center;
@@ -379,6 +372,13 @@ main {
   width: 100%;
   box-sizing: border-box;
   margin: auto;
+}
+
+.feature-section1 {
+  background: var(--primary-dark);
+}
+
+.feature-section2 {
   background: linear-gradient(
     to left,
     var(--primary-light) 0%,
@@ -387,25 +387,17 @@ main {
   );
 }
 
-.container1 {
+.container1,
+.container2 {
   max-width: 300vw;  
-  margin-left: 0;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 2rem;
-  padding: 2rem 0;   
-}
-
-.container2 {
-  max-width: 300vw;  
-  margin: 0 auto;
-  display: flex;
-  align-items: right;
-  gap: 2rem;
   padding: 2rem 0;
 }
 
+/* Feature image */
 .feature-image img {
   max-width: 500px;
   width: 100%;
@@ -413,11 +405,14 @@ main {
   display: block;
   border-radius: 12px;
   border: var(--text-on-dark) 4px solid;
-  box-shadow: 10 20px 80px rgba(0,0,0,0.12);
+  box-shadow: 10px 20px 80px rgba(0,0,0,0.12);
 }
+
+/* Text content */
 .feature-content {
   flex: 1;
 }
+
 .feature-content h2 {
   margin-top: 0;
   font-family: 'Montserrat';
@@ -425,12 +420,15 @@ main {
   color: var(--text-on-dark);
   text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
 }
+
 .feature-content .subheading {
   font-size: 1.5rem;
   color: var(--text-on-dark);
   margin: 0.5rem 0 1.5rem 0;
   text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
 }
+
+/* CTA button */
 .cta-button {
   display: inline-block;
   padding: 0.75rem 1.5rem;
@@ -442,21 +440,47 @@ main {
   font-weight: bold;
   transition: background 0.2s;
 }
+
 .cta-button:hover {
   background: var(--text-on-dark);
 }
 
-@media (max-width: 50%) {
-  .feature-section {
+/* Responsive layout */
+@media (max-width: 768px) {
+  .feature-section1,
+  .feature-section2 {
     flex-direction: column;
     text-align: center;
-    gap: 1.5rem;
+    padding: 1.5rem 1rem;
   }
+
+  .container1,
+  .container2 {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+  }
+
+  .feature-content h2 {
+    font-size: 2.2rem;
+  }
+
+  .feature-content .subheading {
+    font-size: 1.2rem;
+  }
+
   .feature-image img {
-    max-width: 100%;
+    max-width: 90%;
     margin: 0 auto;
   }
+
+  .cta-button {
+    font-size: 1.2rem;
+    padding: 0.6rem 1.2rem;
+  }
 }
+
 
 .news-feed-section {
     max-width: 80vw;
