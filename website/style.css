@@ -209,10 +209,11 @@ header {
 }
 
 .logo {
-    min-width: 3vw;
-    min-height: 3vh;
+    width: clamp(40px, 6vw, 100px);
+    height: auto;
     margin-right: 1rem;
 }
+
 
 .site-title {
     font-size: 2rem;
@@ -847,10 +848,8 @@ main {
     max-width: 85%;
     height: auto;
     object-fit: contain;
-    border-radius: 12px;
     margin-bottom: 1rem;
-    background: #eef6ff;
-    border: 2px solid var(--primary-light);
+    background: #fff;
 }
 
 .opportunity-box span1 {
