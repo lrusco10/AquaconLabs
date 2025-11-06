@@ -14,12 +14,6 @@
     --accordion-transition: 240ms cubic-bezier(.4,0,.2,1);
 }
 
-html, body {
-  overscroll-behavior: none;
-  margin: 0;
-  height: 100%;
-}
-
 body.home {
     margin: 0;
     font-family: 'Segoe UI', Arial, sans-serif;
