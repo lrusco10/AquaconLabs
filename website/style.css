@@ -14,6 +14,12 @@
     --accordion-transition: 240ms cubic-bezier(.4,0,.2,1);
 }
 
+html, body {
+  overscroll-behavior: none;
+  margin: 0;
+  height: 100%;
+}
+
 body.home {
     margin: 0;
     font-family: 'Segoe UI', Arial, sans-serif;
@@ -103,7 +109,7 @@ header {
   align-items:center;
   justify-content:center;
   padding:0.5rem;
-  font-size:1.25rem;
+  font-size:3rem;
   height:5vh;
   width:5vw;
   border-radius:8px;
