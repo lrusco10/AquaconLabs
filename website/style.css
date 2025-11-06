@@ -22,12 +22,14 @@ body.home {
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
+    overscroll-behavior: none;
 }
 
 body.standard{
     margin: 0;
     font-family: 'Segoe UI', Arial, sans-serif;
     background: var(--primary-dark);
+    overscroll-behavior: none;
 }
 
 header {
@@ -209,7 +211,7 @@ header {
 }
 
 .logo {
-    width: clamp(40px, 6vw, 100px);
+    width: clamp(100px, 20vw, 100px);
     height: auto;
     margin-right: 1rem;
 }
@@ -595,6 +597,14 @@ main {
   margin-top: 2rem;
   margin-bottom: 2rem;
   box-sizing: border-box;
+  transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hover effect */
+.research-projects:hover {
+  transform: scale(1.03);
+  background-color: var(--accent-blue); /* use your theme variable or pick a nice tint */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
 .image-container img {
@@ -693,6 +703,30 @@ main {
   max-height: 80px;
 }
 
+.project-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.project-link .research-projects {
+  transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hover effects */
+.project-link:hover .research-projects {
+  transform: scale(1.03);
+  background-color: var(--secondary-light, #f0fff4);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* Optional: pressed/click effect */
+.project-link:active .research-projects {
+  transform: scale(0.98);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
 /* Only adjust for very small screens */
 @media (max-width: 480px) {
   .research-projects {
@@ -758,8 +792,8 @@ main {
     max-width: 1100px;
     margin: 3rem auto;
     padding: 2.5rem;
-    background: #fff;
-    border-radius: 0;
+    background: var(--secondary-dark-green);
+    border-radius: 12px;
     box-shadow: 0 2px 10px rgba(6,70,117,0.12);
     text-align: center;
 }
