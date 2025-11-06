@@ -9,13 +9,25 @@
     ];
     let pos = 0;
 
+
+    function getCharWidth() {
+      const span = document.createElement('span');
+      span.textContent = 'M'; // typical monospace width
+      span.style.fontFamily = 'monospace';
+      span.style.visibility = 'hidden';
+      document.body.appendChild(span);
+      const width = span.getBoundingClientRect().width;
+      span.remove();
+      return width;
+}
+
     function getDimensions() {
-      // Estimate chars per line and lines per page based on window size and font size
-      const fontSize = 16; // px, must match CSS
-      const charsPerLine = Math.floor(window.innerWidth / (fontSize * 0.6)); // monospace approx
+      const fontSize = 16;
+      const charWidth = getCharWidth();
+      const charsPerLine = Math.floor(window.innerWidth / charWidth);
       const linesPerPage = Math.floor(window.innerHeight / fontSize);
       return { charsPerLine, linesPerPage };
-    }
+}
 
     function drawAquarium() {
       const { charsPerLine, linesPerPage } = getDimensions();
