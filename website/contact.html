@@ -15,9 +15,6 @@
             <img src="assets/logo.svg" alt="SOAC Logo" class="logo">
         </a>
 
-
-
-                                            <!-- new -->
         <!-- Nav container -->
     <nav id="main-nav" class="nav" role="navigation" aria-label="Primary">
       <!-- visible inline items -->
@@ -52,7 +49,6 @@
     </header>
     <main>
 
-
         <section class="landing">
         <img class="landing-img" src="assets/contact/slide1.jpg" alt="Research Landing Image">
         <div class="mission-overlay">
@@ -74,27 +70,30 @@
                     </a>
                 </div>
                 <div class="contact-form">
+                    <label for="userEmail">Your Email</label>
+                    <input type="email" id="userEmail" placeholder="you@example.com" required>
+                    <button id="sendCodeBtn" onclick="sendVerificationCode()">Send Verification Code</button>
+                    
+                    <div id="codeSection" style="display: none;">
+                        <label for="verificationCode">Verification Code</label>
+                        <input type="text" id="verificationCode" placeholder="Enter 6-digit code" maxlength="6">
+                    </div>
+                    
                     <label for="userName">Your Name</label>
                     <input type="text" id="userName" placeholder="Jane Doe" required>
-                    <label for="userEmail">Your Email</label>
-                    <input type="text" id="userEmail" placeholder="you@example.com" required>
+                    
                     <label for="userText">Message</label>
                     <textarea id="userText" placeholder="Users are limited to 3 messages per day." required></textarea>
-                    <button id="submitBtn" onclick="submitForm()">Send Message</button>
+                    
+                    <button id="submitBtn" onclick="submitForm()" disabled>Send Message</button>
                     <div id="submissionsLeft"></div>
                     <div id="status"></div>
                 </div>
 
                 <script>
-
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwWTN5a58IyWfwogFWqdhO-cqKktFTj5ISEkHPlW6aJMoN-PDhiEh7ECcfbo7R8LI5nxw/exec';
     
     let remainingSubmissions = null;
-
-    // Check submissions on page load
-    window.onload = function() {
-      updateSubmissionCounter();
-    };
 
     function updateSubmissionCounter() {
       const counter = document.getElementById('submissionsLeft');
@@ -111,15 +110,72 @@
       }
     }
 
+    async function sendVerificationCode() {
+        const email = document.getElementById('userEmail').value;
+        const status = document.getElementById('status');
+        const sendCodeBtn = document.getElementById('sendCodeBtn');
+        
+        if (!email || !email.includes('@')) {
+            status.textContent = 'Please enter a valid email';
+            status.className = 'error';
+            return;
+        }
+        
+        status.textContent = 'Sending code...';
+        status.className = 'info';
+        sendCodeBtn.disabled = true;
+        
+        try {
+            const response = await fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: 'sendCode',
+                    email: email
+                })
+            });
+            
+            const result = await response.json();
+            
+            if (result.status === 'success') {
+                status.textContent = 'Code sent! Check your email (including spam folder).';
+                status.className = 'success';
+                document.getElementById('codeSection').style.display = 'block';
+                document.getElementById('verificationCode').focus();
+                
+                // Enable submit button when code is entered
+                document.getElementById('verificationCode').addEventListener('input', function() {
+                    if (this.value.length === 6) {
+                        document.getElementById('submitBtn').disabled = false;
+                    }
+                });
+            } else {
+                status.textContent = 'Error: ' + result.message;
+                status.className = 'error';
+                sendCodeBtn.disabled = false;
+            }
+        } catch (error) {
+            status.textContent = 'Error: ' + error;
+            status.className = 'error';
+            sendCodeBtn.disabled = false;
+        }
+    }
+
     async function submitForm() {
       const textResponse = document.getElementById('userText').value;
       const name = document.getElementById('userName').value;
       const email = document.getElementById('userEmail').value;
+      const verificationCode = document.getElementById('verificationCode').value;
       const status = document.getElementById('status');
       const submitBtn = document.getElementById('submitBtn');
 
       if (!textResponse.trim()) {
-        status.textContent = 'Please enter some text!';
+        status.textContent = 'Please enter a message!';
+        status.className = 'error';
+        return;
+      }
+      
+      if (!verificationCode || verificationCode.length !== 6) {
+        status.textContent = 'Please enter the 6-digit verification code';
         status.className = 'error';
         return;
       }
@@ -132,9 +188,11 @@
         const response = await fetch(SCRIPT_URL, {
           method: 'POST',
           body: JSON.stringify({
+            action: 'submit',
             textResponse: textResponse,
             name: name,
-            email: email
+            email: email,
+            verificationCode: verificationCode
           })
         });
 
@@ -145,7 +203,7 @@
           status.className = 'success';
           document.getElementById('userText').value = '';
           document.getElementById('userName').value = '';
-          document.getElementById('userEmail').value = '';
+          document.getElementById('verificationCode').value = '';
           
           // Update remaining submissions
           remainingSubmissions = result.remainingSubmissions;
@@ -174,7 +232,6 @@
       }
     }
   </script>
-
 
             </div>
         </section>
