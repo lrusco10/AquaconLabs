@@ -1234,7 +1234,8 @@ main {
   color: var(--primary-light);
 }
 
-.contact-form input[type="email"],
+.contact-form input[id="userEmail"],
+.contact-form input[id="userName"],
 .contact-form textarea {
   width: 100%;
   padding: 0.7rem 1rem;
@@ -1265,6 +1266,36 @@ main {
   transition: background 0.18s, color 0.18s, transform 0.12s;
   margin-top: 0.3rem;
   box-shadow: 0 2px 8px rgba(6,70,117,0.11);
+}
+
+#submissionsLeft {
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #e7f3ff;
+    border-left: 4px solid #2196F3;
+    display: none;
+}
+
+#status {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+#status.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+#status.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+#status.info {
+    background-color: #d1ecf1;
+    color: #0c5460;
 }
 
 .contact-form button:hover, .contact-form button:focus {
@@ -1442,6 +1473,133 @@ main {
     box-sizing: border-box;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*about section */
+/* Lab Info Section Styles */
+.lab-info-section {
+    width: 80%;
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 40px 50px;
+    text-align: left;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-left: 4px solid var(--accent-green);
+}
+
+.lab-info-section h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: var(--border-light);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.lab-subtitle {
+    font-size: 1.1rem;
+    font-style: italic;
+    margin-bottom: 30px;
+    color: var(--accent-green);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.lab-info-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    margin-top: 25px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.mission-text {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #fff;
+    text-align: justify;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .lab-info-section {
+        width: 95%;
+        padding: 30px 25px;
+        margin: 40px auto;
+    }
+    
+    .lab-info-section h2 {
+        font-size: 1.6rem;
+    }
+    
+    .lab-subtitle {
+        font-size: 1rem;
+    }
+    
+    .lab-info-section h3 {
+        font-size: 1.3rem;
+    }
+    
+    .mission-text {
+        font-size: 1rem;
+        text-align: left;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Team Section */
 .team-section {
