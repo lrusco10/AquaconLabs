@@ -645,6 +645,7 @@ main {
   gap: 20px;
   width: 100%;
   box-sizing: border-box;
+  pointer-events: none;
 }
 
 .project-title {
@@ -671,6 +672,7 @@ main {
   width: 56px;
   height: 56px;
   flex-shrink: 0;
+  pointer-events: auto;
 }
 
 .contributors .author-image {
@@ -1132,7 +1134,7 @@ main {
 /* Contact Page Styles */
 .contact-section {
   max-width: 80vw;
-  margin: 3rem auto;
+  margin: 1rem auto;
   padding: 2.5rem;
   background: transparent;
   border-radius: 0;
