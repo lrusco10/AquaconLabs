@@ -73,13 +73,108 @@
                         <span>Instagram</span>
                     </a>
                 </div>
-                <form class="contact-form" action="mailto:soaclab@gmail.com" method="POST" enctype="text/plain">
-                    <label for="contact-email">Your Email</label>
-                    <input type="email" id="contact-email" name="email" placeholder="you@example.com" required>
-                    <label for="contact-message">Message</label>
-                    <textarea id="contact-message" name="message" placeholder="Type your message here..." required></textarea>
-                    <button type="submit">Send Message</button>
-                </form>
+                <div class="contact-form">
+                    <label for="userName">Your Name</label>
+                    <input type="text" id="userName" placeholder="Jane Doe" required>
+                    <label for="userEmail">Your Email</label>
+                    <input type="text" id="userEmail" placeholder="you@example.com" required>
+                    <label for="userText">Message</label>
+                    <textarea id="userText" placeholder="Users are limited to 3 messages per day." required></textarea>
+                    <button id="submit" onclick="submitForm()">Send Message</button>
+                    <div id="status"></div>
+                </div>
+
+                <script>
+
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwWTN5a58IyWfwogFWqdhO-cqKktFTj5ISEkHPlW6aJMoN-PDhiEh7ECcfbo7R8LI5nxw/exec';
+    
+    let remainingSubmissions = null;
+
+    // Check submissions on page load
+    window.onload = function() {
+      updateSubmissionCounter();
+    };
+
+    function updateSubmissionCounter() {
+      const counter = document.getElementById('submissionsLeft');
+      if (remainingSubmissions !== null) {
+        if (remainingSubmissions > 0) {
+          counter.innerHTML = `You have <strong>${remainingSubmissions}</strong> submission${remainingSubmissions === 1 ? '' : 's'} remaining today.`;
+          counter.style.display = 'block';
+        } else {
+          counter.innerHTML = `You have reached your daily limit. Please try again tomorrow.`;
+          counter.style.borderLeftColor = '#f44336';
+          counter.style.backgroundColor = '#ffebee';
+          document.getElementById('submitBtn').disabled = true;
+        }
+      }
+    }
+
+    async function submitForm() {
+      const textResponse = document.getElementById('userText').value;
+      const name = document.getElementById('userName').value;
+      const email = document.getElementById('userEmail').value;
+      const status = document.getElementById('status');
+      const submitBtn = document.getElementById('submitBtn');
+
+      if (!textResponse.trim()) {
+        status.textContent = 'Please enter some text!';
+        status.className = 'error';
+        return;
+      }
+
+      status.textContent = 'Submitting...';
+      status.className = 'info';
+      submitBtn.disabled = true;
+
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          body: JSON.stringify({
+            textResponse: textResponse,
+            name: name,
+            email: email
+          })
+        });
+
+        const result = await response.json();
+        
+        if (result.status === 'success') {
+          status.textContent = 'Submitted successfully!';
+          status.className = 'success';
+          document.getElementById('userText').value = '';
+          document.getElementById('userName').value = '';
+          document.getElementById('userEmail').value = '';
+          
+          // Update remaining submissions
+          remainingSubmissions = result.remainingSubmissions;
+          updateSubmissionCounter();
+          
+          // Re-enable button if submissions remain
+          if (remainingSubmissions > 0) {
+            submitBtn.disabled = false;
+          }
+        } else {
+          status.textContent = 'Error: ' + result.message;
+          status.className = 'error';
+          
+          // If daily limit reached, disable button
+          if (result.message.includes('Daily submission limit')) {
+            remainingSubmissions = 0;
+            updateSubmissionCounter();
+          } else {
+            submitBtn.disabled = false;
+          }
+        }
+      } catch (error) {
+        status.textContent = 'Error submitting: ' + error;
+        status.className = 'error';
+        submitBtn.disabled = false;
+      }
+    }
+  </script>
+
+
             </div>
         </section>
 
