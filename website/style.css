@@ -1268,6 +1268,36 @@ main {
   box-shadow: 0 2px 8px rgba(6,70,117,0.11);
 }
 
+#submissionsLeft {
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #e7f3ff;
+    border-left: 4px solid #2196F3;
+    display: none;
+}
+
+#status {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+#status.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+#status.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+#status.info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
 .contact-form button:hover, .contact-form button:focus {
   background: #ffe19b;
   color: var(--primary-dark);
