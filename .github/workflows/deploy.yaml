@@ -3,6 +3,7 @@ name: Deploy to Server
    on:
      push:
        branches: [ main ]  # or whatever branch you want to auto-deploy
+       workflow_dispatch:
    
    jobs:
      deploy:
