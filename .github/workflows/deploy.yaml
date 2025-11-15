@@ -1,0 +1,24 @@
+name: Deploy to Server
+   
+   on:
+     push:
+       branches: [ main ]  # or whatever branch you want to auto-deploy
+   
+   jobs:
+     deploy:
+       runs-on: ubuntu-latest
+       
+       steps:
+       - name: Deploy to server
+         uses: appleboy/ssh-action@master
+         with:
+           host: ${{ secrets.SSH_HOST }}
+           username: ${{ secrets.SSH_USERNAME }}
+           key: ${{ secrets.SSH_PRIVATE_KEY }}
+           script: |
+             cd /home/lrusco/public_html/AquaconLabs/
+             git pull origin main
+             # Add any build steps or server restarts here
+             # npm install
+             # npm run build
+             # sudo systemctl restart your-service
