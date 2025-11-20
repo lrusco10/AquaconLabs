@@ -258,7 +258,7 @@ main {
 .slideshow {
   position: relative;
   width: 100%;
-  height: 80vw;
+  height: 70vh;
   overflow: hidden;
   background: var(--primary-dark);
   box-shadow: 0 4px 24px rgba(0,0,0,0.12);
@@ -326,6 +326,7 @@ main {
     text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
     margin: 0 auto;
     box-sizing: border-box;
+    padding-bottom: 5%;
     padding-left: 5%;
     padding-right: 5%;
 
@@ -385,6 +386,7 @@ main {
 
 .mission-overlay {
   position: absolute;
+  font-size:  2rem;
   top: 0; left: 0;
   width: 100%; height: 100%;
   display: flex;
