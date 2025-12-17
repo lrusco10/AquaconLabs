@@ -1,6 +1,7 @@
 //This is the Javascript that handles the slideshow on the home page.
 
 let slideIndex = 0;
+let slideInterval;
 const slides = document.querySelectorAll('.slide');
 const prevBtn = document.querySelector('.prev');
 const nextBtn = document.querySelector('.next');
@@ -21,10 +22,21 @@ function prevSlide() {
   showSlide(slideIndex);
 }
 
+function resetTimer() {
+  clearInterval(slideInterval);
+  slideInterval = setInterval(nextSlide, 6000);
+}
+
 if (nextBtn && prevBtn && slides.length > 0) {
-  nextBtn.addEventListener('click', nextSlide);
-  prevBtn.addEventListener('click', prevSlide);
-  setInterval(nextSlide, 5000);
+  nextBtn.addEventListener('click', () => {
+    nextSlide();
+    resetTimer();
+  });
+  prevBtn.addEventListener('click', () => {
+    prevSlide();
+    resetTimer();
+  });
+  resetTimer();
   showSlide(slideIndex);
 }
 
