@@ -66,6 +66,10 @@ p {
     text-align: justify;
 }
 
+li {
+    padding-left: 5%;
+}
+
 /* Article figures */
 .article-figure {
     margin: 40px 0;
