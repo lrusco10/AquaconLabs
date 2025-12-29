@@ -6,20 +6,153 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="assets/logo.svg">
+  <style>
+      /* --- PASTE THE NEW CSS HERE OR IN YOUR STYLE.CSS --- */
+      
+      /* Global overflow fix */
+      html, body { overflow-x: hidden; width: 100%; }
+
+      /* Keep your existing ASCII background */
+      #ascii-bg {
+          position: fixed;
+          top: 0; left: 0;
+          width: 100vw; height: 100vh;
+          font-family: monospace;
+          font-size: 16px;
+          white-space: pre;
+          color: var(--text-on-dark);
+          opacity: 0.2;
+          z-index: -1;
+          pointer-events: none;
+          overflow: hidden;
+          line-height: 1;
+      }
+
+      /* Glassmorphism Card Style */
+      .research-projects {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        max-width: 1000px;
+        width: 90%; /* Responsive width */
+        margin: 3rem auto;
+        padding: 2.5rem;
+        border-radius: 24px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .research-projects:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        background: rgba(255, 255, 255, 0.95);
+      }
+
+      /* Grid Layout */
+      .project-details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+        align-items: center;
+        width: 100%;
+      }
+
+      /* Zig-Zag Logic */
+      section:nth-of-type(even) .project-details .image-container { order: 2; }
+      section:nth-of-type(even) .project-details .text-content { order: 1; }
+
+      /* Image Styling */
+      .image-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+      }
+      
+      .image-container img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        border: 4px solid var(--primary-dark, #333); 
+        transition: transform 0.3s ease;
+      }
+
+      .image-container:hover img { transform: scale(1.02); }
+
+      /* Text Styling */
+      .text-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .project-title { text-decoration: none; }
+      
+      .project-title h2 {
+        font-family: 'Lora', serif;
+        font-size: 2rem;
+        margin: 0;
+        color: var(--primary-dark, #000);
+        line-height: 1.2;
+        text-align: left;
+      }
+
+      .project-description { text-decoration: none; color: inherit; }
+
+      .project-description p {
+        font-family: 'Nunito', sans-serif;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: #333;
+        margin: 0;
+        text-align: left;
+      }
+
+      /* Contributors */
+      .contributors {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .contributors .author-image {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #fff;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        transition: transform 0.2s ease;
+      }
+      
+      .contributors a:hover .author-image { transform: scale(1.1); }
+
+      /* Mobile */
+      @media (max-width: 768px) {
+        .project-details { grid-template-columns: 1fr; gap: 1.5rem; }
+        section:nth-of-type(even) .project-details .image-container { order: unset; }
+        section:nth-of-type(even) .project-details .text-content { order: unset; }
+        .project-title h2, .project-description p { text-align: center; }
+        .contributors { justify-content: center; }
+        .image-container img { height: auto; max-height: 250px; }
+      }
+  </style>
 </head>
+
 <div id="ascii-bg"></div> 
-<body class = "standard">
+
+<body class="standard">
   <header class="site-header" id="site-header">
-        <a href="index.html" class="logo-container">
-            <img src="assets/logo.svg" alt="SOAC Logo" class="logo">
-        </a>
-
-
-
-                                            <!-- new -->
-        <!-- Nav container -->
+    <a href="index.html" class="logo-container">
+        <img src="assets/logo.svg" alt="SOAC Logo" class="logo">
+    </a>
     <nav id="main-nav" class="nav" role="navigation" aria-label="Primary">
-      <!-- visible inline items -->
       <div class="nav-primary" id="nav-primary" aria-hidden="false">
         <a href="index.html" class="nav-link">Home</a>
         <a href="research.html" class="nav-link">Research</a>
@@ -27,32 +160,15 @@
         <a href="about.html" class="nav-link">About</a>
         <a href="contact.html" class="nav-link">Contact</a>
       </div>
-
-      <button
-        id="nav-toggle"
-        class="nav-toggle"
-        aria-controls="nav-overflow"
-        aria-expanded="false"
-        aria-label="Open menu"
-        hidden
-      >
-        ☰
-      </button>
-
-      <!-- Overflow menu container (items moved here) -->
+      <button id="nav-toggle" class="nav-toggle" hidden>☰</button>
       <div id="nav-overflow" class="nav-overflow" aria-hidden="true">
-        <!-- Storage for moved items (used by balancing code) -->
         <div class="nav-overflow-list" id="nav-overflow-list" role="menu" hidden></div>
-
-        <!-- Display menu shown when the hamburger opens; populated with ALL nav links -->
         <div class="nav-overflow-menu" id="nav-overflow-menu" role="menu" hidden></div>
       </div>
     </nav>
-    </header>
+  </header>
 
   <main>
-
-
     <section class="landing">
         <img class="landing-img" src="assets/research/researchLanding.jpg" alt="Research Landing Image">
         <div class="mission-overlay">
@@ -60,153 +176,158 @@
         </div>
     </section>
 
-  <section class="research-projects" id="walleye-migration">
-    <div class="project-details">
-      <a href="articles/WalleyeMigration.html" class="project-title">
-        <h2>Walleye Migration</h2>
-      </a>
-      <a href="articles/WalleyeMigration.html" class="image-container">
-      <img src="assets/research/SRMTBoat.jpg" alt="Image of the SUNY and USGS joint-funded research raft used to navigate the st. Regis River.">
-    </a>
-    <div class="contributors">
-          <a href="https://www.linkedin.com/in/spencer-alascio-a2a50b1a5" target="_blank" data-name="Spencer Alascio" onclick="event.stopPropagation();">
-            <img src="assets/research/spencer.jpeg" alt="Spencer Alascio" class="author-image" title="Spencer Alascio">
+    <section class="research-projects" id="walleye-migration">
+      <div class="project-details">
+        <a href="articles/WalleyeMigration.html" class="image-container">
+          <img src="assets/research/SRMTBoat.jpg" alt="Research raft on St. Regis River">
+        </a>
+        <div class="text-content">
+          <a href="articles/WalleyeMigration.html" class="project-title">
+            <h2>Walleye Migration</h2>
           </a>
-    </div>
-    <a href="articles/WalleyeMigration.html" class="project-description">
-        <p>
-          Using the SUNY and USGS joint funding, researchers from the Saint Regis Mohawk Tribe have commissioned a research raft, and used it to trace the populations of walleye making their spring runs up the St. Regis River for their seasonal migration. In accomplishing this, while utilizing eDNA technology, researchers can identify which sections and streams of the St. Regis river are most important to the cyclical behavior patterns of native walleye, and can in turn make caculated efforts to protecting them.
-        </p>
-      </a>
-    </div>
-  </section>
-
-
-  <section class="research-projects" id="edna-research">
-    <div class="project-details">
-      <a href="articles/eDNAProj.html" class="project-title">
-        <h2>eDNA Surveillance</h2>
-      </a>
-      <a href="articles/eDNAProj.html" class="image-container">
-      <img src="articles/ednaAssets/eDNASRMT.png" alt="Project image">
-    </a>
-    <div class="contributors">
-      <a href="https://scholar.google.com/citations?user=Tito-y4AAAAJ&hl=en" target="_blank" data-name="Dr. Nicholas Sard" onclick="event.stopPropagation();">
-            <img src="assets/research/sardguy.jpg" alt="Dr. Sard" class="author-image" title="Dr. Nicholas Sard">
+          <div class="contributors">
+            <a href="https://www.linkedin.com/in/spencer-alascio-a2a50b1a5" target="_blank">
+              <img src="assets/research/spencer.jpeg" alt="Spencer Alascio" class="author-image" title="Spencer Alascio">
+            </a>
+          </div>
+          <a href="articles/WalleyeMigration.html" class="project-description">
+            <p>
+              Using the SUNY and USGS joint funding, researchers from the Saint Regis Mohawk Tribe have commissioned a research raft to trace the populations of walleye making their spring runs up the St. Regis River. By utilizing eDNA technology, researchers can identify which sections of the river are most important to native walleye behavior patterns.
+            </p>
           </a>
-          <a href="https://www.linkedin.com/in/brittney-rogers" target="_blank" data-name="Dr. Brittany Rogers" onclick="event.stopPropagation();">
-            <img src="assets/research/BR.png" alt="Brittany Rogers" class="author-image" title="Dr. Brittany Rogers">
+        </div>
+      </div>
+    </section>
+
+    <section class="research-projects" id="edna-research">
+      <div class="project-details">
+        <a href="articles/eDNAProj.html" class="image-container">
+          <img src="articles/ednaAssets/eDNASRMT.png" alt="eDNA Project Image">
+        </a>
+        <div class="text-content">
+          <a href="articles/eDNAProj.html" class="project-title">
+            <h2>eDNA Surveillance</h2>
           </a>
-          <a href="https://www.facebook.com/VinnieS/" target="_blank" data-name="Vinnie Siegel" onclick="event.stopPropagation();">
-            <img src="assets/research/vinnie.jpg" alt="Vinnie Siegel" class="author-image" title="Vinnie Siegel">
+          <div class="contributors">
+            <a href="https://scholar.google.com/citations?user=Tito-y4AAAAJ&hl=en" target="_blank">
+              <img src="assets/research/sardguy.jpg" alt="Dr. Sard" class="author-image" title="Dr. Nicholas Sard">
+            </a>
+            <a href="https://www.linkedin.com/in/brittney-rogers" target="_blank">
+              <img src="assets/research/BR.png" alt="Brittany Rogers" class="author-image" title="Dr. Brittany Rogers">
+            </a>
+            <a href="https://www.facebook.com/VinnieS/" target="_blank">
+              <img src="assets/research/vinnie.jpg" alt="Vinnie Siegel" class="author-image" title="Vinnie Siegel">
+            </a>
+            <a href="https://www.linkedin.com/in/spencer-alascio-a2a50b1a5" target="_blank">
+              <img src="assets/research/spencer.jpeg" alt="Spencer Alascio" class="author-image" title="Spencer Alascio">
+            </a>
+          </div>
+          <a href="articles/eDNAProj.html" class="project-description">
+            <p>
+              Our waters face growing threats from non-native species. In partnership with SLELO PRISM and the Saint Regis Mohawk Tribe, we can spot invaders early with cutting-edge environmental DNA (eDNA) technology. This technology is also used to survey the region for surprisingly accurate population data.
+            </p>
           </a>
-          <a href="https://www.linkedin.com/in/spencer-alascio-a2a50b1a5" target="_blank" data-name="Spencer Alascio" onclick="event.stopPropagation();">
-            <img src="assets/research/spencer.jpeg" alt="Spencer Alascio" class="author-image" title="Spencer Alascio">
+        </div>
+      </div>
+    </section>
+
+    <section class="research-projects" id="eli-spotlight">
+      <div class="project-details">
+        <a href="articles/eliHorst.html" class="image-container">
+          <img src="assets/research/eliChinook2.jpg" alt="Eli Horst Research">
+        </a>
+        <div class="text-content">
+          <a href="articles/eliHorst.html" class="project-title">
+            <h2>Ontario Chinook Salmon Research</h2>
           </a>
-    </div>
-    <a href="articles/eDNAProj.html" class="project-description">
-        <p>
-          Our waters face growing threats from non-native species that spread quickly and disrupt balance. In partnership with SLELO PRISM and accompanying The Saint Regis Mohawk Tribe, we can spot invaders early with cutting-edge environmental DNA (eDNA) technology and give the Great Lakes a fighting chance. By proxy, this technology is also used to survey the region for surprisingly accurate population data (photo provided by the Saint Regis Mohawk Tribe’s Center for Media and Communications).
-        </p>
-      </a>
-    </div>
-  </section>
-
-  <section class="research-projects" id="eli-spotlight">
-  <div class="project-details">
-    <a href="articles/eliHorst.html" class="project-title">
-      <h2>Ontario Chinook Salmon Research</h2>
-    </a>
-    <a href="articles/eliHorst.html" class="image-container">
-      <img src="assets/research/eliChinook2.jpg" alt="Project image">
-    </a>
-    <div class="contributors">
-      <a href="bios/EliHorstBio.html" target="_blank" data-name="Elijah Horst">
-        <img src="assets/about/EliHorstBio.jpg" alt="Eli Horst" class="author-image" title="Eli Horst">
-      </a>
-    </div>
-      <a href="articles/eliHorst.html" class="project-description">
-        <p>
-          Eli Horst is a senior undergraduate student at SUNY Oswego and is researching an effective way to quickly determine the sex of Lake Ontario Chinook Salmon. Click to learn more!
-        </p>
-      </a>
-  </div>
-</section>
-
-
-  <section class="research-projects" id="chloe-spotlight">
-    <div class="project-details">
-      <a href="articles/chloeWang.html" class="project-title">
-        <h2>Native Brook Trout Restoration</h2>
-      </a>
-      <a href="articles/chloeWang.html" class="image-container">
-      <img src="assets/research/alumSpotProj.jpeg" alt="Project image">
-    </a>
-    <div class="contributors">
-      <a href="https://www.watershedalliance.org/awe-fellows/chloe-wang/" target="_blank" data-name="Chloe Wang">
-        <img src="assets/research/chloeWang.jpg" alt="Chloe Wang" class="author-image" title="Chloe Wang">
-      </a>
-    </div>
-    <a href="articles/chloeWang.html" class="project-description">
-        <p>
-          Chloe Wang (she/her) is a second-year Master of Science student in the Department of Environmental Biology at SUNY ESF. She is a member of the CHAOS Lab at ESF and is collaborating with SOAC on her thesis research.
-Her study explores the restoration potential of native Brook Trout (Salvelinus fontinalis) in the upper Onondaga Creek watershed, on land recently repossessed by the Onondaga Nation. This project is part of an ongoing, shared research agenda between the Onondaga Nation and the Center for Native Peoples and the Environment at ESF.
-        </p>
-      </a>
-    </div>
-  </section>
-
-  <section class="research-projects" id="maggie-spotlight">
-    <div class="project-details">
-      <a href="articles/maggieCarroll.html" class="project-title">
-        <h2>Muskellunge and Walleye Population Surveillance</h2>
-      </a>
-      <a href="articles/maggieCarroll.html" class="image-container">
-      <img src="assets/research/maggieWork.jpeg" alt="Project image">
-    </a>
-    <div class="contributors">
-      <a href="https://www.linkedin.com/in/maggie-carroll-053092220" target="_blank" data-name="Maggie Carroll">
-        <img src="assets/research/maggieCarroll.jpg" alt="Maggie Carroll" class="author-image" title="Maggie Carroll">
-      </a>
-    </div>
-    <a href="articles/maggieCarroll.html" class="project-description">
-        <p>
-          Aquatic and Fisheries Science Master's student at SUNY ESF, co-advised by Dr. John Farrell and Dr. Nick Sard.
-Examining muskellunge and walleye population structure in the St. Lawrence River and Eastern Lake Ontario.
-In these pictures, we were working on a RADseq library prep to sequence DNA from our study organisms. This will give us a foundation for population analyses down the line.
-        </p>
-      </a>
-    </div>
-  </section>
-
-
-
-  <section class="research-projects" id="golden-Walleye">
-    <div class="project-details">
-      <a href="articles/goldWall.html" class="project-title">
-        <h2>Golden Walleye Research</h2>
-      </a>
-      <a href="articles/goldWall.html" class="image-container">
-      <img src="assets/research/goldenFish.png" alt="Project image">
-    </a>
-    <div class="contributors">
-      <a href="https://www.linkedin.com/in/tony-david-728309a" target="_blank" data-name="Tony David" onclick="event.stopPropagation();">
-            <img src="assets/unknown.svg" alt="Tony David" class="author-image" title="Tony David">
+          <div class="contributors">
+            <a href="bios/EliHorstBio.html" target="_blank">
+              <img src="assets/about/EliHorstBio.jpg" alt="Eli Horst" class="author-image" title="Eli Horst">
+            </a>
+          </div>
+          <a href="articles/eliHorst.html" class="project-description">
+            <p>
+              Eli Horst is a senior undergraduate student at SUNY Oswego and is researching an effective way to quickly determine the sex of Lake Ontario Chinook Salmon. Click to learn more about his findings!
+            </p>
           </a>
-          <a href="https://www.linkedin.com/in/spencer-alascio-a2a50b1a5" target="_blank" data-name="Spencer Alascio" onclick="event.stopPropagation();">
-            <img src="assets/research/spencer.jpeg" alt="Spencer Alascio" class="author-image" title="Spencer Alascio">
+        </div>
+      </div>
+    </section>
+
+    <section class="research-projects" id="chloe-spotlight">
+      <div class="project-details">
+        <a href="articles/chloeWang.html" class="image-container">
+          <img src="assets/research/alumSpotProj.jpeg" alt="Chloe Wang Research">
+        </a>
+        <div class="text-content">
+          <a href="articles/chloeWang.html" class="project-title">
+            <h2>Native Brook Trout Restoration</h2>
           </a>
-    </div>
-    <a href="articles/goldWall.html" class="project-description">
-        <p>
-          An angler fishing on Lake Erie pulled in a remarkable catch — a golden-colored walleye rarely seen in the wild. Click to learn more about this popular game fish!
-        </p>
-      </a>
-    </div>
-  </section>
+          <div class="contributors">
+            <a href="https://www.watershedalliance.org/awe-fellows/chloe-wang/" target="_blank">
+              <img src="assets/research/chloeWang.jpg" alt="Chloe Wang" class="author-image" title="Chloe Wang">
+            </a>
+          </div>
+          <a href="articles/chloeWang.html" class="project-description">
+            <p>
+              Chloe Wang (M.S. Student, SUNY ESF) explores the restoration potential of native Brook Trout in the upper Onondaga Creek watershed on land recently repossessed by the Onondaga Nation. This is part of a shared research agenda with the Center for Native Peoples and the Environment.
+            </p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="research-projects" id="maggie-spotlight">
+      <div class="project-details">
+        <a href="articles/maggieCarroll.html" class="image-container">
+          <img src="assets/research/maggieWork.jpeg" alt="Maggie Carroll Research">
+        </a>
+        <div class="text-content">
+          <a href="articles/maggieCarroll.html" class="project-title">
+            <h2>Muskellunge & Walleye Surveillance</h2>
+          </a>
+          <div class="contributors">
+            <a href="https://www.linkedin.com/in/maggie-carroll-053092220" target="_blank">
+              <img src="assets/research/maggieCarroll.jpg" alt="Maggie Carroll" class="author-image" title="Maggie Carroll">
+            </a>
+          </div>
+          <a href="articles/maggieCarroll.html" class="project-description">
+            <p>
+              Maggie Carroll (M.S. Student, SUNY ESF) is examining muskellunge and walleye population structure in the St. Lawrence River. The team is using RADseq library prep to sequence DNA, providing a foundation for future population analyses.
+            </p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="research-projects" id="golden-Walleye">
+      <div class="project-details">
+        <a href="articles/goldWall.html" class="image-container">
+          <img src="assets/research/goldenFish.png" alt="Golden Walleye">
+        </a>
+        <div class="text-content">
+          <a href="articles/goldWall.html" class="project-title">
+            <h2>Golden Walleye Research</h2>
+          </a>
+          <div class="contributors">
+            <a href="https://www.linkedin.com/in/tony-david-728309a" target="_blank">
+              <img src="assets/unknown.svg" alt="Tony David" class="author-image" title="Tony David">
+            </a>
+            <a href="https://www.linkedin.com/in/spencer-alascio-a2a50b1a5" target="_blank">
+              <img src="assets/research/spencer.jpeg" alt="Spencer Alascio" class="author-image" title="Spencer Alascio">
+            </a>
+          </div>
+          <a href="articles/goldWall.html" class="project-description">
+            <p>
+              An angler fishing on Lake Erie pulled in a remarkable catch—a golden-colored walleye rarely seen in the wild. Click to learn more about the biology behind this rare pigmentation!
+            </p>
+          </a>
+        </div>
+      </div>
+    </section>
   
   </main>
-  <script src="fishies.js"> </script>
+  <script src="fishies.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

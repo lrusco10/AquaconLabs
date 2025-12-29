@@ -296,4 +296,3 @@ if (nextBtn && prevBtn && slides.length > 0) {
     _closeMenu: closeOverflowMenu
   };
 })();
-

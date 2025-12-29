@@ -6,56 +6,30 @@
     <title>SOAC - Join Us</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="assets/logo.svg">
-</head>
+    </head>
 <body class="standard">
 
-
-
-
-    
     <header class="site-header" id="site-header">
         <a href="index.html" class="logo-container">
             <img src="assets/logo.svg" alt="SOAC Logo" class="logo">
         </a>
-
-
-
-                                            <!-- new -->
-        <!-- Nav container -->
-    <nav id="main-nav" class="nav" role="navigation" aria-label="Primary">
-      <!-- visible inline items -->
-      <div class="nav-primary" id="nav-primary" aria-hidden="false">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="research.html" class="nav-link">Research</a>
-        <a href="joinus.html" class="nav-link">Join Us</a>
-        <a href="about.html" class="nav-link">About</a>
-        <a href="contact.html" class="nav-link">Contact</a>
-      </div>
-
-      <button
-        id="nav-toggle"
-        class="nav-toggle"
-        aria-controls="nav-overflow"
-        aria-expanded="false"
-        aria-label="Open menu"
-        hidden
-      >
-        ☰
-      </button>
-
-      <!-- Overflow menu container (items moved here) -->
-      <div id="nav-overflow" class="nav-overflow" aria-hidden="true">
-        <!-- Storage for moved items (used by balancing code) -->
-        <div class="nav-overflow-list" id="nav-overflow-list" role="menu" hidden></div>
-
-        <!-- Display menu shown when the hamburger opens; populated with ALL nav links -->
-        <div class="nav-overflow-menu" id="nav-overflow-menu" role="menu" hidden></div>
-      </div>
-    </nav>
+        <nav id="main-nav" class="nav" role="navigation" aria-label="Primary">
+            <div class="nav-primary" id="nav-primary" aria-hidden="false">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="research.html" class="nav-link">Research</a>
+                <a href="joinus.html" class="nav-link">Join Us</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <button id="nav-toggle" class="nav-toggle" hidden>☰</button>
+            <div id="nav-overflow" class="nav-overflow" aria-hidden="true">
+                <div class="nav-overflow-list" id="nav-overflow-list" hidden></div>
+                <div class="nav-overflow-menu" id="nav-overflow-menu" hidden></div>
+            </div>
+        </nav>
     </header>
 
     <main>
-
         <section class="landing">
             <img class="landing-img" src="assets/joinUs/joinUsLanding.jpg" alt="Research Landing Image">
             <div class="mission-overlay">
@@ -63,86 +37,168 @@
             </div>
         </section>
 
-
         <section class="joinus-section">
-  <div class="opportunity-menus">
-    <div class="opportunity-menu">
-      <h2>Job Opportunities</h2>
-      <div class="opportunity-boxes">
+            <div class="opportunity-menus">
+                <div class="opportunity-menu">
+                    <h2>Job Opportunities</h2>
+                    
+                    <div class="opportunity-boxes">
 
-        <a href="https://oswego.interviewexchange.com/jobofferdetails.jsp?JOBID=193735" class="opportunity-box">
-          <img src="assets/joinUs/oswegoLogo.png" alt="Postdoc Research" />
-          <span1>RF Molecular Ecologist</span1>
-          <span2>Lead eDNA/eRNA research projects focused on conservation genomics.</span2>
-          <ul>
-            <li>Lead molecular ecology projects and mentor team members.</li>
-            <li>Manage analyses (qPCR, dPCR, metabarcoding) and bioinformatics (DADA2, QIIME2).</li>
-            <li>MS in Molecular Ecology or related field; hands-on lab experience required.</li>
-            <li>PhD and R/Python skills preferred.</li>
-            <li>Salary: $60K–$90K + benefits.</li>
-          </ul>
-        </a>
+                        <div class="box-wrapper" style="position: relative;">
+                            <div class="opportunity-box">
+                                
+                                <a href="https://oswego.interviewexchange.com/jobofferdetails.jsp?JOBID=193735" class="box-main-link">
+                                    <img src="assets/joinUs/oswegoLogo.png" alt="Postdoc Research" />
+                                    <span1>RF Molecular Ecologist</span1>
+                                    <span2>Lead eDNA/eRNA research projects focused on conservation genomics.</span2>
+                                </a>
 
-        <a href="https://oswego.joinhandshake.com/jobs/10404561" class="opportunity-box">
-          <img src="assets/joinUs/oswegoLogo.png" alt="Postdoc Research" />
-          <span1>Undergraduate Fisheries Researcher</span1>
-          <span2>Lead eDNA/eRNA research projects focused on conservation genomics.</span2>
-          <ul>
-            <li>Conduct DNA/RNA extractions, PCRs, and sample prep for next-generation sequencing.</li>
-            <li>Organize and manage biological samples and data (Excel, Google Drive).</li>
-            <li>Assist with field collections and basic data analysis (R experience a plus).</li>
-            <li>Contribute to projects on Lake Sturgeon, Chinook Salmon, Cisco, and Lake Trout restoration.</li>
-            <li>Qualifications: Current undergraduate (Biology, Fisheries, Zoology, or related); detail-oriented, organized, and motivated.</li>
-            <li>Commitment: 10–20 hrs/week during the academic year.</li>
-            <li>Pay: $16–$20/hr, depending on experience.</li>
-          </ul>
-        </a>
+                                <ul>
+                                    <li>Lead molecular ecology projects and mentor team members.</li>
+                                    <li>Manage analyses (qPCR, dPCR, metabarcoding) and bioinformatics.</li>
+                                    <li>MS in Molecular Ecology or related field required.</li>
+                                    <li>Salary: $60K–$90K + benefits.</li>
+                                </ul>
 
-        <a href="http://oswego.interviewexchange.com/jobofferdetails.jsp?JOBID=193493" class="opportunity-box">
-          <img src="assets/joinUs/oswegoLogo.png" alt="Research Scientist" />
-          <span1>RF Aquatic Biologist – Lake Erie</span1>
-          <span2>Conduct field and lab research to support native fish restoration.</span2>
-          <ul>
-            <li>Design and execute aquatic studies using traditional and molecular tools.</li>
-            <li>Master’s in Biology, Fisheries, or Ecology (or Bachelor’s + 2 yrs experience).</li>
-            <li>Field sampling experience required; R and writing skills preferred.</li>
-            <li>Salary: $58K–$69K + benefits.</li>
-          </ul>
-        </a>
+                                <button class="expand-btn" aria-label="Toggle details">
+                                    <span class="arrow-icon">▼</span>
+                                </button>
+                            </div>
+                        </div>
 
-        <a href="http://oswego.interviewexchange.com/jobofferdetails.jsp?JOBID=193747" class="opportunity-box">
-          <img src="assets/joinUs/oswegoLogo.png" alt="Lab Coordinator" />
-          <span1>RF Fisheries Technicians (2)</span1>
-          <span2>Field-based roles supporting native fish reproduction studies.</span2>
-          <ul>
-            <li>Conduct field sampling, deploy traps, and operate research vessels.</li>
-            <li>BS in Fisheries, Ecology, or related field + 1–2 yrs field experience.</li>
-            <li>Boat operation and fish ID skills preferred.</li>
-            <li>Pay: $19–$22/hr + benefits.</li>
-          </ul>
-        </a>
+                        <div class="box-wrapper" style="position: relative;">
+                            <div class="opportunity-box">
+                                <a href="https://oswego.joinhandshake.com/jobs/10404561" class="box-main-link">
+                                    <img src="assets/joinUs/oswegoLogo.png" alt="Undergrad Research" />
+                                    <span1>Undergraduate Fisheries Researcher</span1>
+                                    <span2>Lead eDNA/eRNA research projects focused on conservation genomics.</span2>
+                                </a>
+                                <ul>
+                                    <li>Conduct DNA/RNA extractions and PCRs.</li>
+                                    <li>Organize biological samples and data.</li>
+                                    <li>Contribute to Lake Sturgeon and Salmon restoration.</li>
+                                    <li>Pay: $16–$20/hr.</li>
+                                </ul>
+                                <button class="expand-btn" aria-label="Toggle details">
+                                    <span class="arrow-icon">▼</span>
+                                </button>
+                            </div>
+                        </div>
 
-        <a href="https://oswego.interviewexchange.com/jobofferdetails.jsp?JOBID=193870" class="opportunity-box">
-          <img src="assets/joinUs/oswegoLogo.png" alt="Lab Technician" />
-          <span1>RF Lab Technician</span1>
-          <span2>Support molecular lab operations with opportunities for fieldwork.</span2>
-          <ul>
-            <li>Perform DNA extraction, PCR, sequencing, and library prep.</li>
-            <li>Maintain lab supplies and organize sample inventories.</li>
-            <li>BS in Biology or related field; lab experience required.</li>
-            <li>Conservation genetics and R/Python skills preferred.</li>
-            <li>Salary: $33K–$39K + benefits.</li>
-          </ul>
-        </a>
+                        <div class="box-wrapper" style="position: relative;">
+                            <div class="opportunity-box">
+                                <a href="http://oswego.interviewexchange.com/jobofferdetails.jsp?JOBID=193493" class="box-main-link">
+                                    <img src="assets/joinUs/oswegoLogo.png" alt="Research Scientist" />
+                                    <span1>RF Aquatic Biologist</span1>
+                                    <span2>Conduct field and lab research to support native fish restoration.</span2>
+                                </a>
+                                <ul>
+                                    <li>Design and execute aquatic studies.</li>
+                                    <li>Master’s in Biology/Fisheries required.</li>
+                                    <li>Field sampling experience required.</li>
+                                    <li>Salary: $58K–$69K + benefits.</li>
+                                </ul>
+                                <button class="expand-btn" aria-label="Toggle details">
+                                    <span class="arrow-icon">▼</span>
+                                </button>
+                            </div>
+                        </div>
 
-      </div>
+                        <div class="box-wrapper" style="position: relative;">
+                            <div class="opportunity-box">
+                                <a href="http://oswego.interviewexchange.com/jobofferdetails.jsp?JOBID=193747" class="box-main-link">
+                                    <img src="assets/joinUs/oswegoLogo.png" alt="Lab Coordinator" />
+                                    <span1>RF Fisheries Technicians (2)</span1>
+                                    <span2>Field-based roles supporting native fish reproduction studies.</span2>
+                                </a>
+                                <ul>
+                                    <li>Conduct field sampling and deploy traps.</li>
+                                    <li>BS in Fisheries/Ecology + field experience.</li>
+                                    <li>Pay: $19–$22/hr + benefits.</li>
+                                </ul>
+                                <button class="expand-btn" aria-label="Toggle details">
+                                    <span class="arrow-icon">▼</span>
+                                </button>
+                            </div>
+                        </div>
 
-      <h2>We're always updating this page with new jobs. Check back soon!</h2>
-    </div>
-  </div>
-</section>
+                         <div class="box-wrapper" style="position: relative;">
+                            <div class="opportunity-box">
+                                <a href="https://oswego.interviewexchange.com/jobofferdetails.jsp?JOBID=193870" class="box-main-link">
+                                    <img src="assets/joinUs/oswegoLogo.png" alt="Lab Technician" />
+                                    <span1>RF Lab Technician</span1>
+                                    <span2>Support molecular lab operations with opportunities for fieldwork.</span2>
+                                </a>
+                                <ul>
+                                    <li>Perform DNA extraction, PCR, and sequencing.</li>
+                                    <li>Maintain lab supplies and inventories.</li>
+                                    <li>BS in Biology required.</li>
+                                    <li>Salary: $33K–$39K + benefits.</li>
+                                </ul>
+                                <button class="expand-btn" aria-label="Toggle details">
+                                    <span class="arrow-icon">▼</span>
+                                </button>
+                            </div>
+                        </div>
 
+                    </div>
+                    <h2>We're always updating this page with new jobs. Check back soon!</h2>
+                </div>
+            </div>
+        </section>
     </main>
+
     <script src="script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Select ONLY the buttons, not the whole box
+            const toggles = document.querySelectorAll('.expand-btn');
+
+            toggles.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    // Stop the click from bubbling (just in case)
+                    e.stopPropagation();
+
+                    // Find the parent card and the wrapper
+                    const box = this.closest('.opportunity-box');
+                    const wrapper = this.closest('.box-wrapper') || this.closest('div[style*="position: relative"]');
+
+                    // 1. Close all OTHER boxes
+                    document.querySelectorAll('.opportunity-box.is-open').forEach(openBox => {
+                        if (openBox !== box) {
+                            openBox.classList.remove('is-open');
+                            if(openBox.parentElement) openBox.parentElement.style.height = '';
+                        }
+                    });
+
+                    // 2. Toggle THIS box
+                    if (box.classList.contains('is-open')) {
+                        // Close
+                        box.classList.remove('is-open');
+                        if (wrapper) wrapper.style.height = '';
+                    } else {
+                        // Open
+                        // Lock the wrapper height to prevent grid collapse
+                        if (wrapper) {
+                            const closedHeight = box.offsetHeight;
+                            wrapper.style.height = `${closedHeight}px`;
+                        }
+                        box.classList.add('is-open');
+                    }
+                });
+            });
+
+            // Close when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.opportunity-box')) {
+                    document.querySelectorAll('.opportunity-box.is-open').forEach(box => {
+                        box.classList.remove('is-open');
+                        if(box.parentElement) box.parentElement.style.height = '';
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
