@@ -893,6 +893,7 @@ section:nth-of-type(even) .project-details .text-content {
     font-size: 1.5rem;
     margin-bottom: 1.2rem;
     padding-top: 0; /* Adjusted */
+    text-align: center;
 }
 
 .opportunity-menu p {
@@ -933,10 +934,9 @@ section:nth-of-type(even) .project-details .text-content {
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(6,70,117,0.09);
     padding: 1.5rem 1.25rem;
-    text-decoration: none;
-    color: var(--primary-dark);
     transition: all 0.2s ease;
     cursor: pointer;
+    color: var(--text-on-light);
     
     /* Ensure height is determined by content */
     height: fit-content; 
@@ -952,11 +952,12 @@ section:nth-of-type(even) .project-details .text-content {
 
 /* Image & Text Styling */
 .opportunity-box img {
+    display: block;
+    margin: 0 auto 1rem auto;
     width: 100%;
     max-width: 85%;
     height: auto;
     object-fit: contain;
-    margin-bottom: 1rem;
 }
 
 /* Using your custom tags span1/span2 */
@@ -968,6 +969,7 @@ section:nth-of-type(even) .project-details .text-content {
     display: block;
     padding-bottom: 0.4rem;
     line-height: 1.2;
+    color: var(--text-on-light);
 }
 
 .opportunity-box span2 {
@@ -979,6 +981,13 @@ section:nth-of-type(even) .project-details .text-content {
     display: block;
     padding-bottom: 0.8rem;
     color: #666;
+}
+
+/* Target the actual link wrapper */
+.box-main-link {
+    text-decoration: none !important; /* Force removal of underline */
+    color: inherit;       /* Inherit the dark color from parent, not blue */
+    display: block;       /* Ensures the link fills the width */
 }
 
 /* --- The Dropdown Logic --- */
@@ -1019,6 +1028,44 @@ section:nth-of-type(even) .project-details .text-content {
 .opportunity-box.is-open ul {
     display: block;
     opacity: 1;
+}
+
+/* 1. Make the button span the full width of the card */
+.expand-btn {
+    width: 100%;             /* Forces the button to be as wide as the box */
+    background: transparent; /* No background color by default */
+    border: none;            /* Removes default gray button border */
+    cursor: pointer;         /* Shows hand icon on hover */
+    padding: 15px 0;         /* Adds vertical height (easy to tap) */
+    margin-top: 10px;        /* Adds space between text and arrow */
+    
+    /* Centers the arrow inside the wide button */
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    
+    /* Smooth transition for hover effects */
+    transition: background-color 0.2s ease;
+}
+
+/* Optional: Add a subtle hover color so users know it's clickable */
+.expand-btn:hover {
+    background-color: rgba(0, 0, 0, 0.05); /* Light gray hover effect */
+    border-radius: 0 0 12px 12px;          /* Rounds the bottom corners to match the card */
+}
+
+/* 2. Make the arrow icon itself bigger */
+.arrow-icon {
+    font-size: 2.5rem;       /* Significantly increases the size of the ▼ */
+    line-height: 1;          /* Keeps the height tight to the icon */
+    color: var(--primary-dark);
+    display: block;          /* Ensures transforms work smoothly */
+    transition: transform 0.3s ease; /* Smooth rotation animation */
+}
+
+/* Ensure the arrow rotates when the box is open */
+.opportunity-box.is-open .arrow-icon {
+    transform: rotate(180deg);
 }
 
 /* --- Media Queries --- */
