@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>SOAC News: Partnerships, Research and Grant Notifications</title>
+    <meta name="description" content="Stay updated on Great Lakes aquatic conservation. Read the latest news on funding, habitat restoration, and environmental policy.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="assets/SOAC_logo.png">
+    <meta name="google-site-verification" content="sO4l5PAe_Ywg9Y3lqf1c0GZR61exSvXGP1KzLQ4h8kc" />
+</head>
+
+<body class="standard">
+
+  <header class="site-header" id="site-header">
+        <a href="index.html" class="logo-container">
+            <img src="assets/SOAC_logo.png" alt="SOAC Logo" class="logo">
+        </a>
+
+        <!-- Nav container -->
+    <nav id="main-nav" class="nav" role="navigation" aria-label="Primary">
+      <!-- visible inline items -->
+      <div class="nav-primary" id="nav-primary" aria-hidden="false">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="news.html" class="nav-link">News</a>
+        <a href="research.html" class="nav-link">Research</a>
+        <a href="joinus.html" class="nav-link">Join Us</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+
+      <button
+        id="nav-toggle"
+        class="nav-toggle"
+        aria-controls="nav-overflow"
+        aria-expanded="false"
+        aria-label="Open menu"
+        hidden
+      >
+        ☰
+      </button>
+
+      <!-- Overflow menu container (items moved here) -->
+      <div id="nav-overflow" class="nav-overflow" aria-hidden="true">
+        <!-- Storage for moved items (used by balancing code) -->
+        <div class="nav-overflow-list" id="nav-overflow-list" role="menu" hidden></div>
+
+        <!-- Display menu shown when the hamburger opens; populated with ALL nav links -->
+        <div class="nav-overflow-menu" id="nav-overflow-menu" role="menu" hidden></div>
+      </div>
+    </nav>
+    </header>
+
+    <div class="hero-container" id="hero">
+        <div class="hero-overlay"></div>
+        
+        <button class="arrow arrow-left" onclick="changeSlide(-1)">&#10094;</button>
+        
+        <div class="hero-content">
+            <span class="hero-tag" id="hero-tag">Category</span>
+            <h1 class="hero-title" id="hero-title">Heading</h1>
+        </div>
+
+        <button class="arrow arrow-right" onclick="changeSlide(1)">&#10095;</button>
+    </div>
+
+    <div class="feed-container" id="feed-list">
+        </div>
+
+
+
+
+
+
+
+
+
+
+    <script src="script.js"></script>
+</body>
+
+

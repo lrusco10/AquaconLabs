@@ -296,3 +296,6 @@ if (nextBtn && prevBtn && slides.length > 0) {
     _closeMenu: closeOverflowMenu
   };
 })();
+
+
+//This is the logic for the news page
