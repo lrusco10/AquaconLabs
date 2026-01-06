@@ -52,6 +52,12 @@ body.standard{
     background: var(--primary-dark);
 }
 
+body.news{
+  margin: 0;
+  background-color: var(--secondary-dark-green);
+
+}
+
 header {
     background: var(--primary-dark);
     color: var(--text-on-dark);
@@ -2193,139 +2199,124 @@ font-family: 'Lora', serif;
 
 
 /* News  and stuff/*
-/* Article container */
+/* Main container for the slideshow */
+.posts {
+  margin: 5% auto;
+  position: relative;
+  max-width: 800px; /* Adjust width as needed */
+  height: 500px;    /* Fixed height for uniformity */
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  border-radius: 12px;
+  background-color: #333;
+}
 
-.hero-container {
-            position: relative;
-            height: 60vh; /* Takes up 60% of the screen height */
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-size: cover;
-            background-position: center;
-            transition: background-image 0.5s ease-in-out;
-            color: white;
-        }
+/* The Slide Container 
+  By default, we hide all slides. We will use the .active class to show them.
+*/
+.news-container {
+  display: none; /* Hidden by default */
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  /* Smooth fade animation */
+  animation: fadeEffect 0.5s ease-in-out;
+}
 
-        .hero-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: var(--dark-overlay);
-            z-index: 1;
-        }
+/* The class JS will add to show a slide */
+.news-container.active {
+  display: block;
+}
 
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            max-width: 800px;
-            padding: 20px;
-        }
+/* Dummy Backgrounds for your IDs 
+  (Replace these with your actual image URLs)
+*/
+#funding { background-image: url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80'); }
+#event1  { background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80'); }
+#event2  { background-image: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80'); }
 
-        .hero-tag {
-            font-family: "Lora", serif;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.9rem;
-            color: #93c5fd;
-            margin-bottom: 10px;
-            display: block;
-        }
+/* Dark Gradient Overlay 
+  Makes text readable regardless of the background image 
+*/
+.news-overlay {
+  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Push text to bottom */
+  padding: 40px;
+}
 
-        .hero-title {
-            font-family: "Lora", serif;
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
+.news-content {
+  margin: 5%;
+  background-color: white;
+}
 
-        /* Arrows */
-        .arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            color: white;
-            padding: 15px;
-            cursor: pointer;
-            z-index: 10;
-            transition: all 0.2s;
-            font-size: 1.5rem;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(5px);
-        }
+.news-content p {
+  font-size: large;
+  font-family: 'Courier New', Courier, monospace;
+  color: black;
+}
 
-        .arrow:hover {
-            background: rgba(255, 255, 255, 0.9);
-            color: black;
-        }
+/* Typography */
+.news-meta {
+  margin: 5%;
+  color: white;
+  font-family: system-ui, -apple-system, sans-serif;
+}
 
-        .arrow-left { left: 30px; }
-        .arrow-right { right: 30px; }
+.news-tag {
+  display: inline-block;
+  background-color: #e63946; /* Accent color */
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
 
-        .news-card {
-            background: white;
-            margin-bottom: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            display: flex;
-            gap: 20px;
-            transition: transform 0.2s;
-            animation: fadeIn 0.5s ease-out;
-            border: 12px;
-            border-color: var(--primary-light);
-          }
+.news-title {
+  margin: 0;
+  font-size: 2.5rem;
+  line-height: 1.2;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
 
-        .news-card:hover {
-            transform: translateY(-2px);
-        }
+/* Navigation Arrows */
+.arrow {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px; /* Center vertically */
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+  transition: 0.3s ease;
+  background-color: rgba(0,0,0,0.2);
+  border: none;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  z-index: 10; /* Ensure it sits on top of images */
+}
 
-        .news-subtext {
-          font-size: 0.8rem;
-          color: var(--border-dark);
-          font-family: 'Nunito', sans-serif;
-        }
+.arrow-right {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
 
-        .news-details h3 {
-            font-size: 1.4rem;
-            margin-bottom: 8px;
-            color: var(--secondary-dark-green);
-            font-family: "Lora", serif;
-        }
+.arrow:hover {
+  background-color: rgba(0,0,0,0.8);
+}
 
-        .news-details p {
-            color: #6b7280;
-            line-height: 1.6;
-            color: var(--text-on-light);
-            font-family: 'Nunito', sans-serif;
-        }
-
-        .timestamp {
-            font-size: 0.8rem;
-            color: var(--border-dark);
-            font-weight: 600;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-
-        /* Animation for switching content */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Mobile Adjustments */
-        @media (max-width: 768px) {
-            .hero-title { font-size: 2rem; }
-            .news-card { flex-direction: column; }
-            .news-image { width: 100%; height: 200px; }
-            .arrow { width: 40px; height: 40px; font-size: 1rem; }
-        }
+/* Fade Animation Keyframes */
+@keyframes fadeEffect {
+  from {opacity: 0.4} 
+  to {opacity: 1}
+}

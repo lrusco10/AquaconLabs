@@ -10,7 +10,7 @@
     <meta name="google-site-verification" content="sO4l5PAe_Ywg9Y3lqf1c0GZR61exSvXGP1KzLQ4h8kc" />
 </head>
 
-<body class="standard">
+<body class="news">
 
   <header class="site-header" id="site-header">
         <a href="index.html" class="logo-container">
@@ -51,31 +51,44 @@
     </nav>
     </header>
 
-    <div class="hero-container" id="hero">
-        <div class="hero-overlay"></div>
-        
-        <button class="arrow arrow-left" onclick="changeSlide(-1)">&#10094;</button>
-        
-        <div class="hero-content">
-            <span class="hero-tag" id="hero-tag">Category</span>
-            <h1 class="hero-title" id="hero-title">Heading</h1>
+
+    <main>
+      <div class="posts">
+      <div class="news-container" id="funding">
+        <div class="news-overlay">
+          <div class="news-meta">
+            <span class="news-tag" id="funding-tag">Category</span>
+            <h1 class="news-title" id="funding-title">Title</h1>
+          </div>
         </div>
-
-        <button class="arrow arrow-right" onclick="changeSlide(1)">&#10095;</button>
-    </div>
-
-    <div class="feed-container" id="feed-list">
+        <div class="news-content">
+          <p>hello world</p>
         </div>
+        
+      </div>
 
+      <div class="news-container" id="event1">
+        <div class="news-overlay">
+          <div class="news-meta">
+            <span class="news-tag" id="event1-tag">Category</span>
+            <h1 class="news-title" id="event1-title">Title</h1>
+          </div>
+        </div>
+      </div>
 
+      <div class="news-container" id="event2">
+        <div class="news-overlay">
+          <div class="news-meta">
+            <span class="news-tag" id="event2-tag">Category</span>
+            <h1 class="news-title" id="event2-title">Title</h1>
+          </div>
+        </div>
+      </div>
+      <button class="arrow arrow-left" onclick="changeArticle(-1)">&#10094;</button>
+      <button class="arrow arrow-right" onclick="changeArticle(1)">&#10095;</button>
+      </div>
 
-
-
-
-
-
-
-
+    </main>
     <script src="script.js"></script>
 </body>
 

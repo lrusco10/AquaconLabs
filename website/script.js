@@ -299,3 +299,33 @@ if (nextBtn && prevBtn && slides.length > 0) {
 
 
 //This is the logic for the news page
+let newsIndex = 0;
+const articles = document.querySelectorAll(".news-container");
+
+// Initialize the slider
+showArticle(newsIndex);
+
+// Function called by the arrow buttons
+function changeArticle(n) {
+  newsIndex += n;
+  
+  // Wrap around logic
+  if (newsIndex >= articles.length) {
+    newsIndex = 0;
+  } else if (newsIndex < 0) {
+    newsIndex = articles.length - 1;
+  }
+  
+  showArticle(newsIndex);
+}
+
+// Core logic to toggle visibility
+function showArticle(index) {
+  // Loop through all articles and hide them
+  articles.forEach((news) => {
+    news.classList.remove("active");
+  });
+
+  // Show the specific news requested
+  articles[index].classList.add("active");
+}
