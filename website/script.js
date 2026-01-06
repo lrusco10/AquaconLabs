@@ -298,6 +298,8 @@ if (nextBtn && prevBtn && slides.length > 0) {
 })();
 
 
+
+
 //This is the logic for the news page
 let newsIndex = 0;
 const articles = document.querySelectorAll(".news-container");
