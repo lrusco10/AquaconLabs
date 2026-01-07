@@ -6,8 +6,13 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://www.cs.oswego.edu/SOAC/news.html</loc>
+    <lastmod>2026-01-07</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.cs.oswego.edu/SOAC/research.html</loc>
-    <lastmod>2025-11-24</lastmod>
+    <lastmod>2025-01-07</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
