@@ -301,33 +301,32 @@ if (nextBtn && prevBtn && slides.length > 0) {
 
 
 //This is the logic for the news page
-let newsIndex = 0;
-const articles = document.querySelectorAll(".news-container");
+document.addEventListener('DOMContentLoaded', () => {
+    const articles = document.querySelectorAll('.news-article');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    let currentIndex = 0;
 
-// Initialize the slider
-showArticle(newsIndex);
+    function showArticle(index) {
+        // Loop logic
+        if (index >= articles.length) currentIndex = 0;
+        else if (index < 0) currentIndex = articles.length - 1;
+        else currentIndex = index;
 
-// Function called by the arrow buttons
-function changeArticle(n) {
-  newsIndex += n;
-  
-  // Wrap around logic
-  if (newsIndex >= articles.length) {
-    newsIndex = 0;
-  } else if (newsIndex < 0) {
-    newsIndex = articles.length - 1;
-  }
-  
-  showArticle(newsIndex);
-}
+        // Hide all
+        articles.forEach(article => article.classList.remove('active'));
+        
+        // Show active
+        articles[currentIndex].classList.add('active');
 
-// Core logic to toggle visibility
-function showArticle(index) {
-  // Loop through all articles and hide them
-  articles.forEach((news) => {
-    news.classList.remove("active");
-  });
+        // Optional: Scroll back to the top of the container smoothly
+        // This is helpful if the user was at the bottom of the previous long article
+        document.querySelector('.news-container').scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+        });
+    }
 
-  // Show the specific news requested
-  articles[index].classList.add("active");
-}
+    nextBtn.addEventListener('click', () => showArticle(currentIndex + 1));
+    prevBtn.addEventListener('click', () => showArticle(currentIndex - 1));
+});

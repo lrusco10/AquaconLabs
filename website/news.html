@@ -51,44 +51,45 @@
     </nav>
     </header>
 
-
-    <main>
-      <div class="posts">
-      <div class="news-container" id="funding">
-        <div class="news-overlay">
-          <div class="news-meta">
-            <span class="news-tag" id="funding-tag">Category</span>
-            <h1 class="news-title" id="funding-title">Title</h1>
-          </div>
+    <section class="landing">
+        <img class="landing-img" src="assets/news/blueFishies.jpg" alt="Newspage Landing image (school of blue fish)">
+        <div class="mission-overlay">
+          <h1>News</h1>
         </div>
-        <div class="news-content">
-          <p>hello world</p>
-        </div>
-        
-      </div>
+    </section>
 
-      <div class="news-container" id="event1">
-        <div class="news-overlay">
-          <div class="news-meta">
-            <span class="news-tag" id="event1-tag">Category</span>
-            <h1 class="news-title" id="event1-title">Title</h1>
-          </div>
-        </div>
-      </div>
 
-      <div class="news-container" id="event2">
-        <div class="news-overlay">
-          <div class="news-meta">
-            <span class="news-tag" id="event2-tag">Category</span>
-            <h1 class="news-title" id="event2-title">Title</h1>
-          </div>
-        </div>
-      </div>
-      <button class="arrow arrow-left" onclick="changeArticle(-1)">&#10094;</button>
-      <button class="arrow arrow-right" onclick="changeArticle(1)">&#10095;</button>
-      </div>
 
-    </main>
+    <div class="news-container">
+
+    <button class="nav-arrow prev-btn">&#10094;</button>
+    <button class="nav-arrow next-btn">&#10095;</button>
+
+
+    <article class="news-article active">
+        <div class="hero-section">
+            <img src="/website/assets/news/GrantExtensionNews/USGS.jpeg" alt="USGS Great Lakes Science Center" class="hero-image">
+            <div class="hero-content">
+                <div class="hero-meta">01/02/2026</div>
+                <h1>Congress Extends Federal Support for Great Lakes Fishery Research Through 2030</h1>
+            </div>
+        </div>
+        <div class="article-body">
+            <h3>Focus on Operations vs. The Future</h3>
+            <p>This past December, Congress has approved the Great Lakes Fishery Research Reauthorization Act (GLFRAA) with bipartisan support, extending federal funding for Great Lakes fishery research through 2030, providing long-term stability for scientific work supporting the Great Lake Basin’s ecosystems and fisheries.</p>
+            <p>The bill’s passage was celebrated by the Great Lakes Fishery Commission, which emphasized the importance of sustained scientific research for protecting fish populations, freshwater habitats, and the region’s fishing economy, valued at an estimated $5.1 billion annually.</p>
+            <h3>Empowering Science and Legislative Leadership</h3>
+            <p>The legislation provides continuous support for the U.S. Geological Survey’s Great Lakes Science Center, which plays a crucial role in researching native and invasive fish populations, and assessing habitat conditions across the region. With the funding, scientists and researchers develop new tools and work with state, local and tribal communities to monitor conservation efforts. </p>
+            <p>GLFRAA received broad bipartisan support from lawmakers representing Great Lakes states. The legislation was led in the House by Mike Quigley and Bill Huizenga, with the Senate version championed by Gary Peters and Jon Husted. Additional support came from Debbie Dingell and Tim Walberg as the bill advanced through congressional committees.</p>
+            <p>By extending federal support into the next half of the decade, Great Lakes fishery research can continue to support conservation efforts that protect the long term health of the region and its species and the ecosystems they live in. This stability allows scientists to track long-term changes, respond to emerging challenges and provide the data needed to guide sustainable management decisions across the basin.</p>
+            <p class="article-footer-text">For futher references, please visit the official SOAC instagram <a href="https://instagram.com/_s.o.a.c" target="_blank">@_s.o.a.c</a> for the post made on this subject matter.</p>
+        </div>
+    </article>
+
+    </div>
+    
+
+
     <script src="script.js"></script>
 </body>
 

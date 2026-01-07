@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOAC Link Tree</title>
+    <link rel="icon" type="image/png" href="assets/SOAC_logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    #ascii-bg {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        font-family: monospace;
+        font-size: 16px;
+        white-space: pre;
+        color: var(--text-on-dark);
+        opacity: 0.2;
+        z-index: -1;
+        pointer-events: none;
+        overflow: hidden;
+        line-height: 1;
+    }
+    .logo-container {
+        height: 10vh; 
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10%;
+    }
+
+    .logo-container img {
+        width: auto;
+        height: auto;
+        object-fit: contain; 
+        border: none;
+        border-radius: 0;
+    }
+    .logo-container p {
+        font-family: "Lora", serif;
+        font-size: 0.95rem;
+        color: white;
+        font-style: italic;
+        line-height: 1.4;
+        text-align: center;
+        margin-bottom: 0;
+    }
+    .social-flex {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-top: 7%;
+        text-align: center;
+        align-items: center;
+        gap: 2.5rem;
+        width: 100%;
+    }
+</style>
+<div id="ascii-bg"></div> 
+<body class="standard">
+    <main>
+        <div class="logo-container">
+            <img src="/website/assets/SOAC_logo.png" alt="Large SOAC logo">
+            <p>SUNY Oswego Aquatic Conservation</p>
+        </div>
+        <div class="social-flex">
+            <div class="social-buttons">
+                <a href="https://www.cs.oswego.edu/SOAC" class="social-btn website" target="_blank" aria-label="Website">
+                    <i class="fas fa-globe"></i>
+                    <span>Website</span>
+                </a>
+                <a href="https://www.instagram.com/_s.o.a.c?igsh=MWE4d29vY2x5NWlrdg%3D%3D&utm_source=qr" class="social-btn instagram" target="_blank" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://www.facebook.com/share/17RbdfXYKe/?mibextid=wwXIfr" class="social-btn facebook" target="_blank" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                    <span>Facebook</span>
+                </a>
+
+            </div>
+        </div>
+
+
+    </main>
+    <script src="fishies.js"></script>
+</body>
+</html>
+
