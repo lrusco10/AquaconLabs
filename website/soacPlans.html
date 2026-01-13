@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOAC Plan Board</title>
+    <link rel="icon" type="image/png" href="assets/SOAC_logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    #ascii-bg {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        font-family: monospace;
+        font-size: 16px;
+        white-space: pre;
+        color: var(--text-on-dark);
+        opacity: 0.2;
+        z-index: -1;
+        pointer-events: none;
+        overflow: hidden;
+        line-height: 1;
+    }
+    .logo-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 4rem;
+        margin-bottom: 2rem;
+    }
+
+    .logo-container img {
+        width: auto;
+        height: auto;
+        object-fit: contain; 
+        border: none;
+        border-radius: 0;
+    }
+    .logo-container p {
+        font-family: "Lora", serif;
+        font-size: 0.95rem;
+        color: white;
+        font-style: italic;
+        line-height: 1.4;
+        text-align: center;
+        margin-top: 1rem;
+        margin-bottom: 0;
+        padding: 0 1rem;
+    }
+    .social-flex {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-top: 10vh;
+        text-align: center;
+        align-items: center;
+        gap: 2.5rem;
+        width: 100%;
+    }
+</style>
+<div id="ascii-bg"></div> 
+<body class="standard">
+    <main>
+        <div class="logo-container">
+            <img src="assets/SOAC_logo.png" alt="Large SOAC logo">
+            <p>SUNY Oswego Aquatic Conservation</p>
+            <p>Gantt Chart Plans 2026-2031</p>
+        </div>
+        <div class="social-flex">
+            <div class="social-buttons">
+                <a href="../GanttProject/sites/2026-2027/SOACPLANS2026-2027.html" class="social-btn website" target="_blank" aria-label="Website">
+                    <i class="fas fa-globe"></i>
+                    <span>2026-2027</span>
+                </a>
+                <a href="../GanttProject/sites/2027-2028/SOACPLANS2027-2028.html" class="social-btn website" target="_blank" aria-label="Website">
+                    <i class="fas fa-globe"></i>
+                    <span>2027-2028</span>
+                </a>
+                <a href="../GanttProject/sites/2028-2029/SOACPLANS2028-2029.html" class="social-btn website" target="_blank" aria-label="Website">
+                    <i class="fas fa-globe"></i>
+                    <span>2028-2029</span>
+                </a>
+                <a href="../GanttProject/sites/2029-2030/SOACPLANS2029-2030.html" class="social-btn website" target="_blank" aria-label="Website">
+                    <i class="fas fa-globe"></i>
+                    <span>2029-2030</span>
+                </a>
+                <a href="../GanttProject/sites/2030-2031/SOACPLANS2030-2031.html" class="social-btn website" target="_blank" aria-label="Website">
+                    <i class="fas fa-globe"></i>
+                    <span>2030-2031</span>
+                </a>
+                <a href="https://www.cs.oswego.edu/SOAC" class="social-btn website" target="_blank" aria-label="Website">
+                    <i class="fas fa-globe"></i>
+                    <span>Official Website</span>
+                </a>
+            </div>
+        </div>
+
+
+    </main>
+    <script src="fishies.js"></script>
+</body>
+</html>
+
