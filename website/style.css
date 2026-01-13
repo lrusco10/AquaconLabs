@@ -509,12 +509,12 @@ main {
 
 .container1,
 .container2 {
-  max-width: 300vw;  
+  max-width: 100vw;  
   display: flex;
   align-items: center;
-  justify-content: flex-start;
   gap: 2rem;
   padding: 2rem 0;
+  margin-inline: auto;
 }
 
 /* Feature image */
@@ -1130,6 +1130,109 @@ section:nth-of-type(even) .project-details .text-content {
     .opportunity-box span1 {
         font-size: 1.25rem;
     }
+}
+
+/* --- Student Inquiry Panel (Distinct Style) --- */
+
+.student-inquiry-panel {
+    /* distinct from .opportunity-menu */
+    background: #ffffff; /* Clean white background */
+    border-radius: 20px; /* Matches the curvature of your other menus */
+    padding: 2.5rem 2rem;
+    margin-top: 3rem;    /* Spacing between Jobs and this section */
+    
+    /* Subtle shadow to lift it off the green page background */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    
+    /* Center alignment for a "Call to Action" feel */
+    text-align: center;
+    max-width: 800px;    /* Keeps text from getting too wide/unreadable */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.student-inquiry-panel h2 {
+    font-family: 'Lora', serif;
+    font-size: 2rem;
+    color: var(--primary-dark); /* Dark text on light background */
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--secondary-dark-green); /* Optional accent line */
+    display: inline-block;
+    padding-bottom: 0.5rem;
+}
+
+.student-inquiry-panel p {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #333; /* Dark gray for readability */
+    margin-bottom: 1rem;
+}
+
+/* --- The Call-to-Action Button --- */
+.inquiry-btn {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 14px 35px;
+    
+    /* Inverted colors: Dark button on Light card */
+    background-color: var(--primary-dark); 
+    color: var(--text-on-dark);
+    
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    border-radius: 50px; /* Pill shape stands out from square job boxes */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.inquiry-btn:hover {
+    background-color: var(--secondary-dark-green); /* Hover change */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+}
+
+/* --- Mobile Tweaks for this section --- */
+@media (max-width: 700px) {
+    .student-inquiry-panel {
+        padding: 2rem 1rem;
+        margin-top: 2rem;
+    }
+    
+    .student-inquiry-panel h2 {
+        font-size: 1.6rem;
+    }
+}
+
+/* --- No Listings Notice --- */
+
+.no-listings-message {
+    /* Layout: Span the full width of the grid */
+    grid-column: 1 / -1; 
+    
+    /* Styling to match the Dark Menu theme */
+    text-align: center;
+    padding: 3rem 1rem;
+    color: rgba(255, 255, 255, 0.6); /* Muted white text */
+    font-family: 'Lora', serif;      /* Matches your headers */
+    font-style: italic;
+    font-size: 1.2rem;
+    
+    /* Optional: A subtle dashed border to fill the space visually */
+    border: 2px dashed rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    margin-top: 1rem;
+}
+
+/* --- THE LOGIC --- */
+/* The '~' symbol selects the message ONLY if it comes after a .box-wrapper.
+   1. If .box-wrapper exists (job is active), the message gets display: none.
+   2. If .box-wrapper is commented out (no jobs), this rule fails, and the message stays visible.
+*/
+.box-wrapper ~ .no-listings-message {
+    display: none;
 }
 
 
