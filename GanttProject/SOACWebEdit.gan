@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="SOAC WebEdit Dev Cycle" company="SUNY Oswego Aquatic Conservation Labs" webLink="https://www.cs.oswego.edu/SOAC" view-date="2026-01-15" view-index="0" gantt-divider-location="351" resource-divider-location="300" version="3.3.3316" locale="en_US">
+    <description><![CDATA[This is a chart depicting the planned lifecycle of the product SOAC WebEdit -- which is a graphical editor for official SOAC WebPage.]]></description>
+    <view zooming-state="default:2" id="gantt-chart">
+        <field id="tpd15" name="Notes" width="20" order="-1"/>
+        <field id="tpd3" name="Name" width="200" order="0"/>
+        <field id="tpd4" name="Begin date" width="75" order="1"/>
+        <field id="tpd5" name="End date" width="75" order="2"/>
+        <option id="taskLabelUp" value="name"/>
+        <option id="filter.completedTasks" value="false"/>
+        <option id="filter.dueTodayTasks" value="false"/>
+        <option id="filter.overdueTasks" value="false"/>
+        <option id="filter.inProgressTodayTasks" value="false"/>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Name" width="210" order="0"/>
+        <field id="1" name="Default role" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="true"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" uid="5a1930a4282e421790fc7c58fdb8c4ff" name="Product Launch" meeting="false" start="2026-01-18" duration="60" complete="0" expand="true"/>
+        <task id="1" uid="1abb16816db64275b545c26978c3705f" name="First Prototype" meeting="false" start="2026-01-18" duration="3" complete="33" expand="true">
+            <task id="5" uid="2993de87bc934bfa8ac77fe55f6cbe09" name="Adjust coloring and styling of APP" meeting="false" start="2026-01-20" duration="1" complete="0" expand="true"/>
+            <task id="7" uid="670d9f68544b470ba471c8457ad9521b" name="Compact project into shippable EXE" meeting="false" start="2026-01-20" duration="1" complete="0" expand="true"/>
+            <task id="8" uid="1de29513a0294c5ba3d628d380fe2580" name="Develop setup wizard for config files and cloning." meeting="false" start="2026-01-19" duration="1" complete="0" expand="true"/>
+            <task id="6" uid="4a545697951b488196c0943921a88d3b" name="Implement SOAC WebPage HOME elements into app" meeting="false" start="2026-01-19" duration="1" complete="0" expand="true">
+                <depend id="7" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="4" uid="bc14989c8b0a436e8099d7f2b45dd6be" name="Acquire Dr. Sard's UI Preference and dev approval" meeting="true" start="2026-01-21" duration="0" complete="0" expand="true"/>
+            <task id="3" uid="dbeac420eacc4148ac6e4d2b606ef21a" name="Write non-SOAC prototype" meeting="false" start="2026-01-18" duration="1" complete="100" expand="true">
+                <depend id="6" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="2" uid="75083ab4ba44496686c4cb5088e7263b" name="Write docs" meeting="false" start="2026-01-18" duration="1" complete="100" expand="true">
+                <depend id="6" type="2" difference="0" hardness="Strong"/>
+            </task>
+        </task>
+        <task id="9" uid="efe3c53dccb14cc28d0f5d1f321493e2" name="Second Prototype" meeting="false" start="2026-01-21" duration="3" complete="0" expand="true">
+            <task id="10" uid="1c066b2e0aab489fa6f394a6f3016b59" name="Utilize feedback to improve immediate issues" meeting="false" start="2026-01-21" duration="1" complete="0" expand="true"/>
+            <task id="11" uid="0912ca74442d4a40a3a7d6a1232ab441" name="Implement Google Gemini integration" meeting="false" start="2026-01-21" duration="2" complete="0" expand="true"/>
+            <task id="12" uid="0a493498d17346f7b4a58622778c6544" name="Implement Google AUTH for liable app usage. (perhaps storing config files via google drive?)" meeting="false" start="2026-01-21" duration="2" complete="0" expand="true"/>
+            <task id="13" uid="d8af9b0e214e47f591eacd40699db0b2" name="Expand to research section" meeting="false" start="2026-01-22" duration="2" complete="0" expand="true"/>
+            <task id="15" uid="4e3fb3e66fc9484f8341749ff6791989" name="Acquire Dr Sard's development and UI approval" meeting="true" start="2026-01-24" duration="0" complete="0" expand="true"/>
+        </task>
+        <task id="16" uid="8522ae83555d4b60b7ebaae43248049b" name="Third prototype" meeting="false" start="2026-01-24" duration="8" complete="0" expand="true">
+            <task id="19" uid="68dd92078baa4c8d81ed1df54e105188" name="Adapt any preferences or concerns by Dr. Sard" meeting="false" start="2026-01-24" duration="2" complete="0" expand="true"/>
+            <task id="17" uid="9c7dc2aad98048b2a8052c0ceab6ffbe" name="Implement about, news, and JoinUs pages" meeting="false" start="2026-01-27" duration="3" complete="0" expand="true"/>
+            <task id="18" uid="69df4eaa69ea469f9c71323fd660663d" name="Adjust styling and accessibility concerns" meeting="false" start="2026-01-29" duration="1" complete="0" expand="true"/>
+            <task id="20" uid="039c921f608b4b459231b6a1f92a6363" name="Acquire Dr. Sard's Development approval" meeting="true" start="2026-01-31" duration="0" complete="0" expand="true"/>
+        </task>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles roleset-name="SoftwareDevelopment"/>
+</project>
