@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="SOAC WebEdit Dev Cycle" company="SUNY Oswego Aquatic Conservation Labs" webLink="https://www.cs.oswego.edu/SOAC" view-date="2026-01-15" view-index="0" gantt-divider-location="351" resource-divider-location="300" version="3.3.3316" locale="en_US">
+<?xml version="1.0" encoding="UTF-8"?><project name="SOAC WebEdit Dev Cycle" company="SUNY Oswego Aquatic Conservation Labs" webLink="https://www.cs.oswego.edu/SOAC" view-date="2026-01-14" view-index="0" gantt-divider-location="351" resource-divider-location="300" version="3.3.3316" locale="en_US">
     <description><![CDATA[This is a chart depicting the planned lifecycle of the product SOAC WebEdit -- which is a graphical editor for official SOAC WebPage.]]></description>
     <view zooming-state="default:2" id="gantt-chart">
-        <field id="tpd15" name="Notes" width="20" order="-1"/>
         <field id="tpd3" name="Name" width="200" order="0"/>
         <field id="tpd4" name="Begin date" width="75" order="1"/>
         <field id="tpd5" name="End date" width="75" order="2"/>
+        <field id="tpd15" name="Notes" width="20" order="3"/>
         <option id="taskLabelUp" value="name"/>
         <option id="filter.completedTasks" value="false"/>
         <option id="filter.dueTodayTasks" value="false"/>
@@ -62,7 +62,7 @@
             <task id="13" uid="d8af9b0e214e47f591eacd40699db0b2" name="Expand to research section" meeting="false" start="2026-01-22" duration="2" complete="0" expand="true"/>
             <task id="15" uid="4e3fb3e66fc9484f8341749ff6791989" name="Acquire Dr Sard's development and UI approval" meeting="true" start="2026-01-24" duration="0" complete="0" expand="true"/>
         </task>
-        <task id="16" uid="8522ae83555d4b60b7ebaae43248049b" name="Third prototype" meeting="false" start="2026-01-24" duration="8" complete="0" expand="true">
+        <task id="16" uid="8522ae83555d4b60b7ebaae43248049b" name="Third prototype" meeting="false" start="2026-01-24" duration="7" complete="0" expand="true">
             <task id="19" uid="68dd92078baa4c8d81ed1df54e105188" name="Adapt any preferences or concerns by Dr. Sard" meeting="false" start="2026-01-24" duration="2" complete="0" expand="true"/>
             <task id="17" uid="9c7dc2aad98048b2a8052c0ceab6ffbe" name="Implement about, news, and JoinUs pages" meeting="false" start="2026-01-27" duration="3" complete="0" expand="true"/>
             <task id="18" uid="69df4eaa69ea469f9c71323fd660663d" name="Adjust styling and accessibility concerns" meeting="false" start="2026-01-29" duration="1" complete="0" expand="true"/>
@@ -74,5 +74,4 @@
     <vacations/>
     <previous/>
     <roles roleset-name="Default"/>
-    <roles roleset-name="SoftwareDevelopment"/>
 </project>
