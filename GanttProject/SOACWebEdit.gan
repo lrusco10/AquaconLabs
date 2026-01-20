@@ -40,11 +40,11 @@
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
         <task id="0" uid="5a1930a4282e421790fc7c58fdb8c4ff" name="Product Launch" meeting="false" start="2026-01-18" duration="60" complete="0" expand="true"/>
-        <task id="1" uid="1abb16816db64275b545c26978c3705f" name="First Prototype" meeting="false" start="2026-01-18" duration="3" complete="33" expand="true">
+        <task id="1" uid="1abb16816db64275b545c26978c3705f" name="First Prototype" meeting="false" start="2026-01-18" duration="3" complete="66" expand="true">
             <task id="5" uid="2993de87bc934bfa8ac77fe55f6cbe09" name="Adjust coloring and styling of APP" meeting="false" start="2026-01-20" duration="1" complete="0" expand="true"/>
             <task id="7" uid="670d9f68544b470ba471c8457ad9521b" name="Compact project into shippable EXE" meeting="false" start="2026-01-20" duration="1" complete="0" expand="true"/>
-            <task id="8" uid="1de29513a0294c5ba3d628d380fe2580" name="Develop setup wizard for config files and cloning." meeting="false" start="2026-01-19" duration="1" complete="0" expand="true"/>
-            <task id="6" uid="4a545697951b488196c0943921a88d3b" name="Implement SOAC WebPage HOME elements into app" meeting="false" start="2026-01-19" duration="1" complete="0" expand="true">
+            <task id="8" uid="1de29513a0294c5ba3d628d380fe2580" name="Develop setup wizard for config files and cloning." meeting="false" start="2026-01-19" duration="1" complete="100" expand="true"/>
+            <task id="6" uid="4a545697951b488196c0943921a88d3b" name="Implement SOAC WebPage HOME elements into app" meeting="false" start="2026-01-19" duration="1" complete="100" expand="true">
                 <depend id="7" type="2" difference="0" hardness="Strong"/>
             </task>
             <task id="4" uid="bc14989c8b0a436e8099d7f2b45dd6be" name="Acquire Dr. Sard's UI Preference and dev approval" meeting="true" start="2026-01-21" duration="0" complete="0" expand="true"/>
