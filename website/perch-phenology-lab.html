@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Great Lakes Perch & Climate Change Lab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pdark: '#011a27',      /* primary-dark */
+                        plight: '#e9c673',     /* primary-light */
+                        sdark: '#184d47',      /* secondary-dark-green */
+                        slight: '#b3e5fc',     /* secondary-light-blue */
+                        agreen: '#4caf50',     /* accent-green */
+                        ablue: '#aee2fd',      /* accent-blue */
+                        bglight: '#f5faff',    /* background-light */
+                        borderl: '#dbeafe',    /* border-light */
+                        borderd: '#2e3c43',    /* border-dark */
+                        tdark: '#fff',         /* text-on-dark */
+                        tlight: '#222'         /* text-on-light */
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #011a27; /* primary-dark */
+            color: #fff; /* text-on-dark */
+        }
+        .chart-container {
+            position: relative;
+            height: 350px;
+            width: 100%;
+        }
+        .term {
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-style: dashed;
+            color: #184d47; /* sdark - designed for yellow background */
+            font-weight: 900;
+            transition: color 0.2s;
+        }
+        .term:hover {
+            color: #011a27; /* pdark */
+        }
+        .definition {
+            display: none;
+            background-color: #011a27; /* primary-dark */
+            border: 2px solid #184d47; /* secondary-dark-green */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+            color: #fff; /* text-on-dark */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #011a27; /* primary-dark */
+            border-radius: 0.5rem;
+            border: 2px solid #2e3c43; /* border-dark */
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #petri-dish {
+            position: relative;
+            width: 90vw;
+            height: 90vw;
+            max-width: 450px;
+            max-height: 450px;
+            border: 5px solid #011a27; /* pdark */
+            border-radius: 50%;
+            background-color: #f5faff; /* bglight */
+            box-shadow: inset 0 0 25px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+        .egg {
+            position: absolute;
+            border-radius: 50%;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .egg.measurable { cursor: crosshair; }
+        .egg.measurable:hover { transform: scale(1.1); box-shadow: 0 4px 8px rgba(0,0,0,0.8); border-color: #fff !important; }
+        .egg.measured { opacity: 0.3; cursor: not-allowed; }
+        
+        /* Custom scrollbar optimized for light/yellow containers */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: #011a27; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #184d47; }
+    </style>
+</head>
+<body>
+
+    <header class="site-header" id="site-header">
+        <a href="index.html" class="logo-container">
+            <img src="assets/SOAC_logo.png" alt="SOAC Logo" class="logo">
+        </a>
+
+        <!-- Nav container -->
+    <nav id="main-nav" class="nav" role="navigation" aria-label="Primary">
+      <!-- visible inline items -->
+      <div class="nav-primary" id="nav-primary" aria-hidden="false">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="news.html" class="nav-link">News</a>
+        <a href="research.html" class="nav-link">Research</a>
+        <a href="joinus.html" class="nav-link">Join Us</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="resources.html" class="nav-link">Resources</a>
+      </div>
+
+      <button
+        id="nav-toggle"
+        class="nav-toggle"
+        aria-controls="nav-overflow"
+        aria-expanded="false"
+        aria-label="Open menu"
+        hidden
+      >
+        ☰
+      </button>
+
+      <!-- Overflow menu container (items moved here) -->
+      <div id="nav-overflow" class="nav-overflow" aria-hidden="true">
+        <!-- Storage for moved items (used by balancing code) -->
+        <div class="nav-overflow-list" id="nav-overflow-list" role="menu" hidden></div>
+
+        <!-- Display menu shown when the hamburger opens; populated with ALL nav links -->
+        <div class="nav-overflow-menu" id="nav-overflow-menu" role="menu" hidden></div>
+      </div>
+    </nav>
+    </header>
+
+    <section class="landing">
+        <img class="landing-img" src="assets/contact/yellowPerch.jpg" alt="Atlantic Salmon Landing Image">
+        <div class="mission-overlay">
+            <h1>A Great Lakes Mystery:</h1>
+            <p>Vanishing Ice and a Struggling Fishery</p>
+        </div>
+    </section>
+
+    <main class="p-4 md:p-8">
+    <div class="container mx-auto max-w-6xl">
+       
+        <section style="margin-top: 2rem;" class="bg-sdark p-8 rounded-lg shadow-xl mb-8 border border-borderd">
+            <h2 class="text-3xl font-bold mb-4 text-plight text-center">An Ecosystem Under Pressure</h2>
+            <p class="text-lg text-tdark text-center max-w-4xl mx-auto mb-8">
+                The Great Lakes are an economic and ecological powerhouse, supporting a <a href="https://www.glfc.org/" target="_blank" rel="noopener noreferrer" class="text-plight font-bold hover:underline">$7 billion fishing industry</a>. But a silent, steady change is putting it all at risk. Average winter ice cover has been declining for decades across all five lakes—a clear sign of a warming climate. This abiotic shift has a cascade of effects on the ecosystem.
+            </p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="chart-container bg-sdark rounded-lg">
+                    <canvas id="iceCoverChart"></canvas>
+                </div>
+                <div class="chart-container bg-sdark rounded-lg">
+                    <canvas id="perchRecruitmentChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-plight text-tlight p-8 rounded-lg shadow-xl mb-8 border border-pdark">
+            <h2 class="text-3xl font-bold mb-6 text-center text-pdark">The Biological Puzzle</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center mb-8">
+                <div class="md:col-span-1">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Yellow_perch_fish_perca_flavescens.jpg/512px-Yellow_perch_fish_perca_flavescens.jpg" alt="A detailed photo of a Yellow Perch" class="w-full h-auto rounded-lg shadow-lg border-2 border-pdark" onerror="this.onerror=null;this.src='https://placehold.co/400x250/011a27/fff?text=Perca+flavescens';">
+                </div>
+                <div class="md:col-span-2">
+                    <p class="text-lg font-medium">Scientists noticed that as the ice vanished, populations of key native fish, like Yellow Perch <em class="text-sdark font-bold">(Perca flavescens)</em>, began to struggle. They saw a link, but couldn't be sure what was causing it. To solve this puzzle, you need to understand a few key scientific concepts. <strong class="text-pdark">Click each term below to reveal its definition.</strong></p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div><h3 class="text-xl term" onclick="toggleDef('def1')">Phenology</h3><p id="def1" class="definition text-left">The study of the timing of natural events in the lives of plants and animals, like when birds migrate, flowers bloom, or fish spawn. Climate change can disrupt this timing.</p></div>
+                <div><h3 class="text-xl term" onclick="toggleDef('def2')">Ectotherm</h3><p id="def2" class="definition text-left">An animal that relies on the external environment to regulate its body temperature (i.e., "cold-blooded"). Fish are ectotherms, so changes in water temperature have a huge impact on their bodies.</p></div>
+                <div><h3 class="text-xl term" onclick="toggleDef('def3')">Correlation vs. Causation</h3><p id="def3" class="definition text-left">Just because two things happen at the same time (correlation) doesn't mean one caused the other (causation). Scientists need experiments to <strong class='text-plight'>strongly support</strong> causation.</p></div>
+            </div>
+        </section>
+
+        <section class="bg-sdark p-8 rounded-lg shadow-xl mb-8 border border-borderd">
+            <h2 class="text-3xl font-bold mb-6 text-center text-plight">Explore Further</h2>
+            <p class="text-center text-tdark mb-8 max-w-3xl mx-auto text-lg">Watch these short videos to deepen your understanding of phenology.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="video-container shadow-2xl border-pdark"><iframe src="https://www.youtube.com/embed/8UUryEgcj_k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+                <div class="video-container shadow-2xl border-pdark"><iframe src="https://www.youtube.com/embed/b6Tyiq4zwWQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+            </div>
+        </section>
+
+        <section class="bg-plight text-tlight p-8 rounded-lg shadow-xl mb-8 border border-pdark">
+            <h2 class="text-3xl font-bold mb-6 text-center text-pdark">Designing the Experiment</h2>
+            <p class="text-center mb-8 max-w-3xl mx-auto text-lg font-medium">To test if the correlation was real, the scientists in the Farmer et al. study designed a controlled experiment. They needed to compare a "normal" winter to a "climate-changed" winter. They used historical data to make their experiment realistic:</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+                <div class="bg-sdark p-6 rounded-lg border-2 border-pdark shadow-xl text-tdark">
+                    <h3 class="text-2xl font-bold text-plight">The "Long Winter"</h3>
+                    <p class="text-5xl font-black my-4">107</p>
+                    <p>This was the <strong class="font-bold text-plight">average number of days</strong> the water was below 5°C in Lake Erie from 1994-2010. It represents a typical, historical winter.</p>
+                </div>
+                <div class="bg-pdark p-6 rounded-lg border-2 border-sdark shadow-xl text-tdark">
+                    <h3 class="text-2xl font-bold text-slight">The "Short Winter"</h3>
+                    <p class="text-5xl font-black my-4">52</p>
+                    <p>This was based on the winter of 1999, one of the <strong class="font-bold text-slight">warmest on record</strong>. It represents a realistic short, warm winter scenario.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="lab-simulation" class="bg-sdark p-8 rounded-lg shadow-xl mb-8 border border-borderd">
+            <div class="text-center mb-6">
+                <h2 class="text-3xl font-bold text-plight">Your Mission: The Egg Viability Lab</h2>
+                <p class="text-lg text-tdark mt-2">It's your turn to be the scientist. Use the simulation below to investigate the link between winter duration and egg size.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 border-t border-pdark pt-8">
+                
+                <div class="lg:col-span-1 bg-plight text-tlight p-6 rounded-lg border-2 border-pdark flex flex-col shadow-xl">
+                    <h2 class="text-xl font-black mb-4 text-pdark uppercase tracking-wide border-b-2 border-pdark pb-2">Field Notes</h2>
+                    <div id="field-notes" class="space-y-4 mb-6 font-medium">
+                        <p class="flex flex-col">
+                            <span class="text-sm text-sdark font-bold uppercase tracking-wider mb-1">Female ID</span>
+                            <span id="female-id" class="font-mono bg-white px-3 py-2 rounded border border-borderd text-center shadow-inner"></span>
+                        </p>
+                        <p class="flex flex-col">
+                            <span class="text-sm text-sdark font-bold uppercase tracking-wider mb-1">Capture Year</span>
+                            <span id="capture-year" class="font-mono bg-white px-3 py-2 rounded border border-borderd text-center shadow-inner"></span>
+                        </p>
+                        <p class="flex flex-col">
+                            <span class="text-sm text-sdark font-bold uppercase tracking-wider mb-1">Winter Duration</span>
+                            <span class="font-mono bg-white px-3 py-2 rounded border border-borderd text-center shadow-inner"><span id="winter-duration"></span> days</span>
+                        </p>
+                    </div>
+                    <div class="mt-auto space-y-3">
+                        <button id="measure-button" class="w-full bg-pdark text-tdark font-bold py-2 px-4 rounded-lg hover:bg-sdark transition-colors shadow-md">Start Measuring Eggs</button>
+                        <button id="reset-button" class="w-full bg-white text-pdark border-2 border-pdark font-bold py-2 px-4 rounded-lg hover:bg-gray-100 transition-colors shadow-md">Load New Female Sample</button>
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-2 flex flex-col items-center justify-center">
+                    <div id="petri-dish" class="mx-auto mt-4"></div>
+                </div>
+                
+                <div class="lg:col-span-2 bg-plight text-tlight p-6 rounded-lg border-2 border-pdark flex flex-col shadow-xl">
+                    <h2 class="text-xl font-black mb-2 text-pdark uppercase tracking-wide border-b-2 border-pdark pb-2">Measurement Log</h2>
+                    <p class="text-xs text-sdark font-bold mb-4">Instructions: Measure 10-20 eggs from this female, then load a new sample. Repeat for at least 10 females.</p>
+                    <div class="flex-grow overflow-y-auto border-2 border-pdark rounded-lg bg-white min-h-[300px] shadow-inner">
+                        <table class="w-full text-sm text-left" id="measurement-table">
+                            <thead class="text-xs text-tdark uppercase bg-pdark sticky top-0 z-10">
+                                <tr>
+                                    <th class="px-4 py-3 border-b border-sdark">Egg ID</th>
+                                    <th class="px-4 py-3 border-b border-sdark">Diameter (mm)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="data-log-body"></tbody>
+                        </table>
+                    </div>
+                    <button id="copy-button" class="w-full mt-4 bg-pdark text-tdark font-bold py-3 px-4 rounded-lg hover:bg-sdark transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md" disabled>Copy Data for Spreadsheet</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-plight text-tlight p-8 rounded-lg border-2 border-pdark text-center shadow-xl">
+            <h2 class="text-3xl font-bold mb-4 text-pdark">For Teachers & Collaborators</h2>
+            <p class="text-lg mb-6 font-medium max-w-4xl mx-auto">Interested in the full lesson plan and student worksheets? We have analog options, including printable PDFs of petri dishes with simulated eggs. Click the button below to request access or share your feedback.</p>
+            <a href="https://forms.gle/b1hSQTakPKujcVTn7" target="_blank" rel="noopener noreferrer" class="inline-block bg-pdark text-tdark font-bold py-3 px-8 rounded-lg hover:bg-sdark transition-colors text-lg shadow-lg">
+                Request Teacher Resources
+            </a>
+        </section>
+
+        <footer class="text-center py-10 text-slight text-sm font-bold opacity-80">
+            <p>This lab activity is based on the findings and data presented in the following scientific paper:</p>
+            <p class="mt-2 font-mono font-normal">Farmer, T. M. et al. Short winters threaten temperate fish populations. *Nat. Commun.* 6:7724 <a href="https://www.nature.com/articles/ncomms8724" target="_blank" rel="noopener noreferrer" class="text-plight font-bold hover:underline">doi: 10.1038/ncomms8724</a> (2015).</p>
+        </footer>
+    </div>
+
+</main>
+
+<script>
+    // --- INTRO INFOGRAPHIC SCRIPT ---
+    function toggleDef(id) { document.getElementById(id).style.display = document.getElementById(id).style.display === 'block' ? 'none' : 'block'; }
+    
+    // Set global Chart.js defaults for Dark Theme with BLACK gridlines
+    Chart.defaults.color = '#fff';
+    Chart.defaults.borderColor = '#000000'; // Black gridlines
+
+    const iceCtx = document.getElementById('iceCoverChart').getContext('2d');
+    new Chart(iceCtx, {
+        type: 'line',
+        data: {
+            labels: ['1970s', '1980s', '1990s', '2000s', '2010s'],
+            datasets: [
+                // Highly contrasting lines: varying colors, dash patterns, and line weights
+                { label: 'Overall Trend', data: [54.8, 51.5, 43.5, 36.9, 34.6], borderColor: '#e9c673', borderWidth: 5, tension: 0.3 }, // Primary Light (Thick Solid)
+                { label: 'Superior', data: [68.1, 65.2, 58.4, 49.3, 44.1], borderColor: '#b3e5fc', borderWidth: 3, fill: false, tension: 0.3, borderDash: [5, 5] }, // Light Blue (Regular Dash)
+                { label: 'Michigan', data: [42.3, 39.8, 32.1, 28.5, 25.0], borderColor: '#4caf50', borderWidth: 3, fill: false, tension: 0.3, borderDash: [12, 6] }, // Green (Long Dash)
+                { label: 'Huron', data: [62.5, 59.1, 51.7, 43.8, 40.2], borderColor: '#fff', borderWidth: 3, fill: false, tension: 0.3, borderDash: [2, 2] }, // White (Dotted)
+                { label: 'Erie', data: [68.9, 61.3, 50.2, 38.7, 36.1], borderColor: '#000000', borderWidth: 4, fill: false, tension: 0.3 }, // Black (Solid)
+                { label: 'Ontario', data: [22.1, 19.5, 16.4, 13.1, 12.8], borderColor: '#aee2fd', borderWidth: 3, fill: false, tension: 0.3, borderDash: [15, 3, 3, 3] } // Accent Blue (Dash Dot)
+            ]
+        },
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: false, 
+            scales: { 
+                y: { beginAtZero: true, max: 100, title: { display: true, text: 'Annual Average Ice Concentration (%)'}}, 
+                x: {}
+            }, 
+            plugins: { 
+                legend: { position: 'bottom' }, 
+                title: { display: true, text: 'Decline in Great Lakes Winter Ice Cover', color: '#e9c673'}
+            }
+        }
+    });
+
+    const perchCtx = document.getElementById('perchRecruitmentChart').getContext('2d');
+    new Chart(perchCtx, {
+        type: 'scatter',
+        data: { datasets: [{ label: 'Juvenile Abundance', data: [{x: 72, y: 85}, {x: 93, y: 78}, {x: 68, y: 75}, {x: 38, y: 72}, {x: 75, y: 60}, {x: 48, y: 58}, {x: 55, y: 42}, {x: 5, y: 40}, {x: 88, y: 38}, {x: 52, y: 35}, {x: 45, y: 25}, {x: 60, y: 22}, {x: 42, y: 21}, {x: 2, y: 18}, {x: 82, y: 15}, {x: 58, y: 12}, {x: 48, y: 11}, {x: 40, y: 10}, {x: 98, y: 8}, {x: 25, y: 5}, {x: 10, y: 2}], backgroundColor: '#e9c673', pointRadius: 5, pointHoverRadius: 8 }] }, 
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: false, 
+            scales: { 
+                x: { type: 'linear', position: 'bottom', title: { display: true, text: 'Winter Ice Cover (%)'}}, 
+                y: { title: { display: true, text: 'Fall Juvenile Abundance (CPUE)'}}
+            }, 
+            plugins: { 
+                legend: { display: false }, 
+                title: { display: true, text: 'Lake Erie Yellow Perch Recruitment vs. Ice Cover', color: '#e9c673'}
+            }
+        }
+    });
+
+    // --- PETRI DISH SIMULATION SCRIPT ---
+    const petriDish = document.getElementById('petri-dish');
+    const dataLogBody = document.getElementById('data-log-body');
+    const resetButton = document.getElementById('reset-button');
+    const measureButton = document.getElementById('measure-button');
+    const copyButton = document.getElementById('copy-button');
+    const yearDisplay = document.getElementById('capture-year');
+    const durationDisplay = document.getElementById('winter-duration');
+    const femaleIdDisplay = document.getElementById('female-id');
+    const SAMPLES_PER_FEMALE = 30;
+    let eggData = [];
+    let sampleInfo = {};
+    let measurementModeActive = false;
+    
+    function randomNormal(mean, stdDev) { let u = 0, v = 0; while(u === 0) u = Math.random(); while(v === 0) v = Math.random(); let num = Math.sqrt( -2.0 * Math.log( u ) ) * Math.cos( 2.0 * Math.PI * v ); return num * stdDev + mean; }
+    
+    function generateSampleData() {
+        const captureYear = Math.floor(Math.random() * 45) + 1980;
+        const femaleId = `${captureYear}-F${Math.floor(Math.random() * 90) + 10}`;
+        const longWinterProbability = Math.max(0.05, 0.95 - ((captureYear - 1980) / 44) * 0.9);
+        let winterDurationDays;
+        if (Math.random() < longWinterProbability) { winterDurationDays = Math.round(randomNormal(105, 15)); } else { winterDurationDays = Math.round(randomNormal(65, 15)); }
+        winterDurationDays = Math.max(40, Math.min(140, winterDurationDays));
+        sampleInfo = { captureYear, winterDurationDays, femaleId };
+        const meanDiameter = 1.8 + (winterDurationDays / 120) * 2.2;
+        eggData = [];
+        for (let i = 0; i < SAMPLES_PER_FEMALE; i++) {
+            const diameter = Math.max(1.0, meanDiameter + (Math.random() - 0.5) * 0.8);
+            
+            // Interpolate colors: warm/yellow (#e9c673) to cold/blue (#b3e5fc)
+            const tempRatio = (winterDurationDays - 40) / (120 - 40);
+            const r = 233 * (1 - tempRatio) + 179 * tempRatio;
+            const g = 198 * (1 - tempRatio) + 229 * tempRatio;
+            const b = 115 * (1 - tempRatio) + 252 * tempRatio;
+            const color = `rgba(${r}, ${g}, ${b}, 0.8)`;
+            const borderColor = `rgba(${r * 0.8}, ${g * 0.8}, ${b * 0.8}, 1)`;
+            
+            eggData.push({ id: i + 1, diameter: parseFloat(diameter.toFixed(2)), measured: false, color, borderColor });
+        }
+    }
+    
+    function renderEggs() {
+        petriDish.innerHTML = '';
+        const dishSize = petriDish.clientWidth;
+        const scaleFactor = 12;
+        const placedEggs = [];
+        eggData.forEach(egg => {
+            const eggElement = document.createElement('div');
+            eggElement.className = 'egg';
+            if (egg.measured) { eggElement.classList.add('measured'); } else if (measurementModeActive) { eggElement.classList.add('measurable'); }
+            const eggSize = egg.diameter * scaleFactor;
+            const eggRadius = eggSize / 2;
+            eggElement.style.width = `${eggSize}px`;
+            eggElement.style.height = `${eggSize}px`;
+            eggElement.style.backgroundColor = egg.color;
+            eggElement.style.border = `1px solid ${egg.borderColor}`;
+            let x, y, isValidPosition;
+            let attempts = 0;
+            do {
+                isValidPosition = true;
+                const randomAngle = Math.random() * 2 * Math.PI;
+                const randomRadius = Math.random() * (dishSize / 2 - eggRadius);
+                x = (dishSize / 2) + randomRadius * Math.cos(randomAngle) - eggRadius;
+                y = (dishSize / 2) + randomRadius * Math.sin(randomAngle) - eggRadius;
+                for (const placed of placedEggs) {
+                    const dx = (x + eggRadius) - (placed.x + placed.radius);
+                    const dy = (y + eggRadius) - (placed.y + placed.radius);
+                    if (Math.sqrt(dx * dx + dy * dy) < eggRadius + placed.radius + 2) { isValidPosition = false; break; }
+                }
+                attempts++;
+            } while (!isValidPosition && attempts < 100);
+            placedEggs.push({ x, y, radius: eggRadius });
+            eggElement.style.left = `${x}px`;
+            eggElement.style.top = `${y}px`;
+            eggElement.addEventListener('click', () => { if (measurementModeActive && !egg.measured) { measureEgg(egg.id); } });
+            petriDish.appendChild(eggElement);
+        });
+    }
+    
+    function measureEgg(eggId) {
+        const egg = eggData.find(e => e.id === eggId);
+        if (!egg || egg.measured) return;
+        egg.measured = true;
+        const row = document.createElement('tr');
+        row.className = 'bg-white border-b border-borderl hover:bg-gray-100 transition-colors';
+        row.id = `egg-row-${egg.id}`;
+        row.innerHTML = `<td class="px-4 py-3 font-bold text-pdark">${egg.id}</td><td class="px-4 py-3 text-tlight font-medium">${egg.diameter}</td>`;
+        dataLogBody.appendChild(row);
+        copyButton.disabled = false;
+        renderEggs();
+    }
+    
+    function updateUI() {
+        femaleIdDisplay.textContent = sampleInfo.femaleId;
+        yearDisplay.textContent = sampleInfo.captureYear;
+        durationDisplay.textContent = sampleInfo.winterDurationDays;
+        dataLogBody.innerHTML = '';
+        copyButton.disabled = true;
+        copyButton.textContent = 'Copy Data for Spreadsheet';
+        measurementModeActive = false;
+        measureButton.textContent = 'Start Measuring Eggs';
+        measureButton.className = 'w-full bg-pdark text-tdark font-bold py-3 px-4 rounded-lg hover:bg-sdark transition-colors shadow-md';
+    }
+    
+    function copyDataToClipboard() {
+        const measuredEggs = eggData.filter(e => e.measured);
+        if (measuredEggs.length === 0) return;
+        let clipboardText = "Female_ID\tCapture_Year\tWinter_Duration_Days\tEgg_ID\tEgg_Diameter_mm\n";
+        measuredEggs.forEach(egg => { clipboardText += `${sampleInfo.femaleId}\t${sampleInfo.captureYear}\t${sampleInfo.winterDurationDays}\t${egg.id}\t${egg.diameter}\n`; });
+        navigator.clipboard.writeText(clipboardText).then(() => {
+            copyButton.textContent = 'Copied!';
+            setTimeout(() => { copyButton.textContent = 'Copy Data for Spreadsheet'; }, 2000);
+        }).catch(err => {
+            const textArea = document.createElement("textarea");
+            textArea.value = clipboardText;
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try { document.execCommand('copy'); copyButton.textContent = 'Copied!'; setTimeout(() => { copyButton.textContent = 'Copy Data for Spreadsheet'; }, 2000); } catch (err) { console.error('Fallback copy failed', err); }
+            document.body.removeChild(textArea);
+        });
+    }
+    
+    function initializeSimulation() {
+        generateSampleData();
+        updateUI();
+        renderEggs();
+    }
+    
+    measureButton.addEventListener('click', () => {
+        measurementModeActive = !measurementModeActive;
+        if (measurementModeActive) {
+            measureButton.textContent = 'Stop Measuring';
+            measureButton.className = 'w-full bg-sdark text-tdark font-bold py-3 px-4 rounded-lg border-2 border-pdark hover:opacity-90 transition-opacity shadow-md';
+        } else {
+            measureButton.textContent = 'Start Measuring Eggs';
+            measureButton.className = 'w-full bg-pdark text-tdark font-bold py-3 px-4 rounded-lg hover:bg-sdark transition-colors shadow-md';
+        }
+        renderEggs();
+    });
+    
+    copyButton.addEventListener('click', copyDataToClipboard);
+    resetButton.addEventListener('click', initializeSimulation);
+    window.onload = initializeSimulation;
+    window.onresize = renderEggs;
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -24,7 +24,7 @@
                 <a href="research.html" class="nav-link">Research</a>
                 <a href="joinus.html" class="nav-link">Join Us</a>
                 <a href="about.html" class="nav-link">About</a>
-                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="resources.html" class="nav-link">Resources</a>
             </div>
 
             <button id="nav-toggle" class="nav-toggle" aria-controls="nav-overflow" aria-expanded="false" aria-label="Open menu" hidden>☰</button>
@@ -45,11 +45,11 @@
         </section>
 
         <section class="lab-info-section">
-            <h2>The Aquatic Conservation Lab</h2>
-            <p class="lab-subtitle">(Also known as AQUACON Lab)</p>
+            <h2>The SUNY Oswego Aquatic Conservation Lab</h2>
+            <p class="lab-subtitle">(Also known as SOAC Lab)</p>
             <h3>Our Mission</h3>
             <p class="mission-text">
-                The Aquatic Conservation Lab (AQUACON Lab) is dedicated to safeguarding the health and resilience of aquatic ecosystems across diverse geographies, from the Great Lakes to the Atlantic and Pacific Northwest waterways. We tackle critical 21st-century challenges facing aquatic life by integrating advanced scientific methodologies with practical, applied solutions. Our interdisciplinary team leverages genomics and bioinformatics to understand population dynamics and genetic health, employs ecological field techniques (including exploring the use of autonomous underwater vehicles for habitat monitoring), and increasingly incorporates artificial intelligence and machine learning for automated classification and data analysis. We are committed to fostering innovative conservation and management strategies for a wide array of aquatic organisms, including fish, crustaceans, mussels, and plants, in close collaboration with state and federal fisheries biologists, as well as non-governmental organizations (NGOs).
+                The SUNY Oswego Aquatic Conservation (SOAC) Lab is dedicated to protecting our regional natural assets and ensuring the biological integrity of our waters for future generations. By bridging rigorous academic research with real-world stewardship, our interdisciplinary team integrates advanced genetic analysis, ecological fieldwork, and technological innovation to address critical challenges in fishery conservation, native species recovery, and ecosystem security. Working closely with state, federal, and sovereign tribal partners, we apply cutting-edge genomic tools to guide evidence-based management—such as utilizing Parentage-Based Tagging (PBT) to track the recovery of threatened Lake Sturgeon and deploying environmental DNA (eDNA) to monitor invasive threats like Eurasian watermilfoil. Beyond genetic analysis, the SOAC Lab pioneers practical, student-driven technological solutions, including the engineering of cost-effective autonomous underwater drones for spawning reef analysis and the development of AI-driven models for automated fish identification. Through these collaborative initiatives, we provide actionable data that safeguards our Great Lakes ecosystems while empowering the next generation of scientific innovators.
             </p>
         </section>
 
@@ -73,35 +73,322 @@
             </div>
         </section>
 
-        <!-- AQUACON Lab Core Team -->
+
+
+
+
+        <!-- SOAC Lab Core Team -->
         <section class="organization-section">
             <h2 class="organization-header">SOAC Lab Core Team</h2>
             <div class="team-grid">
-                <div class="team-profile" data-name="Nicholas Sard">
+                <div class="team-profile" data-name="Dr. Nicholas Sard">
                     <img src="assets/about/sardBio.jpg" alt="Nicholas Sard">
                     <div class="team-info">
                         <span class="team-name">Nicholas Sard</span>
-                        <span class="team-role">Principal Investigator</span>
+                        <span class="team-role">SOAC Director</span>
                         <a href="https://scholar.google.com/citations?user=Tito-y4AAAAJ&hl=en" target="_blank" class="bio-link">Click to View Bio</a>
                     </div>
                 </div>
                 <div class="team-profile" data-name="Vinnie Siegel">
-                    <img src="assets/about/vinnieBio.jpg" alt="Vinnie Siegel">
+                    <img src="assets/about/vinnie.jpg" alt="Vinnie Siegel">
                     <div class="team-info">
                         <span class="team-name">Vinnie Siegel</span>
                         <span class="team-role">Lab Manager</span>
-                        <a href="https://www.facebook.com/VinnieS/videos/" target="_blank" class="bio-link">Click to View Bio</a>
+                        <a href="../website/bios/VinnieSiegelBio.html" target="_blank" class="bio-link">Click to View Bio</a>
+                    </div>
+                </div>
+                <div class="team-profile" data-name="Lyric McCullouch">
+                        <img src="assets/about/lyricMcculloch.png" alt="Lyric McCullouch">
+                        <div class="team-info">
+                            <span class="team-name">Lyric McCullouch</span>
+                            <span class="team-role">Primary Lab Technician</span>
+                            <a href="../website/bios/LyricMccullochBio.html" target="_blank" class="bio-link">Click to View Bio</a>
+                        </div>
+                    </div>
+                
+                <div class="hidden-profiles" id="core-hidden">
+                    <div class="team-profile" data-name="Caroline Cauret">
+                        <img src="assets/about/carolinecauretbIO.jpg" alt="Caroline Cauret">
+                        <div class="team-info">
+                            <span class="team-name">Caroline Cauret</span>
+                            <span class="team-role">Postdoctoral Researcher</span>
+                            <a href="https://scholar.google.com/citations?user=_ipCosQAAAAJ&hl=en" target="_blank" class="bio-link">Click to View Bio</a>
+                        </div>
+                    </div>
+                    <div class="team-profile" data-name="Dr. Sophie Orzechowski ">
+                        <img src="assets/about/sophieOrzechowski.jpeg" alt="Sophie Orzechowski">
+                        <div class="team-info">
+                            <span class="team-name">Sophie Orzechowski </span>
+                            <span class="team-role">eDNA Research Lead</span>
+                            <a href="https://edwards.oeb.harvard.edu/people/sophie-orzechowski" target="_blank" class="bio-link">Click to View Bio</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="show-more-container">
+                <button class="show-more-btn" onclick="toggleSection('core-hidden', this)">
+                    Show More <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+        </section>
+
+
+
+
+        <!--Aquatic Biology & Research Support Team-->
+        <section class="organization-section">
+            <h2 class="organization-header">Aquatic Biology & Research Support Team</h2>
+            <div class="team-grid">
+                <div class="team-profile" data-name="Dr. Lyndsie Collis">
+                        <img src="assets/about/lyndsieCollisBio.jpg" alt="Dr. Lyndsie Collis">
+                        <div class="team-info">
+                            <span class="team-name">Dr. Lyndsie Collis</span>
+                            <span class="team-role">Aquatic Biologist (NYS DEC)</span>
+                            <a href="https://scholar.google.com/citations?user=DxXA3qkAAAAJ&hl=en&oi=ao" target="_blank" class="bio-link">Click to View Bio</a>
+                        </div>
+                    </div>
+                <div class="team-profile" data-name="Dr. Christopher Osborne">
+                    <img src="assets/about/christopherOsborne.jpg" alt="Dr. Christopher Osborne">
+                    <div class="team-info">
+                        <span class="team-name">Dr. Christopher Osborne</span>
+                        <span class="team-role">Aquatic Biologist (NYS DEC)</span>
+                        <a href="https://www.researchgate.net/profile/Christopher-Osborne-3" target="_blank" class="bio-link">Click to View Bio</a>
                     </div>
                 </div>
                 <div class="team-profile" data-name="Spencer Alascio">
-                        <img src="assets/research/spencer.jpeg" alt="Spencer Alascio">
+                    <img src="assets/research/spencer.jpeg" alt="Spencer Alascio">
+                    <div class="team-info">
+                        <span class="team-name">Spencer Alascio</span>
+                        <span class="team-role">Saint Regis Mohawk Tribe Aquatic Biologist</span>
+                        <a href="https://www.linkedin.com/in/spencer-alascio-a2a50b1a5/" target="_blank" class="bio-link">Click to View Bio</a>
+                    </div>
+                </div>
+
+                <div class="hidden-profiles" id="support-hidden">
+
+                    <div class="team-profile" data-name="Jacob Bulich">
+                        <img src="assets/about/jacobBulich.jpg" alt="Jacob Bulich">
                         <div class="team-info">
-                            <span class="team-name">Spencer Alascio</span>
-                            <span class="team-role">Saint Regis Mohawk Tribe Aquatic Biologist</span>
-                            <a href="https://www.linkedin.com/in/spencer-alascio-a2a50b1a5/" target="_blank" class="bio-link">Click to View Bio</a>
+                            <span class="team-name">Jacob Bulich</span>
+                            <span class="team-role">Fisheries Technician</span>
+                            <a href="https://www.linkedin.com/in/jacob-bulich01/" target="_blank" class="bio-link">Click to View Bio</a>
                         </div>
                     </div>
-                <div class="hidden-profiles" id="core-hidden">
+                </div>
+            </div>
+            <div class="show-more-container">
+                <button class="show-more-btn" onclick="toggleSection('support-hidden', this)">
+                    Show More <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+        </section>
+
+
+
+        <!-- Regional Partners & Tribal Leadership -->
+        <section class="organization-section">
+            <h2 class="organization-header">Regional Partners & Tribal Leadership</h2>
+            <div class="team-grid">
+                <div class="team-profile" data-name="Jason Robinson">
+                        <img src="assets/about/jasonRobinson.jpg" alt="Jason Robinson">
+                        <div class="team-info">
+                            <span class="team-name">Jason Robinson</span>
+                            <span class="team-role">Research Unit Leader (NYSDEC)</span>
+                            <a href="https://niagarafishingexpo.com/jason-robinson/" target="_blank" class="bio-link">Click to View Bio</a>
+                        </div>
+                    </div>
+                <div class="team-profile" data-name="Tony David">
+                        <img src="assets/about/tonyDavid.jpg" alt="Tony David">
+                        <div class="team-info">
+                            <span class="team-name">Tony David</span>
+                            <span class="team-role">Head of the Environmental Division (SRMT)</span>
+                            <a href="https://www.linkedin.com/in/tony-david-728309a/" target="_blank" class="bio-link">Click to View Bio</a>
+                        </div>
+                    </div>
+                <div class="team-profile" data-name="Tiernan Smith">
+                        <img src="assets/about/tiernen.jpg" alt="Tiernan Smith">
+                        <div class="team-info">
+                            <span class="team-name">Tiernan Smith</span>
+                            <span class="team-role">primary supervisor (SRMT)</span>
+                            <a href="https://www.linkedin.com/in/tiernan-w-smith-223a0196/" target="_blank" class="bio-link">Click to View Bio</a>
+                        </div>
+                    </div>
+                <div class="hidden-profiles" id="tribal-hidden">
+
+                    <div class="team-profile" data-name="Lisa Holst">
+                        <img src="assets/about/lisaHolst.jpg" alt="Lisa Holst">
+                        <div class="team-info">
+                            <span class="team-name">Lisa Holst</span>
+                            <span class="team-role">Aquatic Biologist (NYSDEC)</span>
+                            <a href="https://www.linkedin.com/in/lisa-holst-06559767/" target="_blank" class="bio-link">Click to View Bio</a>
+                        </div>
+                    </div>
+
+                    <div class="team-profile" data-name="Christopher Legard">
+                        <img src="assets/about/chrisLegard.jpg" alt="Christopher Legard">
+                        <div class="team-info">
+                            <span class="team-name">Christopher Legard</span>
+                            <span class="team-role">Aquatic Biologist (NYSDEC)</span>
+                            <a href="https://niagarafishingexpo.com/chris-legard/" target="_blank" class="bio-link">Click to View Bio</a>
+                        </div>
+                    </div>
+
+                    <div class="team-profile" data-name="Scott Schlueter">
+                        <img src="assets/unknown.svg" alt="Scott Schlueter">
+                        <div class="team-info">
+                            <span class="team-name">Scott Schlueter</span>
+                            <span class="team-role">US Fish and Wildlife Biologist</span>
+                            <a href="https://www.researchgate.net/profile/Scott-Schlueter" target="_blank" class="bio-link">Click to View Bio</a>
+                        </div>
+                    </div>
+
+                    <div class="team-profile" data-name="Amanda Higgs">
+                        <img src="assets/unknown.svg" alt="Amanda Higgs">
+                        <div class="team-info">
+                            <span class="team-name">Amanda Higgs</span>
+                            <span class="team-role">Hudson River Scientist (NYSDEC)</span>
+                            <a href="https://www.researchgate.net/profile/Amanda-Higgs" target="_blank" class="bio-link">Click to View Bio</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="show-more-container">
+                <button class="show-more-btn" onclick="toggleSection('tribal-hidden', this)">
+                    Show More <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+        </section>
+
+
+        <!-- Institutional & NGO Collaborators -->
+        <section class="organization-section">
+            <h2 class="organization-header">Institutional & NGO Collaborators</h2>
+            <div class="team-grid">
+                <div class="team-profile" data-name="Dr. John Farrell">
+                    <img src="assets/about/johnFarrel.jpg" alt="Dr. John Farrell">
+                    <div class="team-info">
+                        <span class="team-name">Dr. John Farrell</span>
+                        <span class="team-role">Lead TIBS ibvestigator (SUNY ESF)</span>
+                        <a href="https://scholar.google.com/citations?user=1Q6Rkr8AAAAJ&hl=en" target="_blank" class="bio-link">Click to View Bio</a>
+                    </div>
+                </div>
+                <div class="team-profile" data-name="Dr. James Watkins">
+                    <img src="assets/about/jamesWatkins.png" alt="Dr. James Watkins">
+                    <div class="team-info">
+                        <span class="team-name">Dr. James Watkins</span>
+                        <span class="team-role">Great Lakes Ecologist</span>
+                        <a href="https://cals.cornell.edu/people/james-watkins" target="_blank" class="bio-link">Click to View Bio</a>
+                    </div>
+                </div>
+                <div class="team-profile" data-name="Dr. Chris Wilson">
+                        <img src="assets/about/chrisWilson.jpg" alt="Dr. Chris Wilson">
+                        <div class="team-info">
+                            <span class="team-name">Dr. Chris Wilson</span>
+                            <span class="team-role">international Partner (OMNRF)</span>
+                            <a href="https://www.researchgate.net/profile/Chris-Wilson-3" target="_blank" class="bio-link">Click to View Bio</a>
+                        </div>
+                    </div>
+                <div class="hidden-profiles" id="NGO-hidden">
+                    <div class="team-profile" data-name="Brittney Rogers">
+                        <img src="assets/about/brittneyRogers.jpg" alt="Brittney Rogers">
+                        <div class="team-info">
+                            <span class="team-name">Brittney Rogers</span>
+                            <span class="team-role">Invasive Species Program Director (SLELO PRISM)</span>
+                            <a href="https://www.linkedin.com/in/brittney-rogers/" target="_blank" class="bio-link">Click to View Bio</a>
+                        </div>
+                    </div>
+                    <div class="team-profile" data-name="Brian Greene">
+                        <img src="assets/about/brianGreene.jpg" alt="Brian Greene">
+                        <div class="team-info">
+                            <span class="team-name">Brian Greene</span>
+                            <span class="team-role">APIPP Program Director</span>
+                            <a href="https://adkinvasives.com/About/Our-Team/" target="_blank" class="bio-link">Click to View Bio</a>
+                        </div>
+                    </div>
+                    <div class="team-profile" data-name="Benjamin Marcy-Quay">
+                        <img src="assets/about/benMarcyQ.jpg" alt="Benjamin Marcy-Quay">
+                        <div class="team-info">
+                            <span class="team-name">Benjamin Marcy-Quay</span>
+                            <span class="team-role">Federal Collaborator (USGS)</span>
+                            <a href="https://scholar.google.com/citations?user=lOepfGQAAAAJ&hl=en" target="_blank" class="bio-link">Click to View Bio</a>
+                        </div>
+                    </div>
+                    <div class="team-profile" data-name="Dr. Dan Stitch">
+                        <img src="assets/about/danStitch.webp" alt="Dr. Dan Stitch">
+                        <div class="team-info">
+                            <span class="team-name">Dr. Dan Stitch</span>
+                            <span class="team-role">Biological Field Station Researcher (SUNY Oneonta)</span>
+                            <a href="https://researchconnect.suny.edu/en/persons/daniel-stich/" target="_blank" class="bio-link">Click to View Bio</a>
+                        </div>
+                    </div>
+                    <div class="team-profile" data-name="Dr. Trevor Krabbenhoft">
+                        <img src="assets/about/trevorKrebben.jpg" alt="Dr. Trevor Krabbenhoft">
+                        <div class="team-info">
+                            <span class="team-name">Dr. Trevor Krabbenhoft</span>
+                            <span class="team-role">Genomics Biologist (UB)</span>
+                            <a href="https://scholar.google.com/citations?user=kcye0lEAAAAJ&hl=en" target="_blank" class="bio-link">Click to View Bio</a>
+                        </div>
+                    </div>
+
+                    <div class="team-profile" data-name="Dr. Corey Krabbenhoft">
+                        <img src="assets/about/coreyKrabben.jpg" alt="Dr. Corey Krabbenhoft">
+                        <div class="team-info">
+                            <span class="team-name">Dr. Corey Krabbenhoft</span>
+                            <span class="team-role">Genomics Biologist (UB)</span>
+                            <a href="https://scholar.google.com/citations?user=YqDHkK0AAAAJ&hl=en" target="_blank" class="bio-link">Click to View Bio</a>
+                        </div>
+                    </div>
+
+                    <div class="team-profile" data-name="Dr. Jared Homola">
+                        <img src="assets/about/jaredHomola.png" alt="Dr. Jared Homola">
+                        <div class="team-info">
+                            <span class="team-name">Dr. Jared Homola</span>
+                            <span class="team-role">Ecologist</span>
+                            <a href="https://scholar.google.com/citations?user=yLaghG4AAAAJ&hl=en" target="_blank" class="bio-link">Click to View Bio</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="show-more-container">
+                <button class="show-more-btn" onclick="toggleSection('NGO-hidden', this)">
+                    Show More <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+        </section>
+
+
+
+
+
+        <!-- Student Research Team: Investing in Future Leaders -->
+        <section class="organization-section">
+            <h2 class="organization-header">Student Research Team: Investing in Future Leaders</h2>
+            <div class="team-grid">
+                <div class="team-profile" data-name="Emily Culley">
+                    <img src="assets/about/emilyCulley.png" alt="Emily Culley">
+                    <div class="team-info">
+                        <span class="team-name">Emily Culley</span>
+                        <span class="team-role">Molcular Biologist (SUNY Oswego)</span>
+                        <a href="https://www.linkedin.com/in/emily-culley-04a9b3390/" target="_blank" class="bio-link">Click to View Bio</a>
+                    </div>
+                </div>
+                <div class="team-profile" data-name="Greta Swanson">
+                    <img src="assets/about/gretaSwanson.jpg" alt="Greta Swanson">
+                    <div class="team-info">
+                        <span class="team-name">Greta Swanson</span>
+                        <span class="team-role">Biochemist (SUNY Oswego)</span>
+                        <a href="https://www.linkedin.com/in/greta-swanson-9236aa345/" target="_blank" class="bio-link">Click to View Bio</a>
+                    </div>
+                </div>
+                <div class="team-profile" data-name="Elijah Horst">
+                    <img src="assets/about/EliHorstBio.jpg" alt="Elijah Horst">
+                    <div class="team-info">
+                        <span class="team-name">Elijah Horst</span>
+                        <span class="team-role">Alumni (SUNY Oswego)</span>
+                        <a href="bios/EliHorstBio.html" target="_blank" class="bio-link">Click to View Bio</a>
+                    </div>
+                </div>
+                <!-- <div class="hidden-profiles" id="core-hidden">
                     <div class="team-profile" data-name="Caroline Cauret">
                         <img src="assets/about/carolinecauretbIO.jpg" alt="Caroline Cauret">
                         <div class="team-info">
@@ -126,156 +413,106 @@
                             <a href="https://www.linkedin.com/in/kaden-smith-032a5129b/" target="_blank" class="bio-link">Click to View Bio</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
-            <div class="show-more-container">
+            <!-- <div class="show-more-container">
                 <button class="show-more-btn" onclick="toggleSection('core-hidden', this)">
                     Show More <i class="fas fa-chevron-down"></i>
                 </button>
-            </div>
+            </div> -->
         </section>
 
-        <!-- External Collaborators -->
-        <section class="organization-section">
-            <h2 class="organization-header">Collaborators</h2>
-            <div class="team-grid">
-                <div class="team-profile" data-name="Brian Weidel">
-                    <img src="assets/about/brianWeidelBio.jpg" alt="Brian Weidel">
-                    <div class="team-info">
-                        <span class="team-name">Brian Weidel</span>
-                        <span class="team-role">USGS Project Officer</span>
-                        <a href="https://scholar.google.com/citations?user=1dbOibcAAAAJ&hl=en" target="_blank" class="bio-link">Click to View Bio</a>
-                    </div>
-                </div>
-                <div class="team-profile" data-name="Ellen Karboski">
-                    <img src="assets/about/ellenKarboskiBio.JPG" alt="Ellen Karboski">
-                    <div class="team-info">
-                        <span class="team-name">Ellen Karboski</span>
-                        <span class="team-role">Great Lakes native fish ecologist</span>
-                        <a href="https://ellenkarboski.wixsite.com/karboskilab" target="_blank" class="bio-link">Click to View Bio</a>
-                    </div>
-                </div>
-                <div class="team-profile" data-name="Stacy Furgal">
-                        <img src="assets/about/stacyFurgal.jpeg" alt="Stacy Furgal">
-                        <div class="team-info">
-                            <span class="team-name">Stacy Furgal</span>
-                            <span class="team-role">Great Lakes Fisheries & Ecosystem Health Specialist</span>
-                            <a href="https://www.researchgate.net/profile/Stacy-Furgal" target="_blank" class="bio-link">Click to View Bio</a>
-                        </div>
-                    </div>
 
-                <div class="hidden-profiles" id="collaborators-hidden">
-                    
-                    <div class="team-profile" data-name="Susan Hammerly">
-                    <img src="assets/unknown.svg" alt="Susan Hammerly">
+
+
+        <!-- Student Media & Redesign Team: The Frontlines of Engagement -->
+        <section class="organization-section">
+            <h2 class="organization-header">Student Media & Redesign Team: The Frontlines of Engagement</h2>
+            <div class="team-grid">
+                <div class="team-profile" data-name="Emma Kerl">
+                    <img src="assets/about/emmaKerl.jpg" alt="Emma Kerl">
                     <div class="team-info">
-                        <span class="team-name">Susan Hammerly</span>
-                        <span class="team-role">Project Lead</span>
-                        <a href="https://ww1.oswego.edu/biological-sciences/profile/susan-hammerly" target="_blank" class="bio-link">Click to View Bio</a>
+                        <span class="team-name">Emma Kerl</span>
+                        <span class="team-role">Writer and Relations Specialist</span>
+                        <a href="https://www.linkedin.com/in/emmakerlpr/" target="_blank" class="bio-link">Click to View Bio</a>
                     </div>
+                </div>
+                <div class="team-profile" data-name="Lakpa Sherpa">
+                    <img src="assets/about/lakpaSherpa.jpg" alt="Lakpa Sherpa">
+                    <div class="team-info">
+                        <span class="team-name">Lakpa Sherpa</span>
+                        <span class="team-role">Bio-Sci Communications Specialist</span>
+                        <a href="https://www.linkedin.com/in/lakpasherpa-/" target="_blank" class="bio-link">Click to View Bio</a>
                     </div>
-                    <div class="team-profile" data-name="Lyndsie Collis">
-                        <img src="assets/about/lyndsieCollisBio.jpg" alt="Lyndsie Collis">
+                </div>
+                <div class="team-profile" data-name="Giavanna Latta">
+                        <img src="assets/about/giavannaLatta.jpg" alt="Giavanna Latta">
                         <div class="team-info">
-                            <span class="team-name">Lyndsie Collis</span>
-                            <span class="team-role">Aquatic Biologist</span>
-                            <a href="https://scholar.google.com/citations?user=DxXA3qkAAAAJ&hl=en&oi=ao" target="_blank" class="bio-link">Click to View Bio</a>
+                            <span class="team-name">Giavanna Latta</span>
+                            <span class="team-role">Graphic Design and Film Specialist</span>
+                            <a href="https://www.linkedin.com/in/giavanna-latta-53b440327/" target="_blank" class="bio-link">Click to View Bio</a>
                         </div>
                     </div>
-                    <div class="team-profile" data-name="Maggie Carroll">
-                        <img src="assets/research/maggieCarroll.jpg" alt="Maggie Carroll">
+                <div class="hidden-profiles" id="media-hidden">
+                    <div class="team-profile" data-name="Lu Pway Doh Htoo">
+                        <img src="assets/about/lu.jpg" alt="Lu Pway Doh Htoo">
                         <div class="team-info">
-                            <span class="team-name">Maggie Carroll</span>
-                            <span class="team-role">Graduate Researcher</span>
-                            <a href="https://www.linkedin.com/in/maggie-carroll-053092220" target="_blank" class="bio-link">Click to View Bio</a>
+                            <span class="team-name">Lu Pway Doh Htoo</span>
+                            <span class="team-role">Biologist and Communications Specialist</span>
+                            <a href="https://www.linkedin.com/in/lu-pway-doh-htoo-936740261/" target="_blank" class="bio-link">Click to View Bio</a>
                         </div>
                     </div>
-                    <div class="team-profile" data-name="Chloe Wang">
-                        <img src="assets/research/chloeWang.jpg" alt="Chloe Wang">
+                    <div class="team-profile" data-name="Landon Rusco">
+                        <img src="assets/about/landonRusco.jpeg" alt="Landon Rusco">
                         <div class="team-info">
-                            <span class="team-name">Chloe Wang</span>
-                            <span class="team-role">Graduate Researcher</span>
-                            <a href="https://www.watershedalliance.org/awe-fellows/chloe-wang/" target="_blank" class="bio-link">Click to View Bio</a>
+                            <span class="team-name">Landon Rusco</span>
+                            <span class="team-role">Web Developer and Software Engineer</span>
+                            <a href="../website/bios/LandonRuscoBio.html" target="_blank" class="bio-link">Click to View Bio</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="show-more-container">
-                <button class="show-more-btn" onclick="toggleSection('collaborators-hidden', this)">
+                <button class="show-more-btn" onclick="toggleSection('media-hidden', this)">
                     Show More <i class="fas fa-chevron-down"></i>
                 </button>
             </div>
         </section>
 
-        <!-- Alumni -->
+
+
+
+
+        <!-- Cross-Disciplinary Collaborators: Innovation through Industry -->
         <section class="organization-section">
-            <h2 class="organization-header">Alumni & Former Members</h2>
+            <h2 class="organization-header">Cross-Disciplinary Collaborators: Innovation through Industry</h2>
             <div class="team-grid">
-                <div class="team-profile" data-name="Elijah Horst">
-                        <img src="assets/about/EliHorstBio.jpg" alt="Elijah Horst">
-                        <div class="team-info">
-                            <span class="team-name">Elijah Horst</span>
-                            <span class="team-role">Alumni (SUNY Oswego)</span>
-                            <a href="bios/EliHorstBio.html" target="_blank" class="bio-link">Click to View Bio</a>
-                        </div>
-                    </div>
-                <div class="team-profile" data-name="Alexandria Herard">
-                    <img src="assets/about/alexHerardBio.jpg" alt="Alexandria Herard">
+                <div class="team-profile" data-name="Dr. Bastian Tenbergen">
+                    <img src="assets/about/derBergen.jpg" alt="Dr. Bastian Tenbergen">
                     <div class="team-info">
-                        <span class="team-name">Alexandria Herard</span>
-                        <span class="team-role">Alumni (SUNY ESF)</span>
-                        <a href="https://www.linkedin.com/in/alexandria-herard-05264a271/" target="_blank" class="bio-link">Click to View Bio</a>
+                        <span class="team-name">Dr. Bastian Tenbergen</span>
+                        <span class="team-role">Director of Software Productions</span>
+                        <a href="https://scholar.google.com/citations?user=0CGqDi4AAAAJ&hl=de" target="_blank" class="bio-link">Click to View Bio</a>
                     </div>
                 </div>
-                <div class="team-profile" data-name="Collin Atwood">
-                    <img src="assets/about/collinAtwoodBio.webp" alt="Collin Atwood">
+                <div class="team-profile" data-name="Spencer Evans">
+                    <img src="assets/about/spencerEvans.jpg" alt="Spencer Evans">
                     <div class="team-info">
-                        <span class="team-name">Collin Atwood</span>
-                        <span class="team-role">Alumni (Trent University)</span>
-                        <a href="https://sardlab.com/people/" target="_blank" class="bio-link">Click to View Bio</a>
+                        <span class="team-name">Spencer Evans</span>
+                        <span class="team-role">Autonomous Deepwater Sub Engineer</span>
+                        <a href="https://www.linkedin.com/in/spencer-evans-4a14b1349/" target="_blank" class="bio-link">Click to View Bio</a>
                     </div>
                 </div>
-                <div class="hidden-profiles" id="alumni-hidden">
-                    <div class="team-profile" data-name="Grace Cordone">
-                    <img src="assets/about/graceCordoneBio.jpg" alt="Grace Cordone">
-                    <div class="team-info">
-                        <span class="team-name">Grace Cordone</span>
-                        <span class="team-role">Former Lab Technician</span>
-                        <a href="https://www.linkedin.com/in/grace-cordone-a17635381/" target="_blank" class="bio-link">Click to View Bio</a>
-                    </div>
-                </div>
-                    <div class="team-profile" data-name="Joseph Sweeney">
-                        <img src="assets/about/josephSweenyBio.jpg" alt="Joseph Sweeney">
+                <div class="team-profile" data-name="Thomas Mendelis">
+                        <img src="assets/about/tommyMendelis.jpg" alt="Thomas Mendelis">
                         <div class="team-info">
-                            <span class="team-name">Joseph Sweeney</span>
-                            <span class="team-role">Alumni (UC Davis)</span>
-                            <a href="https://www.linkedin.com/in/joseph-sweeney-22935b237/" target="_blank" class="bio-link">Click to View Bio</a>
+                            <span class="team-name">Thomas Mendelis</span>
+                            <span class="team-role">Autonomous Deepwater Sub Engineer</span>
+                            <a href="https://www.linkedin.com/in/thomas-mendelis/" target="_blank" class="bio-link">Click to View Bio</a>
                         </div>
                     </div>
-                    <div class="team-profile" data-name="Kalie Talbot-Evangelow">
-                        <img src="assets/about/kalieTalbotBio.jpg" alt="Kalie Talbot-Evangelow">
-                        <div class="team-info">
-                            <span class="team-name">Kalie Talbot-Evangelow</span>
-                            <span class="team-role">Alumni (NYS DEC)</span>
-                            <a href="https://www.linkedin.com/in/kalie-talbot-evangelow-6659452b3/" target="_blank" class="bio-link">Click to View Bio</a>
-                        </div>
-                    </div>
-                    <div class="team-profile" data-name="Noland Michels">
-                        <img src="assets/about/nolandMichelsBio.jpg" alt="Noland Michels">
-                        <div class="team-info">
-                            <span class="team-name">Noland Michels</span>
-                            <span class="team-role">Former Aquatic Biologist</span>
-                            <a href="https://www.linkedin.com/in/noland-michels-6b994712a/" target="_blank" class="bio-link">View Bio</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="show-more-container">
-                <button class="show-more-btn" onclick="toggleSection('alumni-hidden', this)">
-                    Show More <i class="fas fa-chevron-down"></i>
-                </button>
-            </div>
         </section>
+
 
     </main>
 

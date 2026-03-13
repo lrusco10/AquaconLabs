@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lake Ontario Atlantic Salmon</title>
+    <meta name="description" content="Learn more about Lake Ontario Atlantic Salmon-- Sponsored by NYS Sea Grant">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" type="image/png" href="assets/S O A C.png">
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+    .lab-info-section a {
+        text-decoration: none;
+        color: var(--primary-light);
+        font-weight: bold;
+        
+    }
+
+    #primary-section {
+        width: 600px; /* Changed from max-width */
+        max-width: 95%; /* Safety net for mobile */
+        margin: 80px auto 0 auto; /* Changed 10% to 80px */
+        text-align: center;
+    }
+
+    #primary-section h1 {
+        margin: 0 0 16px 0; /* Changed 1rem to 16px */
+        font-size: 32px; /* Replaced clamp with fixed px */
+        font-family: 'Nunito', sans-serif;
+        letter-spacing: 1px;
+        color: var(--text-on-dark, #fff);
+        text-shadow: 
+            1px 1px 0px #000,
+            2px 2px 0px #000,
+            3px 3px 20px rgba(0,0,0,0.8);
+    }
+
+    #carousel-section {
+        width: 600px;
+        max-width: 95%;
+        margin: 0 auto 80px auto;
+        background: var(--secondary-dark-green);
+        padding: 20px; /* Uniform padding */
+        border-radius: 12px;
+        box-sizing: border-box;
+    }
+
+    .carousel-container {
+        display: flex;
+        flex-direction: column; /* Stacks image then buttons */
+        align-items: center;
+        gap: 15px;
+    }
+
+    .image-wrapper {
+        width: 100%; /* Take up full container width */
+        max-width: 480px;
+        height: 450px;
+        overflow: hidden;
+        border-radius: 8px;
+    }
+
+    .image-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    /* Row for the buttons */
+    .carousel-controls {
+        display: flex;
+        justify-content: center;
+        gap: 40px; /* Space between Left and Right arrows */
+        width: 100%;
+    }
+
+    .nav-btn {
+        background: var(--primary-dark);
+        color: var(--primary-light);
+        border: none;
+        padding: 10px 30px; /* Wider buttons for easier tapping */
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 20px;
+        transition: background 0.2s;
+    }
+
+    .nav-btn:hover {
+        background: var(--accent-blue);
+    }
+
+    #carousel-caption {
+        margin-top: 20px;
+        text-align: center;
+        font-style: italic;
+        color: var(--text-on-dark);
+        min-height: 40px;
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+
+    /* 2. Interactive Tree Styles */
+    #tree-section {
+        width: 800px;
+        max-width: 95%;
+        margin: 0 auto 80px auto; /* Changed 10% to 80px */
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+    #tree-section p {
+        color: #001219;
+        margin-bottom: 25px;
+        font-size: 16px; /* Changed 2rem to 32px */
+        font-family: 'Lora', serif;
+        font-style: italic;
+    }
+
+    .options-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .quiz-btn {
+        flex: 0 0 280px; /* Fixed width of 280px */
+        background: #e9d8a6;
+        border: 3px solid transparent;
+        border-radius: 10px;
+        padding: 15px;
+        cursor: pointer;
+        transition: transform 0.2s, border 0.2s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .quiz-btn:hover {
+        transform: translateY(-5px);
+        border: 3px solid #ee9b00;
+    }
+
+    .quiz-btn img {
+        width: 250px; /* Fixed image width */
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .quiz-btn span {
+        font-size: 18px; /* Changed 1.1rem to 18px */
+        font-weight: bold;
+        color: #001219;
+        line-height: 1.4;
+        font-family: 'Nunito', sans-serif;
+    }
+    
+    /* Result Styles */
+    #result-container {
+        display: none;
+        padding: 20px;
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    #result-message {
+        color: #ae2012;
+        font-size: 28px; /* Changed 1.8rem to 28px */
+        margin-bottom: 20px;
+        font-family: 'Nunito', sans-serif;
+    }
+
+    #restart-btn {
+        background: #94d2bd;
+        color: #001219;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 18px;
+        transition: background 0.2s;
+    }
+
+    #download-poster-btn {
+        transition: color 0.2s ease-in-out, background 0.2s ease-in-out;
+    }
+
+    #download-poster-btn:hover {
+        color: #001219; /* This is the dark slate/black color you used elsewhere in your file */
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+</head>
+
+<header class="site-header" id="site-header">
+        <a href="index.html" class="logo-container">
+            <img src="assets/SOAC_logo.png" alt="SOAC Logo" class="logo">
+        </a>
+
+        <!-- Nav container -->
+    <nav id="main-nav" class="nav" role="navigation" aria-label="Primary">
+      <!-- visible inline items -->
+      <div class="nav-primary" id="nav-primary" aria-hidden="false">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="news.html" class="nav-link">News</a>
+        <a href="research.html" class="nav-link">Research</a>
+        <a href="joinus.html" class="nav-link">Join Us</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="resources.html" class="nav-link">Resources</a>
+      </div>
+
+      <button
+        id="nav-toggle"
+        class="nav-toggle"
+        aria-controls="nav-overflow"
+        aria-expanded="false"
+        aria-label="Open menu"
+        hidden
+      >
+        ☰
+      </button>
+
+      <!-- Overflow menu container (items moved here) -->
+      <div id="nav-overflow" class="nav-overflow" aria-hidden="true">
+        <!-- Storage for moved items (used by balancing code) -->
+        <div class="nav-overflow-list" id="nav-overflow-list" role="menu" hidden></div>
+
+        <!-- Display menu shown when the hamburger opens; populated with ALL nav links -->
+        <div class="nav-overflow-menu" id="nav-overflow-menu" role="menu" hidden></div>
+      </div>
+    </nav>
+    </header>
+
+    <main>
+<body class="salmon">
+
+    <section class="landing">
+        <img class="landing-img" src="assets/StacysPage/wildSalmon2.jpg" alt="Atlantic Salmon Landing Image">
+        <div class="mission-overlay">
+            <h1>Atlantic Salmon</h1>
+        </div>
+    </section>
+
+    <section class="lab-info-section">
+            <h2>Lake Ontario Atlantic Salmon</h2>
+            <p class="mission-text">
+                Atlantic salmon are Lake Ontario's only native species of salmon. They are culturally significant to the many Indigenous communities in the region. The lake is thought to have once held the world's largest population of freshwater Atlantic salmon. This population declined rapidly after European colonization, and by the late 1800s, they were extirpated (locally extinct) from Lake Ontario. Restoration efforts currently aim to create a recreational fishery and increase the possibility of having a population of Atlantic salmon that can reproduce on their own in the wild.
+            </p>
+            <h3>Fishing for Atlantic Salmon</h3>
+            <p class="mission-text">
+                In Lake Ontario, Atlantic salmon can be caught in the lake or tributaries. The NYS Department of Environmental Conservation (NYSDEC) currently stocks Atlantic Salmon in 4 tributaries of Lake Ontario: Sandy Creek (Jefferson County), Salmon River (Oswego County), Sandy Creek (Monroe County), and Oak Orchard Creek (Orleans County). Anglers have had success targeting Atlantics in these tributaries in the fall and early winter. Catch rates are on the rise, so your odds of catching a Lake Ontario Atlantic Salmon have never been better in recent years. Click <a href="https://extapps.dec.ny.gov/docs/fish_marine_pdf/loatlanticsalmonplan.pdf">here</a> to see the DEC's Atlantic Salmon Management Plan, and click <a href="https://lakeontariofishing.com/charter/">here</a> to book a charter to try catching one today!
+            </p>
+            <h3>Share Your Catch – Get a Sticker</h3>
+            <p class="mission-text">
+                Participate in NYSDEC’s New York Angler Achievement Awards Program. If you catch a Lake Ontario Atlantic Salmon that meets the minimum size (categories for adult and youth anglers), take a picture of your catch, fill out a quick form, submit and receive a sticker. More information <a href="https://dec.ny.gov/things-to-do/freshwater-fishing/angler-achievement-awards-program">here.</a>
+            </p>
+        </section>
+
+    <section id="primary-section">
+        <h1>
+            Life Cycle of a Lake Ontario Atlantic Salmon
+        </h1>
+    </section>
+
+    <section id="carousel-section">
+        <div class="carousel-container">
+            <div class="image-wrapper">
+                <img id="carousel-image" src="" alt="Salmon Lifecycle">
+            </div>
+    
+            <div class="carousel-controls">
+                <button id="prev-btn" class="nav-btn"><i class="fas fa-chevron-left"></i></button>
+                <button id="next-btn" class="nav-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+        <p id="carousel-caption"></p>
+        <div id="download-container" style="text-align: center; margin-top: 15px; display: none;">
+            <a href="assets/StacysPage/AtlanticSalmon_LifecyclePoster.pdf" id="download-poster-btn" class="nav-btn" style="text-decoration: none; display: inline-block;" download>
+                Download the Lifecycle poster! <i class="fas fa-download" style="margin-left: 8px;"></i>
+            </a>
+        </div>
+    </section>
+
+    <section id="primary-section">
+        <h1>
+            Identify Your Catch!
+        </h1>
+    </section>
+
+    <section id="tree-section">
+        <p>
+            For those unfamiliar with Atlantic salmon, they can sometimes be difficult to identify. Use the resources below to help you learn to tell apart the many species of trout and salmon in Lake Ontario. You may also click <a href="assets/StacysPage/AtlanticSalmonVSbrownTrout_ID_2026.pdf">here</a> for a guide to identifying salmon against brook trout, or <a href="assets/StacysPage/2024 Salmon and Trout of the Great Lakes.pdf">here</a> for a compiled identification guide of various Great Lakes specimen.
+        </p>
+        
+        <div id="quiz-container">
+            <div class="options-container">
+                <button id="btn-opt1" class="quiz-btn">
+                    <img id="img-opt1" src="" alt="Option 1">
+                    <span id="text-opt1"></span>
+                </button>
+                <button id="btn-opt2" class="quiz-btn">
+                    <img id="img-opt2" src="" alt="Option 2">
+                    <span id="text-opt2"></span>
+                </button>
+            </div>
+        </div>
+
+        <div id="result-container">
+            <img id="result-image" src="" alt="Identified Fish" style="max-width: 100%; border-radius: 12px; margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto;">
+            <h3 id="result-message"></h3>
+            <button id="restart-btn" onclick="startQuiz()">Start Over</button>
+        </div>
+    </section>
+
+    <script>
+        /* --- CAROUSEL LOGIC --- */
+        // Replace these URLs with your actual image paths from your "assets/" folder
+        const carouselData = [
+            { src: "assets/StacysPage/1AtlanticSalmon_Eggs.png", text: "In the fall, adults migrate to tributaries to spawn. Eggs are deposited in shallow gravel nests, called redds, made by female salmon using their powerful tails. Once eggs are fertilized, they are cover for protection."},
+            { src: "assets/StacysPage/2AtlanticSalmon_Alevin.png", text: "Newly hatched from eggs, alevin, stay hidden in the gravel using their yolk sac as fuel."},
+            { src: "assets/StacysPage/3AtlanticSalmon_Fry.png", text: "When spring arrives, fry emerge from the gravel, ready to start eating small prey like aquatic insects."},
+            { src: "assets/StacysPage/4AtlanticSalmon_Parr.png", text: "A young salmon with vertical lines, called “parr marks”, is referred to as a parr. They will stay in the river at this stage for one or more years."},
+            { src: "assets/StacysPage/5AtlanticSalmon_Smolt.png", text: "Losing their parr marks and turning a silvery color, a smolt continues to grow as it swims downstream to Lake Ontario. A smolt will imprint to the natural chemical signals in the river water, which it will use to find its way back as an adult."},
+            { src: "assets/StacysPage/6AtlanticSalmon_SpawningAdult.png", text: "An adult Atlantic Salmon will mature in Lake Ontario until it is ready to follow the chemical signals in the river water to its birthplace to spawn. An Atlantic salmon may spawn several times in its lifetime."}
+        ];
+
+        let currentSlide = 0;
+        const carouselImg = document.getElementById("carousel-image");
+        const carouselCaption = document.getElementById("carousel-caption");
+        const downloadContainer = document.getElementById("download-container"); // Grab the new container
+
+        function updateCarousel() {
+            carouselImg.style.opacity = 0; // Fade out effect
+            setTimeout(() => {
+                carouselImg.src = carouselData[currentSlide].src;
+                carouselCaption.textContent = carouselData[currentSlide].text;
+                carouselImg.style.opacity = 1; // Fade in effect
+                
+                // NEW: Check if it's the last slide to show the download button
+                if (currentSlide === carouselData.length - 1) {
+                    downloadContainer.style.display = "block"; // Show button
+                } else {
+                    downloadContainer.style.display = "none";  // Hide button on all other slides
+                }
+            }, 150);
+        }
+
+        document.getElementById("next-btn").addEventListener("click", () => {
+            currentSlide = (currentSlide + 1) % carouselData.length;
+            updateCarousel();
+        });
+
+        document.getElementById("prev-btn").addEventListener("click", () => {
+            currentSlide = (currentSlide - 1 + carouselData.length) % carouselData.length;
+            updateCarousel();
+        });
+
+        // Initialize Carousel
+        updateCarousel();
+
+
+        /* --- INTERACTIVE TREE LOGIC --- */
+        const treeNodes = {
+            1: {
+                opt1: { 
+                    text: "Dark spots on a lighter background body.", 
+                    img: "assets/StacysPage/darkSpots.jpg", 
+                    next: 2
+                },
+                opt2: { 
+                    text: "Light markings on dark background.", 
+                    img: "assets/StacysPage/lightSpots.jpg", 
+                    next: 3
+                }
+            },
+            2: {
+                opt1: { 
+                    text: "Longest anal fin ray is SHORTER than fin base.", 
+                    img: "assets/StacysPage/shorterFin.jpg", 
+                    next: 4 
+                },
+                opt2: { 
+                    text: "Longest anal fin ray is LONGER than fin base.", 
+                    img: "assets/StacysPage/longerFin.jpg", 
+                    next: 5
+                }
+            },
+            3: {
+                opt1: { 
+                    text: "Forked tail.", 
+                    img: "assets/StacysPage/ovalBothLobes.jpg",
+                    next: {text: "Congratulations! You've identified a Lake Trout! (Salvelinus namaycush)", img: "assets/StacysPage/lakeTrout.jpg" } 
+                },
+                opt2: { 
+                    text: "Square tail.", 
+                    img: "assets/StacysPage/squareTail.jpg",
+                    next: {text: "Congratulations! You've identified a Brook Trout! (Salvelinus fontinalis)", img: "assets/StacysPage/brookTrout.jpg"} 
+                }
+            },
+            4: {
+                opt1: { 
+                    text: "Oval-shaped spots on both lobes of the tail fin.", 
+                    img: "assets/StacysPage/ovalBothLobes.jpg", 
+                    next: {text: "Congratulations! You've identified a Pink Salmon! (Oncorhynchus gorbuscha)", img: "assets/StacysPage/pinksalmon.jpg"}
+                },
+                opt2: { 
+                    text: "Spots on tail fin are not oval-shaped and not in orderly rows.", 
+                    img: "assets/StacysPage/disorderlyNotOval.jpg", 
+                    next: 6
+                }
+            },
+            5: {
+                opt1: { 
+                    text: "Fully spotted, square tail with spots in orderly rows.", 
+                    img: "assets/StacysPage/squareTail.jpg", 
+                    next: 7
+                },
+                opt2: { 
+                    text: "No or few spots on tail, not in orderly rows.", 
+                    img: "assets/StacysPage/noSpots.jpg", 
+                    next: 8
+                }
+            },
+            6: {
+                opt1: { 
+                    text: "Mouth and gums are black.", 
+                    img: "assets/StacysPage/mouthGumsBlack.jpg", 
+                    next: {text: "Congratulations! You've identified a Chinook Salmon! (Oncorhynchus tschawytscha)", img: "assets/StacysPage/ChinookSalmon_Adults.jpg"}
+                },
+                opt2: { 
+                    text: "Mouth is gray or black with lighter gums.", 
+                    img: "assets/StacysPage/mouthBlackLightGums.jpg", 
+                    next: {text: "Congratulations! You've identified a Coho Salmon! (Oncorhynchus kisustch)", img: "assets/StacysPage/CohoSalmonAdult1.jpg"}
+                }
+            },
+            7: {
+                opt1: { 
+                    text: "Mouth and gums are white", 
+                    img: "assets/StacysPage/mouthGumsWhite.jpg", 
+                    next: {text: "Congratulations! You've identified a Steelhead! (Oncorhynchus mykiss)", img: "assets/StacysPage/Steelhead_1.jpg"}
+                },
+                opt2: { 
+                    text: "Mouth is gray or black with lighter gums.", 
+                    img: "assets/StacysPage/mouthBlackLightGums.jpg", 
+                    next: {text: "Congratulations! You've identified a Coho Salmon! (Oncorhynchus kisustch)", img: "assets/StacysPage/CohoSalmonAdult1.jpg"}
+                }
+            },
+            8: {
+                opt1: { 
+                    text: "Jaw extends beyond eye.", 
+                    img: "assets/StacysPage/jawBeyondEye.jpg", 
+                    next: {text: "Congratulations! You've identified a Brown Trout! (Salmo trutta)", img: "assets/StacysPage/BrownTrout_Adult2.jpg"}
+                },
+                opt2: { 
+                    text: "Jaw extends to middle or rear of eye.", 
+                    img: "assets/StacysPage/jawRearEye.jpg", 
+                    next: {text: "Congratulations! You've identified an Atlantic Salmon! (Salmo salar)", img: "assets/StacysPage/AtlanticSalmon_Adult_1.jpg"}
+                }
+            }
+        };
+
+        const quizContainer = document.getElementById("quiz-container");
+        const resultContainer = document.getElementById("result-container");
+        const resultMessage = document.getElementById("result-message");
+        
+        const btnOpt1 = document.getElementById("btn-opt1");
+        const imgOpt1 = document.getElementById("img-opt1");
+        const textOpt1 = document.getElementById("text-opt1");
+
+        const btnOpt2 = document.getElementById("btn-opt2");
+        const imgOpt2 = document.getElementById("img-opt2");
+        const textOpt2 = document.getElementById("text-opt2");
+
+        function loadNode(nodeId) {
+            const node = treeNodes[nodeId];
+            
+            // Set Button 1
+            imgOpt1.src = node.opt1.img;
+            textOpt1.textContent = node.opt1.text;
+            btnOpt1.onclick = () => handleChoice(node.opt1.next);
+
+            // Set Button 2
+            imgOpt2.src = node.opt2.img;
+            textOpt2.textContent = node.opt2.text;
+            btnOpt2.onclick = () => handleChoice(node.opt2.next);
+        }
+
+        const resultImage = document.getElementById("result-image"); // Add this line near other constants
+
+        function handleChoice(nextStep) {
+            if (typeof nextStep === "number") {
+                loadNode(nextStep);
+            } else {
+                // We reached the end! 
+                quizContainer.style.display = "none";
+                
+                // Update the text and the new image
+                resultMessage.textContent = nextStep.text;
+                resultImage.src = nextStep.img;
+                
+                resultContainer.style.display = "block";
+                triggerConfetti();
+            }
+        }
+
+        function startQuiz() {
+            resultContainer.style.display = "none";
+            quizContainer.style.display = "block";
+            loadNode(1); // Start at node 1
+        }
+
+        // Fire Confetti Function
+        function triggerConfetti() {
+            var duration = 3 * 1000; // 3 seconds
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 5, angle: 60, spread: 55, origin: { x: 0 },
+                    colors: ['#005f73', '#0a9396', '#94d2bd', '#e9d8a6', '#ee9b00', '#ae2012']
+                });
+                confetti({
+                    particleCount: 5, angle: 120, spread: 55, origin: { x: 1 },
+                    colors: ['#005f73', '#0a9396', '#94d2bd', '#e9d8a6', '#ee9b00', '#ae2012']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+
+        // Initialize Quiz
+        startQuiz();
+    </script>
+    <script src="script.js"></script>
+    </main>
+</body>
+</html>

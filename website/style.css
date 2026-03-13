@@ -47,6 +47,43 @@ body.home::before {
   z-index: -1;
 }
 
+
+body.salmon {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh; /* Adjust this: more height = more gradual darkening */
+  background-color: #001220; /* Deep navy instead of pure black */
+}
+
+body.salmon::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* STRETCHED GRADIENT: We pushed the darkness much further down */
+  background-image: 
+    linear-gradient(
+      to bottom, 
+      rgba(0, 212, 255, 0.3) 0%,    /* Surface: Bright & Transparent */
+      rgba(0, 100, 200, 0.5) 40%,   /* Mid-depth: Still very blue/visible */
+      rgba(0, 30, 70, 0.8) 85%,     /* Deep: Finally starts getting dark */
+      rgba(0, 5, 15, 1) 100%        /* Bottom: Dark Navy transition */
+    ),
+    url('assets/StacysPage/wildSalmon2.jpg');
+
+    filter: blur(8px);
+    transform: scale(1.1);
+    
+  background-size: 100% 100%, cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+
+
 body.standard{
     margin: 0;
     background: linear-gradient(to bottom, var(--primary-dark), #000000);
@@ -1173,6 +1210,7 @@ section:nth-of-type(even) .project-details .text-content {
 .inquiry-btn {
     display: inline-block;
     margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
     padding: 14px 35px;
     
     /* Inverted colors: Dark button on Light card */
@@ -1319,8 +1357,7 @@ font-family: 'Lora', serif;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
-  max-width: 70vw;
-  align-items: flex-start;
+  max-width: 20vw;
   box-sizing: border-box;
 }
 
@@ -1461,175 +1498,6 @@ font-family: 'Lora', serif;
   transform: scale(1.03);
 }
 
-/* Mobile Responsive Styles */
-
-/* Tablets and smaller (768px and below) */
-@media screen and (max-width: 768px) {
-  .contact-section {
-    max-width: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 1.5rem 1rem;
-    box-sizing: border-box;
-  }
-
-  .contact-section h1 {
-    font-size: 2rem;
-    margin-bottom: 0.6rem;
-  }
-
-  .contact-section p {
-    font-size: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .contact-flex {
-    flex-direction: column;
-    gap: 2rem;
-    align-items: stretch;
-  }
-
-  .social-buttons {
-    width: 100%;
-    min-width: unset;
-    align-items: stretch;
-    box-sizing: border-box;
-  }
-
-  .social-btn {
-    justify-content: center;
-    padding: 1rem 1.4rem;
-    font-size: 1.05rem;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .contact-form {
-    min-width: unset;
-    width: 100%;
-    padding: 1.5rem 1rem;
-    box-sizing: border-box;
-  }
-
-  .contact-form label {
-    font-size: 1rem;
-  }
-
-  .contact-form input[type="email"],
-  .contact-form textarea {
-    width: 100%;
-    font-size: 1rem;
-    padding: 0.8rem;
-    box-sizing: border-box;
-  }
-
-  .contact-form button {
-    font-size: 1.05rem;
-    padding: 0.9rem 1.3rem;
-  }
-}
-
-/* Mobile phones (480px and below) */
-@media screen and (max-width: 480px) {
-  .contact-section {
-    max-width: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 1.2rem 0.8rem;
-    box-sizing: border-box;
-  }
-
-  .contact-section h1 {
-    font-size: 1.75rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .contact-section p {
-    font-size: 0.95rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .contact-flex {
-    gap: 1.5rem;
-  }
-
-  .social-buttons {
-    gap: 1rem;
-  }
-
-  .social-btn {
-    padding: 0.85rem 1.2rem;
-    font-size: 1rem;
-    box-sizing: border-box;
-  }
-
-  .social-btn i {
-    font-size: 1.2rem;
-  }
-
-  .contact-form {
-    padding: 1.2rem 0.8rem;
-    gap: 0.8rem;
-    box-sizing: border-box;
-  }
-
-  .contact-form label {
-    font-size: 0.95rem;
-  }
-
-  .contact-form input[type="email"],
-  .contact-form textarea {
-    font-size: 0.95rem;
-    padding: 0.75rem;
-    box-sizing: border-box;
-  }
-
-  .contact-form textarea {
-    min-height: 120px;
-  }
-
-  .contact-form button {
-    font-size: 1rem;
-    padding: 0.85rem 1.2rem;
-  }
-}
-
-/* Small mobile devices (360px and below) */
-@media screen and (max-width: 360px) {
-  .contact-section {
-    max-width: 100%;
-    width: 100%;
-    padding: 1rem 0.6rem;
-    margin: 0;
-    box-sizing: border-box;
-  }
-
-  .contact-section h1 {
-    font-size: 1.5rem;
-  }
-
-  .contact-section p {
-    font-size: 0.9rem;
-  }
-
-  .social-btn {
-    padding: 0.75rem 1rem;
-    font-size: 0.95rem;
-    gap: 0.5rem;
-    box-sizing: border-box;
-  }
-
-  .contact-form {
-    padding: 1rem 0.6rem;
-    box-sizing: border-box;
-  }
-
-  .contact-form input[type="email"],
-  .contact-form textarea {
-    font-size: 0.9rem;
-    box-sizing: border-box;
-  }
-}
 
 
 
@@ -2305,6 +2173,34 @@ font-family: 'Lora', serif;
         font-size: 0.95rem;
         padding: 0.45rem 1rem;
     }
+}
+
+@media screen and (max-width: 900px) {
+  .contact-flex {
+    flex-direction: column;
+    align-items: center; /* Forces everything to center */
+    gap: 2rem;
+  }
+  
+  .social-buttons {
+    flex-direction: column; 
+    align-items: center;
+    width: 100%;
+    max-width: 100% !important; /* The magic fix to kill the 20vw bug */
+    gap: 1.2rem;
+  }
+  
+  .social-btn {
+    width: 100%;
+    max-width: 300px; /* Keeps them looking like neat pill buttons */
+    justify-content: center;
+  }
+  
+  .contact-form {
+    width: 100%;
+    min-width: unset;
+    max-width: 600px; /* Keeps the form from getting overly wide on tablets */
+  }
 }
 
 
