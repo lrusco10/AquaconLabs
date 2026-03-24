@@ -15,9 +15,14 @@
     --nav-height: 5vh;
     --accordion-transition: 240ms cubic-bezier(.4,0,.2,1);
 }
-html, body {
+html {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+body {
   overflow-x: hidden;
-  overscroll-behavior: none;
   margin: 0;
   padding: 0;
   min-height: 100vh;
@@ -45,6 +50,7 @@ body.home::before {
   background-position: center;
   background-repeat: no-repeat;
   z-index: -1;
+  pointer-events: none;
 }
 
 
@@ -80,6 +86,7 @@ body.salmon::before {
   background-position: center;
   background-repeat: no-repeat;
   z-index: -1;
+  pointer-events: none;
 }
 
 
